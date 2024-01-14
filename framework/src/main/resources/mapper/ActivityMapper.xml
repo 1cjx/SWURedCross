@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jx.mapper.ActivityMapper">
+    <select id="getActivityLocations" resultType="com.jx.domain.vo.ListLocationVo">
+        SELECT DISTINCT
+            l.id,l.name
+        FROM
+            t_activity a LEFT JOIN t_activity_assignment aa ON  a.`id` = aa.`activity_id`
+                          LEFT JOIN t_location l ON  l.`id` = aa.`location_id`
+        WHERE
+            a.id = #{activityId}    AND a.`del_flag` = 0
+        ORDER BY
+            l.name
+    </select>
+    <select id="getUserActivity" resultType="com.jx.domain.entity.Activity">
+        SELECT DISTINCT
+            a.*
+        FROM
+            t_activity_assignment aa LEFT JOIN t_scheduled s ON aa.`id` = s.`activity_assignment_id`
+                                      LEFT JOIN t_user u ON s.`user_id` = u.`id`
+                                      LEFT JOIN t_activity a ON a.`id` = aa.`activity_id`
+        WHERE
+            u.`id` = #{userId}   AND aa.`del_flag` = 0   AND a.`del_flag` = 0
+        ORDER BY
+            a.`begin_date`,a.`status`
+    </select>
+    <select id="getActivityList" resultType="com.jx.domain.entity.Activity">
+        SELECT DISTINCT a.id,a.name,a.theme,a.category_id,a.status,a.allowed_department_id,DATE(a.begin_date) AS begin_date,
+                        DATE(a.end_date) AS end_date,a.create_by,a.create_time,a.update_by,a.update_time
+        FROM t_activity a LEFT JOIN t_activity_assignment aa ON a.`id` = aa.`activity_id`
+        WHERE
+        <if test=' status != null '>
+              a.`status` = #{status}
+        </if>
+        <if test=' locationId != null '>
+            AND    aa.`location_id` = #{locationId}
+        </if>
+        <if test=' categoryId != null '>
+            AND  a.`category_id`  = #{categoryId}
+        </if>
+        <if test=' activityName != null '>
+            AND  a.`name`  LIKE concat('%',#{activityName},'%')
+        </if>
+        <choose>
+            <when test="departmentId!= 9">
+                AND a.`allowed_department_id` in (#{departmentId},0,-1)
+            </when>
+            <otherwise>
+                AND a.`allowed_department_id` = -1
+            </otherwise>
+        </choose>
+        AND a.`del_flag` = 0
+        ORDER BY  DATE(a.`begin_date`) DESC
+    </select>
+    <select id="getActivityDetails" resultType="com.jx.domain.vo.ActivityDetailVo">
+        SELECT a.`id`,a.`name` AS activityName,a.`theme`,c.`name` AS categoryName,a.`begin_  date`,a.`end_date`
+        FROM t_activity a LEFT JOIN t_category c ON a.`category_id` = c.`id`
+        WHERE a.`id` = #{activityId} AND a.`del_flag` = 0
+    </select>
+    <select id="getVariousActivitiesNum" resultType="com.jx.domain.vo.ActivityCategoryHoldVo">
+        SELECT c.id AS categoryId,c.`name` AS categoryName,COUNT(a.id) AS nums
+        FROM t_activity a LEFT JOIN t_category c ON c.`id` = a.`category_id`
+        WHERE a.`del_flag` = 0
+        GROUP BY c.id
+        ORDER BY nums DESC
+    </select>
+    <select id="getActivityAssignmentInfoBo" resultType="com.jx.domain.bo.ActivityAssignmentInfoBo">
+        SELECT aa.id AS id,ts.`begin_time`,ts.`end_time`,ts.`id` AS timeSlotId,l.`name` AS locationName,l.`id` AS locationId,aa.time,aa.`status`,aat.`name` AS typeName ,aat.`id` AS typeId
+        FROM t_activity_assignment aa LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id` LEFT JOIN t_activity_assignment_type aat ON aat.id = aa.`type_id`
+        WHERE aa.id IN(
+            SELECT aa.`id`
+            FROM t_activity_assignment aa
+            WHERE aa.`activity_id` = #{activityId}      AND aa.`del_flag` = 0
+        )         AND ts.`del_flag` = 0      AND l.`del_flag` = 0
+        ORDER BY aat.`id`,l.`name`,ts.`begin_time`
+    </select>
+</mapper>

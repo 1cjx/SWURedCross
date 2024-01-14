@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jx.mapper.VolunteerRecordMapper">
+    <select id="getUserTotalVolunteerTimes" resultType="java.lang.Double">
+        SELECT SUM(vr.`volunteer_time`)
+        FROM t_volunteer_record vr
+        WHERE vr.`user_id` = #{userId} AND vr.`status` = "1"
+    </select>
+    <select id="getUserVolunteerActivityInfo" resultType="com.jx.domain.vo.VolunteerRecordVo">
+        SELECT DISTINCT a.id  AS activityId
+        FROM t_activity a LEFT JOIN t_activity_assignment aa ON aa.`activity_id` = a.`id`
+        WHERE aa.`id` IN (
+            SELECT vr.`activity_assignment_id`
+            FROM t_volunteer_record vr LEFT JOIN t_activity_assignment aa ON vr.`activity_assignment_id` = aa.`id`
+            WHERE vr.`user_id` = #{userId}         AND aa.`del_flag` = 0
+        )
+          AND aa.`del_flag` = 0
+    </select>
+    <select id="getUserVolunteerAssignmentInfo" resultType="com.jx.domain.bo.VolunteerRecordBo">
+        SELECT aa.id AS activityAssignmentId
+        FROM t_activity_assignment aa LEFT JOIN t_volunteer_record vr ON vr.`activity_assignment_id` = aa.`id`
+        WHERE aa.`activity_id` = #{activityId} AND vr.`user_id`=#{userId}         AND aa.`del_flag` = 0
+    </select>
+    <select id="getUserVolunteerInfo" resultType="com.jx.domain.entity.VolunteerRecord">
+        SELECT *
+        FROM t_volunteer_record vr
+        WHERE vr.`activity_assignment_id` = #{activityAssignmentId} AND vr.`user_id` = #{userId}
+    </select>
+    <select id="getUserVolunteerActivityTotalTime" resultType="java.lang.Double">
+        SELECT SUM(vr.`volunteer_time`) AS activityTotalTime
+        FROM t_activity_assignment aa LEFT JOIN t_volunteer_record vr ON vr.`activity_assignment_id` = aa.`id`
+        WHERE aa.`activity_id` = #{activityId} AND vr.`user_id`=#{userId} AND vr.`status` = '1'         AND aa.`del_flag` = 0
+    </select>
+    <select id="getTotalVolunteerTimes" resultType="java.lang.Long">
+        SELECT SUM(vr.`volunteer_time`)
+        FROM t_volunteer_record vr
+    </select>
+    <select id="getUserVolunteerRecordList" resultType="com.jx.domain.vo.UserVolunteerRecordVo">
+        SELECT vr.`user_id` AS userId ,u.name AS userName,d.`name`AS departmentName,SUM(vr.`volunteer_time`) AS userVolunteerTimes,COUNT(vr.`status`) AS userParticipateInActivityNum
+        FROM t_volunteer_record vr LEFT JOIN t_user u ON u.id = vr.`user_id` LEFT JOIN t_department d ON d.id = u.`department_id`
+        WHERE vr.`status` = '1'
+        <if test="departmentId!=null">
+            AND d.`id` = #{departmentId}
+        </if>
+        AND u.`del_flag` = 0
+        AND d.`del_flag` = 0
+        GROUP BY(vr.`user_id`)
+        ORDER BY
+            <choose>
+                <when test="sortType==1">
+                    userParticipateInActivityNum  DESC
+                </when>
+                <otherwise>
+                    userVolunteerTimes DESC,userName ASC
+                </otherwise>
+            </choose>
+        LIMIT 10
+    </select>
+</mapper>

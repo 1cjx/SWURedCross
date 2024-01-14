@@ -1,0 +1,4 @@
+# 项目排除路径
+/admin/target/
+/framework/target/
+/weixin/target/

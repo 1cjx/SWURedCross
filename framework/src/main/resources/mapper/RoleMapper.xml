@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jx.mapper.RoleMapper">
+    <select id="selectRoleKeyByUserId" resultType="java.lang.String">
+        SELECT
+            r.`role_key`
+        FROM
+            `t_uer` u
+                LEFT JOIN `sys_role` r ON r.`role_id` = r.`id`
+        WHERE
+            u.`id` = #{userId} AND
+            r.`status` = 0 AND
+            r.`del_flag` = 0
+    </select>
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.jx.mapper.LocationMapper">
+
+    <select id="getActivityLocations" resultType="com.jx.domain.entity.Location">
+        SELECT DISTINCT l.*
+        FROM t_location l LEFT JOIN t_activity_assignment aa ON l.`id` = aa.`location_id` LEFT JOIN t_activity a ON a.`id` = aa.`activity_id`
+        WHERE a.id = #{activityId}    AND a.`del_flag` = 0
+    </select>
+</mapper>
