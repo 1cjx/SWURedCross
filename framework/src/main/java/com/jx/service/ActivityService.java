@@ -3,6 +3,7 @@ package com.jx.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddActivityDto;
+import com.jx.domain.dto.ChangeActivityStatusDto;
 import com.jx.domain.dto.ListActivityDto;
 import com.jx.domain.dto.UpdateActivityDto;
 import com.jx.domain.entity.Activity;
@@ -41,5 +42,7 @@ public interface ActivityService extends IService<Activity> {
     ResponseResult deleteActivity(Long id);
 
     ResponseResult getActivityAssignmentDetail(Long id);
+
+    ResponseResult changeActivityStatus(ChangeActivityStatusDto changeActivityStatusDto);
 }
 

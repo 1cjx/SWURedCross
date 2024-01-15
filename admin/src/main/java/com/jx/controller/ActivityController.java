@@ -2,12 +2,12 @@ package com.jx.controller;
 
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddActivityDto;
+import com.jx.domain.dto.ChangeActivityStatusDto;
 import com.jx.domain.dto.ListActivityDto;
 import com.jx.domain.dto.UpdateActivityDto;
 import com.jx.service.ActivityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,5 +46,11 @@ public class ActivityController {
     @DeleteMapping("/{id}")
     public ResponseResult deleteActivity(@PathVariable("id")Long id){
         return activityService.deleteActivity(id);
+    }
+
+    @ApiOperation("修改活动状态")
+    @PutMapping("/changeActivityStatus")
+    public ResponseResult changeActivityStatus(@RequestBody ChangeActivityStatusDto changeActivityStatusDto){
+        return activityService.changeActivityStatus(changeActivityStatusDto);
     }
 }

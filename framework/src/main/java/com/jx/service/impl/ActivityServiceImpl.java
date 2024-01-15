@@ -23,7 +23,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * (Activity)表服务实现类
@@ -441,6 +440,15 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         activityAssignmentVo.setPostList(postAssignmentVos);
         return ResponseResult.okResult(activityAssignmentVo);
     }
+
+    @Override
+    public ResponseResult changeActivityStatus(ChangeActivityStatusDto changeActivityStatusDto) {
+        Activity activity = getById(changeActivityStatusDto.getActivityId());
+        activity.setStatus(changeActivityStatusDto.getStatus());
+        updateById(activity);
+        return ResponseResult.okResult();
+    }
+
     public void deleteActivityAssignment(Long activityId){
         // 查询当前活动的班次
         LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
