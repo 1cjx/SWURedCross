@@ -13,6 +13,7 @@ import com.jx.mapper.UserImportRecordMapper;
 import com.jx.service.*;
 import com.jx.service.impl.UserServiceImpl;
 import com.jx.utils.BeanCopyUtils;
+import com.jx.utils.CheckUtils;
 import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,6 +29,8 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     private static PasswordEncoder passwordEncoder;
     private static DepartmentService departmentService;
     private static UserImportDetailService userImportDetailService;
+    private static CollegeService collegeService;
+    private static RoleService roleService;
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -43,6 +46,15 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     @Autowired
     public void setUserImportDetailService(UserImportDetailService userImportDetailService) {
         this.userImportDetailService = userImportDetailService;
+    }
+
+    @Autowired
+    public void setCollegeService(CollegeService collegeService) {
+        this.collegeService = collegeService;
+    }
+    @Autowired
+    public void setRoleService(RoleService roleService) {
+        this.roleService = roleService;
     }
     private Long failNum =0L;
     private Long successNum = 0L;
@@ -74,11 +86,12 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
         try{
             if(!headMap.containsKey(0) || !headMap.containsKey(1) || !headMap.containsKey(2)
                 || !headMap.containsKey(3) ||!headMap.containsKey(4)||!headMap.containsKey(5)
-                ||!headMap.containsKey(6)
-                || !headMap.get(0).equals("学号") || !headMap.get(1).equals("姓名")
-                || !headMap.get(2).equals("性别") || !headMap.get(3).equals("电话号码")
-                || !headMap.get(4).equals("qq")  || !headMap.get(5).equals("电子邮箱")
-                || !headMap.get(6).equals("部门"));
+                ||!headMap.containsKey(6) ||!headMap.containsKey(7)
+                || !headMap.get(0).equals("部门")  || !headMap.get(1).equals("职称")
+                || !headMap.get(2).equals("学号") || !headMap.get(3).equals("姓名")
+                || !headMap.get(4).equals("性别") || !headMap.get(5).equals("电话号码")
+                || !headMap.get(6).equals("qq")  || !headMap.get(7).equals("电子邮箱")
+               );
         }
         catch(Exception e) {
             throw new SystemException(AppHttpCodeEnum.NOT_USE_TEMPLATE);
@@ -89,6 +102,7 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     public void invoke(AddUserDto addUserDto, AnalysisContext analysisContext) {
     	// 这里放具体数据校验方法，校验通过往data里面放数据，否则直接return
         UserImportDetail detail = BeanCopyUtils.copyBean(addUserDto,UserImportDetail.class);
+        detail.setUserId(addUserDto.getId());
         detail.setRecordId(recordId);
         UserImportFail fail = new UserImportFail();
         allNum++;
@@ -99,6 +113,7 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
             userImportDetailService.save(detail);
             //插入用户
             User user = BeanCopyUtils.copyBean(addUserDto,User.class);
+            user.setId(addUserDto.getId());
             user.setPassword(passwordEncoder.encode("123456"));
             userService.save(user);
         }
@@ -117,17 +132,49 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     }
     //效验数据，根据需求自己更改
     private boolean checkImportData(AddUserDto addUserDto, UserImportFail fail) {
-        if(Objects.isNull(addUserDto.getUserId())){
+        if(!StringUtils.hasText(addUserDto.getDepartmentName())){
+            fail.setReason("部门不能为空");
+            return false;
+        }
+        else{
+            LambdaQueryWrapper<Department>departmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            departmentLambdaQueryWrapper.eq(Department::getName,addUserDto.getDepartmentName());
+            Department department = departmentService.getOne(departmentLambdaQueryWrapper);
+            if(Objects.isNull(department)){
+                fail.setReason("该部门不存在");
+                return false;
+            }
+            else{
+                addUserDto.setDepartmentId(department.getId());
+            }
+        }
+        if(!StringUtils.hasText(addUserDto.getRoleName())){
+            fail.setReason("职称不能为空");
+            return false;
+        }
+        else{
+            LambdaQueryWrapper<Role> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            roleLambdaQueryWrapper.eq(Role::getRoleName,addUserDto.getRoleName());
+            Role role = roleService.getOne(roleLambdaQueryWrapper);
+            if(Objects.isNull(role)){
+                fail.setReason("该职称不存在");
+                return false;
+            }
+            else{
+                addUserDto.setRoleId(role.getId());
+            }
+        }
+        if(Objects.isNull(addUserDto.getId())){
             fail.setReason("学号不能为空");
             return false;
         }
-        else if(addUserDto.getUserId().toString().length()!=15){
+        else if(addUserDto.getId().toString().length()!=15){
             fail.setReason("学号长度有误");
             return false;
         }
         else{
             LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-            lambdaQueryWrapper.eq(User::getId,addUserDto.getUserId());
+            lambdaQueryWrapper.eq(User::getId,addUserDto.getId());
             int cnt = userService.count(lambdaQueryWrapper);
             if (cnt > 0){
                 fail.setReason("该学号已注册");
@@ -154,6 +201,10 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
             fail.setReason("手机号不能为空");
             return false;
         }
+        if(!CheckUtils.isValidPhoneNumber(addUserDto.getPhoneNumber())){
+            fail.setReason("手机号格式不正确");
+            return false;
+        }
         if(!StringUtils.hasText(addUserDto.getQq())){
             fail.setReason("qq不能为空");
             return false;
@@ -162,26 +213,21 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
             fail.setReason("邮箱不能为空");
             return false;
         }
-        if(!StringUtils.hasText(addUserDto.getDepartmentName())){
-            fail.setReason("部门不能为空");
+        if(!CheckUtils.checkEmail(addUserDto.getEmail())){
+            fail.setReason("邮件格式不正确");
             return false;
         }
-        else{
-            LambdaQueryWrapper<Department>departmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            departmentLambdaQueryWrapper.eq(Department::getName,addUserDto.getDepartmentName());
-            Department department = departmentService.getOne(departmentLambdaQueryWrapper);
-            if(Objects.isNull(department)){
-                fail.setReason("该部门不存在");
-                return false;
-            }
-            else{
-                addUserDto.setDepartmentId(department.getId());
-            }
-        }
-        String userId =addUserDto.getUserId().toString();
+
+        String userId = addUserDto.getId().toString();
         Long collegeId = Long.valueOf(userId.substring(6,9));
+        LambdaQueryWrapper<College> collegeLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        collegeLambdaQueryWrapper.eq(College::getId,collegeId);
+        College college = collegeService.getOne(collegeLambdaQueryWrapper);
+        if(Objects.isNull(college)){
+            fail.setReason("学号中所对应的学院信息不存在");
+            return false;
+        }
         addUserDto.setCollegeId(collegeId);
-        addUserDto.setRoleId(5L);
         return true;
     }
 }

@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="增加修改活动状态的接口">
+    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了用户批量导入，失败数据导出的内容（增加了用户学号）">
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/CheckUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/template/导入失败模板.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/template/导入失败模板.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" afterDir="false" />
@@ -309,7 +310,7 @@
       <workItem from="1704803971488" duration="625000" />
       <workItem from="1705222677690" duration="2702000" />
       <workItem from="1705304071243" duration="5780000" />
-      <workItem from="1705376431923" duration="2226000" />
+      <workItem from="1705376431923" duration="6557000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -325,7 +326,14 @@
       <option name="project" value="LOCAL" />
       <updated>1705328094762</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="修改了用户批量导入，失败数据导出的内容（增加了用户学号）">
+      <created>1705381549101</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705381549101</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +353,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="加入ReadMe文件" />
     <MESSAGE value="增加修改活动状态的接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="增加修改活动状态的接口" />
+    <MESSAGE value="修改了用户批量导入，失败数据导出的内容（增加了用户学号）" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了用户批量导入，失败数据导出的内容（增加了用户学号）" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

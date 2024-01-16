@@ -127,7 +127,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         //更新user表数据
         User user = BeanCopyUtils.copyBean(addUserDto,User.class);
         //小程序修改信息
-        if(Objects.isNull(addUserDto.getUserId())) {
+        if(Objects.isNull(addUserDto.getId())) {
             Long userId = SecurityUtils.getUserId();
             user.setId(userId);
         }

@@ -36,6 +36,7 @@ public class UserImportDetail  {
     private String email;
 
     private String departmentName;
+    private String roleName;
     
     private String status;
     

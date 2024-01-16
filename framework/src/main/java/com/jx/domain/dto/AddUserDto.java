@@ -12,20 +12,23 @@ import java.util.List;
 @NoArgsConstructor
 public class AddUserDto {
     @ExcelProperty(index=0)
-    private  Long userId;
+    private String departmentName;
     @ExcelProperty(index=1)
-    private String name;
+    private String roleName;
     @ExcelProperty(index=2)
-    private String sex;
+    private  Long id;
     @ExcelProperty(index=3)
+    private String name;
+    @ExcelProperty(index=4)
+    private String sex;
+    @ExcelProperty(index=5)
     private  String phoneNumber;
 
-    @ExcelProperty(index=4)
-    private String qq;
-    @ExcelProperty(index=5)
-    private String email;
     @ExcelProperty(index=6)
-    private String departmentName;
+    private String qq;
+    @ExcelProperty(index=7)
+    private String email;
+
     private String password;
     private String type;
     private String avatar;
