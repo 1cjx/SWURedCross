@@ -25,6 +25,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 public class UserImportDetail  {
     @TableId
     private Long id;
+    private Long userId;
     private Long recordId;
     private String name;
     private String sex;

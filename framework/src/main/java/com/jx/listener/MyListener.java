@@ -117,17 +117,17 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     }
     //效验数据，根据需求自己更改
     private boolean checkImportData(AddUserDto addUserDto, UserImportFail fail) {
-        if(Objects.isNull(addUserDto.getId())){
+        if(Objects.isNull(addUserDto.getUserId())){
             fail.setReason("学号不能为空");
             return false;
         }
-        else if(addUserDto.getId().toString().length()!=15){
+        else if(addUserDto.getUserId().toString().length()!=15){
             fail.setReason("学号长度有误");
             return false;
         }
         else{
             LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<>();
-            lambdaQueryWrapper.eq(User::getId,addUserDto.getId());
+            lambdaQueryWrapper.eq(User::getId,addUserDto.getUserId());
             int cnt = userService.count(lambdaQueryWrapper);
             if (cnt > 0){
                 fail.setReason("该学号已注册");
@@ -178,7 +178,7 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
                 addUserDto.setDepartmentId(department.getId());
             }
         }
-        String userId =addUserDto.getId().toString();
+        String userId =addUserDto.getUserId().toString();
         Long collegeId = Long.valueOf(userId.substring(6,9));
         addUserDto.setCollegeId(collegeId);
         addUserDto.setRoleId(5L);

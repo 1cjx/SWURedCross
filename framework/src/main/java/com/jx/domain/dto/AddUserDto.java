@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AddUserDto {
     @ExcelProperty(index=0)
-    private  Long id;
+    private  Long userId;
     @ExcelProperty(index=1)
     private String name;
     @ExcelProperty(index=2)
