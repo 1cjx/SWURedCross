@@ -27,6 +27,7 @@ import io.jsonwebtoken.lang.Collections;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -55,6 +56,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     @Autowired
     RoleService roleService;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
     @Autowired
     UserImportRecordMapper userImportRecordMapper;
     @Autowired
@@ -108,6 +111,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         wrapper.like(!Objects.isNull(listUserDto.getRoleId()),User::getRoleId, listUserDto.getRoleId());
         wrapper.eq(StringUtils.hasText(listUserDto.getIsBind()),User::getIsBind, listUserDto.getIsBind());
         wrapper.like(!Objects.isNull(listUserDto.getId()),User::getId, listUserDto.getId());
+        wrapper.orderByAsc(User::getRoleId);
+        wrapper.orderByAsc(User::getDepartmentId);
         List<User> userList = list(wrapper);
         List<UserInfoVo> userInfoVos = userList.stream().map(o->userMapper.getUserInfo(o.getId()).setIsBind(o.getIsBind())).collect(Collectors.toList());
         Page<UserInfoVo> userInfoVoPage = PageUtils.listToPage(userInfoVos,pageNum,pageSize);
@@ -130,6 +135,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         if(Objects.isNull(addUserDto.getId())) {
             Long userId = SecurityUtils.getUserId();
             user.setId(userId);
+        }
+        String password = user.getPassword();
+        if(StringUtils.hasText(password)){
+            //重置密码
+            user.setPassword(passwordEncoder.encode("redcross666"));
         }
         updateById(user);
         return ResponseResult.okResult();
@@ -168,7 +178,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userImportRecordMapper.updateById(userImportRecord);
         String ans = "";
         if(lister.getFailNum()>0){
-            ans = "共有"+lister.getFailNum()+"条数据"+"导入失败";
+            ans = "共有"+lister.getFailNum()+"条数据导入失败,详情查看导入记录";
             return ResponseResult.errorResult(550,ans);
         }
         else{
@@ -185,7 +195,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         List<UserImportDetail> list = userImportDetailService.list(lambdaQueryWrapper);
         try {
             ClassPathResource resource = new ClassPathResource("/template/导入失败模板.xlsx");
-            String filename  = URLEncoder.encode("导入失败数据","UTF-8");
+            String filename  = URLEncoder.encode("导入失败数据" + System.currentTimeMillis(),"UTF-8");
             response.setHeader("Content-disposition","attachment;filename="+filename+".xlsx");
             ExcelWriter writer = EasyExcel.write(response.getOutputStream()).withTemplate(resource.getInputStream()).build();
             writer.fill(list,EasyExcel.writerSheet(0).build());
@@ -197,11 +207,19 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public ResponseResult userImportRecordList() {
+    public ResponseResult userImportRecordList(Long pageNum, Long pageSize) {
         Long userId = SecurityUtils.getUserId();
         LambdaQueryWrapper<UserImportRecord> userImportRecordLambdaQueryWrapper = new LambdaQueryWrapper<>();
         userImportRecordLambdaQueryWrapper.eq(UserImportRecord::getCreateBy,userId).orderByDesc(UserImportRecord::getCreateTime);
         List<UserImportRecord> userImportRecords = userImportRecordService.list(userImportRecordLambdaQueryWrapper);
-        return ResponseResult.okResult(userImportRecords);
+        Page<UserImportRecord> importRecordPage = PageUtils.listToPage(userImportRecords,pageNum,pageSize);
+        PageVo pageVo = new PageVo(importRecordPage.getRecords(),importRecordPage.getTotal());
+        return ResponseResult.okResult(pageVo);
+    }
+
+    @Override
+    public ResponseResult deleteUsers(List<Long> userIds) {
+        removeByIds(userIds);
+        return ResponseResult.okResult();
     }
 }

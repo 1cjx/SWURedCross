@@ -6,6 +6,8 @@ import com.jx.domain.dto.AddLocationDto;
 import com.jx.domain.dto.ListLocationDto;
 import com.jx.domain.entity.Location;
 
+import java.util.List;
+
 
 /**
  * (Location)表服务接口
@@ -25,7 +27,7 @@ public interface LocationService extends IService<Location> {
 
     ResponseResult getLocationDetail(Long id);
 
-    ResponseResult deleteLocation(Long id);
+    ResponseResult deleteLocation(List<Long> locationIds);
 
     ResponseResult changeStatus(AddLocationDto addLocationDto);
 

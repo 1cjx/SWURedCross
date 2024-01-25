@@ -6,6 +6,8 @@ import com.jx.domain.dto.AddTimeSlotDto;
 import com.jx.domain.dto.ListTimeSlotDto;
 import com.jx.domain.entity.TimeSlot;
 
+import java.util.List;
+
 
 /**
  * (TimeSlot)表服务接口
@@ -19,7 +21,7 @@ public interface TimeSlotService extends IService<TimeSlot> {
 
     ResponseResult getTimeSlotDetail(Long id);
 
-    ResponseResult deleteTimeSlot(Long id);
+    ResponseResult deleteTimeSlot(List<Long> timeSlotIds);
 
     ResponseResult updateTimeSlot(AddTimeSlotDto addTimeSlotDto);
 

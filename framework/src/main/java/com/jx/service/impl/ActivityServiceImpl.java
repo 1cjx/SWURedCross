@@ -89,6 +89,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     public ResponseResult addSchedule(Scheduled scheduled) {
         Long userId = SecurityUtils.getUserId();
         scheduled.setUserId(userId);
+        //TODO 判断该活动是否还招募
+        //TODO 判断该班次是否还招募
+        //TODO 该用户角色和部门是否符合条件
         //判断在同一时间段是否报班
         Long cnt = activityAssignmentMapper.getUserIsInThisTimeSlot(userId,scheduled.getPostAssignmentId());
         if(cnt>0L){
@@ -110,7 +113,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         //获取活动的排班信息中的时间和地点
         List<ActivityAssignmentsBo> schedule = activityAssignmentMapper.getActivityAssignmentsVoList(activityId);
         //根据时间和地点获取班次列表
-        if(schedule.get(0) !=null) {
+        if(schedule.size()>0) {
             schedule.stream().forEach(
                     o -> {
                         List<ClassBo> classBos = new ArrayList<>();
@@ -144,10 +147,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                         o.setAssignmentVoList(classBos);
                     }
             );
-
-            activityDetailVo.setScheduled(schedule);
         }
-
+        activityDetailVo.setScheduled(schedule);
 
         //班次岗位列表以排班岗位+所需人数为元素
         return ResponseResult.okResult(activityDetailVo);
@@ -270,6 +271,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         activityLambdaQueryWrapper.like(StringUtils.hasText(listActivityDto.getName()),Activity::getName,listActivityDto.getName());
         activityLambdaQueryWrapper.eq(StringUtils.hasText(listActivityDto.getStatus()),Activity::getStatus,listActivityDto.getStatus());
         activityLambdaQueryWrapper.eq(!Objects.isNull(listActivityDto.getCategoryId()),Activity::getCategoryId,listActivityDto.getCategoryId());
+        activityLambdaQueryWrapper.orderByDesc(Activity::getBeginDate);
         List<Activity> activityList = list(activityLambdaQueryWrapper);
         List<ListActivityBo> activityVos = BeanCopyUtils.copyBeanList(activityList,ListActivityBo.class);
         activityVos.stream().forEach(o->{

@@ -92,7 +92,13 @@ public class UserController {
     }
     @ApiOperation("查询当前用户的新增用户记录")
     @GetMapping("/userImportRecordList")
-    public ResponseResult userImportRecordList(){
-        return userService.userImportRecordList();
+    public ResponseResult userImportRecordList(Long pageNum, Long pageSize){
+        return userService.userImportRecordList(pageNum,pageSize);
+    }
+
+
+    @DeleteMapping
+    public ResponseResult deleteUsers(@RequestBody List<Long> userIds){
+        return userService.deleteUsers(userIds);
     }
 }

@@ -10,6 +10,7 @@ import com.jx.domain.dto.AddDepartmentDto;
 import com.jx.domain.dto.ListCategoryDto;
 import com.jx.domain.entity.Activity;
 import com.jx.domain.entity.Category;
+import com.jx.domain.entity.Role;
 import com.jx.domain.vo.CategoryVo;
 import com.jx.domain.vo.PageVo;
 import com.jx.enums.AppHttpCodeEnum;
@@ -22,6 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -92,13 +94,22 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
     }
 
     @Override
-    public ResponseResult deleteCategory(Long id) {
-        LambdaQueryWrapper<Activity>activityLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        activityLambdaQueryWrapper.eq(Activity::getCategoryId,id);
-        if(activityService.count(activityLambdaQueryWrapper)>0){
-            throw new SystemException(AppHttpCodeEnum.CATEGORY_USED);
+    public ResponseResult deleteCategory(List<Long> categoryId) {
+        List<String> ans = new ArrayList<>();
+        categoryId.stream().forEach(o-> {
+            LambdaQueryWrapper<Activity> activityLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            activityLambdaQueryWrapper.eq(Activity::getCategoryId, o);
+            if (activityService.count(activityLambdaQueryWrapper) > 0) {
+                Category category = getById(o);
+                ans.add(category.getName());
+            }
+            else {
+                removeById(o);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"分类"+ans.toString()+"有活动使用,无法删除");
         }
-        removeById(id);
         return  ResponseResult.okResult();
     }
 }

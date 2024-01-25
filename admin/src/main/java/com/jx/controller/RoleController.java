@@ -10,6 +10,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/system/role")
 @Api(tags = "角色相关接口")
@@ -41,11 +43,10 @@ public class RoleController {
     public ResponseResult updateRole(@RequestBody AddRoleDto addRoleDto){
         return roleService.updateRole(addRoleDto);
     }
-    @ApiOperation("删除选中角色")
-    @DeleteMapping("/{id}")
-    public ResponseResult Delete(@PathVariable("id") Long id){
-        roleService.removeById(id);
-        return  ResponseResult.okResult();
+    @ApiOperation("删除角色")
+    @DeleteMapping
+    public ResponseResult Delete(@RequestBody List<Long> roleIds){
+        return roleService.deleteRoles(roleIds);
     }
 
 }

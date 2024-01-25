@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +33,12 @@ public class AdminLoginServiceImpl implements AdminLoginService {
 
     @Override
     public ResponseResult login(LoginUserDto user) {
+        if(Objects.isNull(user.getId())){
+            throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
+        }
+        if(!StringUtils.hasText(user.getPassword())){
+            throw new SystemException(AppHttpCodeEnum.REQUIRE_PASSWORD);
+        }
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getId(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         //判断是否认证通过

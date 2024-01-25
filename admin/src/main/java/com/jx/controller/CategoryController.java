@@ -12,6 +12,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Api(tags = "活动分类相关接口")
 @RestController
 @RequestMapping("/system/category")
@@ -47,8 +49,8 @@ public class CategoryController {
         return categoryService.addCategory(addCategoryDto);
     }
     @ApiOperation("删除选中分类")
-    @DeleteMapping("/{id}")
-    public ResponseResult deleteCategory(@PathVariable("id") Long id){
-        return categoryService.deleteCategory(id);
+    @DeleteMapping
+    public ResponseResult deleteCategory(@RequestBody List<Long> categoryId){
+        return categoryService.deleteCategory(categoryId);
     }
 }

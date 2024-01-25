@@ -9,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 
 /**
@@ -35,6 +36,8 @@ public interface UserService extends IService<User> {
 
     ResponseResult failUploadDownload(Long recordId, HttpServletResponse response);
 
-    ResponseResult userImportRecordList();
+    ResponseResult userImportRecordList(Long pageNum, Long pageSize);
+
+    ResponseResult deleteUsers(List<Long> userIds);
 }
 

@@ -7,6 +7,8 @@ import com.jx.domain.dto.AddDepartmentDto;
 import com.jx.domain.dto.ListCategoryDto;
 import com.jx.domain.entity.Category;
 
+import java.util.List;
+
 
 /**
  * (Category)表服务接口
@@ -26,7 +28,7 @@ public interface CategoryService extends IService<Category> {
 
     ResponseResult addCategory(AddCategoryDto addCategoryDto);
 
-    ResponseResult deleteCategory(Long id);
+    ResponseResult deleteCategory(List<Long> categoryId);
 
 }
 

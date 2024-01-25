@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.xml.ws.Response;
+import java.util.List;
 
 @RestController
 @RequestMapping("/system/timeSlot")
@@ -39,8 +40,8 @@ public class TimeSlotController {
         return timeSlotService.addTimeSlot(addTimeSlotDto);
     }
     @ApiOperation("删除选中活动时间段")
-    @DeleteMapping("{id}")
-    public ResponseResult deleteTimeSlot(@PathVariable("id") Long id){
-        return timeSlotService.deleteTimeSlot(id);
+    @DeleteMapping
+    public ResponseResult deleteTimeSlot(@RequestBody List<Long> timeSlotIds){
+        return timeSlotService.deleteTimeSlot(timeSlotIds);
     }
 }

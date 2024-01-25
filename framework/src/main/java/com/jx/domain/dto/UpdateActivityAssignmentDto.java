@@ -14,6 +14,7 @@ public class UpdateActivityAssignmentDto {
     private Long id;
     private Date time;
     private Long locationId;
+    private String  status;
     private Long timeSlotId;
     private Long typeId;
     private List<UpdatePostAssignmentDto> postList;

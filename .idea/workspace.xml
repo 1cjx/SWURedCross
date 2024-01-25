@@ -4,14 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了用户批量导入，失败数据导出的内容（增加了用户学号）">
-      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/CheckUtils.java" afterDir="false" />
+    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改后台相关批量删除,优化部分后台修改机制">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,8 +63,10 @@
   &quot;keyToString&quot;: {
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
     &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
@@ -83,7 +81,7 @@
     &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a01042e71b9fcf3e2149140516ce2b9b&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -310,7 +308,17 @@
       <workItem from="1704803971488" duration="625000" />
       <workItem from="1705222677690" duration="2702000" />
       <workItem from="1705304071243" duration="5780000" />
-      <workItem from="1705376431923" duration="6557000" />
+      <workItem from="1705376431923" duration="6595000" />
+      <workItem from="1705387761909" duration="6789000" />
+      <workItem from="1705411523083" duration="3819000" />
+      <workItem from="1705718947347" duration="355000" />
+      <workItem from="1705733713083" duration="6728000" />
+      <workItem from="1705821212550" duration="3103000" />
+      <workItem from="1705840653172" duration="4549000" />
+      <workItem from="1705889784411" duration="11968000" />
+      <workItem from="1706065946495" duration="5742000" />
+      <workItem from="1706104111831" duration="953000" />
+      <workItem from="1706152938340" duration="5330000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -333,7 +341,21 @@
       <option name="project" value="LOCAL" />
       <updated>1705381549101</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="修改了用户批量导入，新增了职称导入">
+      <created>1705386921773</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705386921773</updated>
+    </task>
+    <task id="LOCAL-00005" summary="修改后台相关批量删除,优化部分后台修改机制">
+      <created>1706166798720</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1706166798720</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -354,18 +376,24 @@
     <MESSAGE value="加入ReadMe文件" />
     <MESSAGE value="增加修改活动状态的接口" />
     <MESSAGE value="修改了用户批量导入，失败数据导出的内容（增加了用户学号）" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了用户批量导入，失败数据导出的内容（增加了用户学号）" />
+    <MESSAGE value="修改了用户批量导入，新增了职称导入" />
+    <MESSAGE value="修改后台相关批量删除,优化部分后台修改机制" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改后台相关批量删除,优化部分后台修改机制" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java</url>
-          <line>262</line>
+          <line>263</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/RedCross$WeiXinApplication.ic" NAME="WeiXinApplication 覆盖结果" MODIFIED="1702100789810" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -39,6 +39,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             List<String> list = menuMapper.selectPermsByUserId(user.getId());
             return new LoginUser(user,list);
         }
-        return new LoginUser(user,null);
+        else{
+            throw new RuntimeException("当前账号无权进入后台管理系统");
+        }
     }
 }

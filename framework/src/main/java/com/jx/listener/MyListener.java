@@ -100,6 +100,9 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
 
     @Override
     public void invoke(AddUserDto addUserDto, AnalysisContext analysisContext) {
+        if(CheckUtils.checkObjAllFieldsIsNull(addUserDto)){
+            return;
+        }
     	// 这里放具体数据校验方法，校验通过往data里面放数据，否则直接return
         UserImportDetail detail = BeanCopyUtils.copyBean(addUserDto,UserImportDetail.class);
         detail.setUserId(addUserDto.getId());
@@ -114,8 +117,15 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
             //插入用户
             User user = BeanCopyUtils.copyBean(addUserDto,User.class);
             user.setId(addUserDto.getId());
-            user.setPassword(passwordEncoder.encode("123456"));
-            userService.save(user);
+            user.setPassword(passwordEncoder.encode("redcross666"));
+            //判断用户是否存在 存在则修改信息
+            User tempUser = userService.getById(user.getId());
+            if(Objects.isNull(tempUser)) {
+                userService.save(user);
+            }
+            else{
+                userService.updateById(user);
+            }
         }
         else{
             detail.setReason(fail.getReason());

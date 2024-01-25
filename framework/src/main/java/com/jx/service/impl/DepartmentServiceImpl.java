@@ -10,6 +10,7 @@ import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.dto.ListDepartmentDto;
 import com.jx.domain.entity.Department;
 import com.jx.domain.entity.Location;
+import com.jx.domain.entity.Post;
 import com.jx.domain.entity.User;
 import com.jx.domain.vo.DepartmentVo;
 import com.jx.domain.vo.PageVo;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -92,14 +94,22 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
 
     @Transactional
     @Override
-    public ResponseResult deleteDepartment(Long id) {
-        LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userLambdaQueryWrapper.eq(User::getDepartmentId,id);
-        int cnt =  userService.count(userLambdaQueryWrapper);
-        if(cnt>0){
-            throw new SystemException(AppHttpCodeEnum.DEPARTMENT_USED);
+    public ResponseResult deleteDepartment(List<Long> departmentIds) {
+        List<String> ans = new ArrayList<>();
+        departmentIds.stream().forEach(id->{
+            LambdaQueryWrapper<User> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            userLambdaQueryWrapper.eq(User::getDepartmentId,id);
+            if( userService.count(userLambdaQueryWrapper)>0){
+                Department department = getById(id);
+                ans.add(department.getName());
+            }
+            else {
+                removeById(id);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"部门"+ans.toString()+"有用户使用,无法删除");
         }
-        removeById(id);
         return ResponseResult.okResult();
     }
 

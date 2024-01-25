@@ -4,12 +4,12 @@
     <select id="getUserByInfo" resultType="com.jx.domain.entity.User">
         SELECT u.*
         FROM t_user u LEFT JOIN t_college c ON c.`id` = u.`college_id`
-        WHERE u.id = #{id} AND u.name = #{name}   AND u.`del_flag` = 0
+        WHERE u.id = #{id} AND u.name = #{name}
     </select>
     <select id="getUserInfo" resultType="com.jx.domain.vo.UserInfoVo">
         SELECT u.id,u.name,u.`avatar`,u.`phone_number`,u.`qq`,u.`sex`,d.`name` AS department,c.`name` AS college,u.email,t.`role_name` AS role
         FROM t_user u LEFT JOIN t_department d ON d.`id` = u.department_id LEFT JOIN t_college c ON  u.`college_id` = c.`id` LEFT JOIN sys_role t ON t.`id` = u.`role_id`
-        WHERE u.id = #{id}   AND u.`del_flag` = 0          AND d.`del_flag` = 0         AND t.`del_flag` = 0
+        WHERE u.id = #{id}    AND d.`del_flag` = 0         AND t.`del_flag` = 0
     </select>
     <select id="getLeaderInfo" resultType="com.jx.domain.vo.UserInfoVo">
         SELECT u.name, u.`phone_number` ,u.qq
@@ -28,6 +28,6 @@
     <select id="getVolunteerInfo" resultType="com.jx.domain.bo.VolunteerInfoBo">
         SELECT u.name,u.`phone_number`,u.`qq`,u.`id`
         FROM t_scheduled s LEFT JOIN t_user u ON s.`user_id` = u.`id`
-        WHERE s.`post_assignment_id` = #{postAssignmentId}         AND u.`del_flag` = 0
+        WHERE s.`post_assignment_id` = #{postAssignmentId}
     </select>
 </mapper>
