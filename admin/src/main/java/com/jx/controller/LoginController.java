@@ -42,12 +42,6 @@ public class LoginController {
     @ApiOperation("用户登录")
     @PostMapping("/admin/login")
     public ResponseResult login(@RequestBody LoginUserDto user){
-        if(Objects.isNull(user.getId())){
-            throw new SystemException(AppHttpCodeEnum.REQUIRE_USERNAME);
-        }
-        if(!StringUtils.hasText(user.getPassword())){
-            throw new SystemException(AppHttpCodeEnum.REQUIRE_PASSWORD);
-        }
         return loginService.login(user);
     }
     @ApiOperation("用户登出")

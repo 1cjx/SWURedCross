@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/system/department")
 @Api(tags = "部门相关接口")
@@ -47,9 +49,9 @@ public class DepartmentController {
     public ResponseResult addDepartment(@RequestBody AddDepartmentDto addDepartmentDto){
         return departmentService.addDepartment(addDepartmentDto);
     }
-    @ApiOperation("删除选中部门")
-    @DeleteMapping("/{id}")
-    public ResponseResult deleteDepartment(@PathVariable("id") Long id){
-        return departmentService.deleteDepartment(id);
+    @ApiOperation("删除部门")
+    @DeleteMapping
+    public ResponseResult deleteDepartment(@RequestBody List<Long> departmentIds){
+        return departmentService.deleteDepartment(departmentIds);
     }
 }

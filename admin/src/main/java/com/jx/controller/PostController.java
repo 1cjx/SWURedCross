@@ -8,6 +8,8 @@ import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/system/post")
 @Api(tags = "岗位相关接口")
@@ -34,8 +36,8 @@ public class PostController {
     public ResponseResult addPost(@RequestBody AddPostDto addPostDto){
         return postService.addPost(addPostDto);
     }
-    @DeleteMapping("{id}")
-    public ResponseResult deletePost(@PathVariable("id") Long id){
-        return postService.deletePost(id);
+    @DeleteMapping
+    public ResponseResult deletePost(@RequestBody List<Long> postIds){
+        return postService.deletePost(postIds);
     }
 }

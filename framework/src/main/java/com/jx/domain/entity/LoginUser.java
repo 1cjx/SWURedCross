@@ -31,7 +31,6 @@ public class LoginUser implements UserDetails {
         }
 
 //        把permissions中的权限信息封装成SimpleGrantedAuthority对象
-        System.out.println(authorities);
         authorities = permissions.stream()
                                     .map(SimpleGrantedAuthority::new)
                                     .collect(Collectors.toList());

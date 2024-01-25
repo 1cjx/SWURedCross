@@ -25,6 +25,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -128,14 +129,22 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
 
     @Transactional
     @Override
-    public ResponseResult deletePost(Long id) {
-        LambdaQueryWrapper<PostAssignment> postAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        postAssignmentLambdaQueryWrapper.eq(PostAssignment::getPostId,id);
-        int cnt = postAssignmentService.count(postAssignmentLambdaQueryWrapper);
-        if(cnt>0){
-            throw new SystemException(AppHttpCodeEnum.POST_USED);
+    public ResponseResult deletePost(List<Long> postIds) {
+        List<String> ans = new ArrayList<>();
+        postIds.stream().forEach(id->{
+            LambdaQueryWrapper<PostAssignment> postAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            postAssignmentLambdaQueryWrapper.eq(PostAssignment::getPostId,id);
+            if(postAssignmentService.count(postAssignmentLambdaQueryWrapper)>0){
+                Post post = getById(id);
+                ans.add(post.getName());
+            }
+            else {
+                removeById(id);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"岗位"+ans.toString()+"有活动使用,无法删除");
         }
-        removeById(id);
         return ResponseResult.okResult();
     }
 

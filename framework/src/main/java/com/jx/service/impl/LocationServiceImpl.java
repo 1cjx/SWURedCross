@@ -8,6 +8,7 @@ import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddLocationDto;
 import com.jx.domain.dto.ListLocationDto;
 import com.jx.domain.entity.ActivityAssignment;
+import com.jx.domain.entity.Category;
 import com.jx.domain.entity.Location;
 import com.jx.domain.vo.ListLocationVo;
 import com.jx.domain.vo.LocationVo;
@@ -25,6 +26,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,14 +103,22 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
     }
 
     @Override
-    public ResponseResult deleteLocation(Long id) {
-        LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        activityAssignmentLambdaQueryWrapper.eq(ActivityAssignment::getLocationId,id);
-        int cnt = activityAssignmentService.count(activityAssignmentLambdaQueryWrapper);
-        if(cnt>0){
-            throw new SystemException(AppHttpCodeEnum.LOCATION_USED);
+    public ResponseResult deleteLocation(List<Long> locationIds) {
+        List<String> ans = new ArrayList<>();
+        locationIds.stream().forEach(id->{
+            LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            activityAssignmentLambdaQueryWrapper.eq(ActivityAssignment::getLocationId,id);
+            if (activityAssignmentService.count(activityAssignmentLambdaQueryWrapper) > 0) {
+                Location location = getById(id);
+                ans.add(location.getName());
+            }
+            else {
+                removeById(id);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"地点"+ans.toString()+"有活动使用,无法删除");
         }
-        removeById(id);
         return  ResponseResult.okResult();
     }
 

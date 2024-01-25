@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/system/location")
 @Api(tags = "活动地点相关接口")
@@ -42,8 +44,8 @@ public class LocationController {
         return locationService.getLocationDetail(id);
     }
     @ApiOperation("删除选中活动地点")
-    @DeleteMapping("/{id}")
-    public ResponseResult deleteLocation(@PathVariable("id") Long id){
-        return locationService.deleteLocation(id);
+    @DeleteMapping
+    public ResponseResult deleteLocation(@RequestBody List<Long> locationIds){
+        return locationService.deleteLocation(locationIds);
     }
 }

@@ -10,6 +10,7 @@ import com.jx.domain.dto.ChangeRoleStatusDto;
 import com.jx.domain.dto.ListRoleDto;
 import com.jx.domain.entity.Role;
 import com.jx.domain.entity.RoleMenu;
+import com.jx.domain.entity.User;
 import com.jx.domain.vo.PageVo;
 import com.jx.domain.vo.RoleVo;
 import com.jx.enums.AppHttpCodeEnum;
@@ -17,6 +18,7 @@ import com.jx.exception.SystemException;
 import com.jx.mapper.RoleMapper;
 import com.jx.service.RoleMenuService;
 import com.jx.service.RoleService;
+import com.jx.service.UserService;
 import com.jx.utils.BeanCopyUtils;
 import com.jx.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +40,8 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Autowired
     private RoleMenuService roleMenuService;
+    @Autowired
+    private UserService userService;
     @Override
     public List<String> selectRoleKeyByUserId(Long id) {
         //判断是否是管理员 如果是返回集合中只需要有admin
@@ -126,6 +130,28 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         wrapper.eq(Role::getStatus, SystemConstants.STATUS_NORMAL);
         List<RoleVo>  roles = BeanCopyUtils.copyBeanList(list(wrapper),RoleVo.class);
         return ResponseResult.okResult(roles);
+    }
+
+    @Override
+    public ResponseResult deleteRoles(List<Long> roleIds) {
+        List<String> ans = new ArrayList<>();
+        roleIds.stream().forEach(o->{
+            LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<User>();
+            lambdaQueryWrapper.eq(User::getRoleId,o);
+            if(userService.count(lambdaQueryWrapper)>0){
+                //说明该角色有绑定用户
+                Role role = getById(o);
+                ans.add(role.getRoleName());
+            }
+            else{
+                //删除角色
+                removeById(o);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"角色"+ans.toString()+"有绑定用户,无法删除");
+        }
+        return ResponseResult.okResult();
     }
 
     public void addRoleMenu(Long roleId,List<Long>menuId){

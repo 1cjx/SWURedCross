@@ -7,6 +7,8 @@ import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.dto.ListDepartmentDto;
 import com.jx.domain.entity.Department;
 
+import java.util.List;
+
 
 /**
  * (Department)表服务接口
@@ -24,7 +26,7 @@ public interface DepartmentService extends IService<Department> {
 
     ResponseResult addDepartment(AddDepartmentDto addDepartmentDto);
 
-    ResponseResult deleteDepartment(Long id);
+    ResponseResult deleteDepartment(List<Long> departmentIds);
 
     ResponseResult changeStatus(AddDepartmentDto addDepartmentDto);
 

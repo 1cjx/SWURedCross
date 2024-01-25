@@ -8,6 +8,8 @@ import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddTimeSlotDto;
 import com.jx.domain.dto.ListTimeSlotDto;
 import com.jx.domain.entity.ActivityAssignment;
+import com.jx.domain.entity.Location;
+import com.jx.domain.entity.Scheduled;
 import com.jx.domain.entity.TimeSlot;
 import com.jx.domain.vo.PageVo;
 import com.jx.domain.vo.TimeSlotVo;
@@ -24,6 +26,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -59,14 +62,22 @@ public class TimeSlotServiceImpl extends ServiceImpl<TimeSlotMapper, TimeSlot> i
     }
 
     @Override
-    public ResponseResult deleteTimeSlot(Long id) {
-        LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        activityAssignmentLambdaQueryWrapper.eq(ActivityAssignment::getTimeSlotId,id);
-        Long cnt = (long)activityAssignmentService.count(activityAssignmentLambdaQueryWrapper);
-        if(cnt>0){
-            throw new SystemException(AppHttpCodeEnum.TIMESLOT_USED);
+    public ResponseResult deleteTimeSlot(List<Long> timeSlotIds) {
+        List<String> ans = new ArrayList<>();
+        timeSlotIds.stream().forEach(id->{
+            LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            activityAssignmentLambdaQueryWrapper.eq(ActivityAssignment::getTimeSlotId,id);
+            if (activityAssignmentService.count(activityAssignmentLambdaQueryWrapper) > 0) {
+                TimeSlot timeSlot = getById(id);
+                ans.add(timeSlot.getBeginTime()+"-"+timeSlot.getEndTime());
+            }
+            else {
+                removeById(id);
+            }
+        });
+        if(ans.size()>0){
+            return ResponseResult.errorResult(550,"时间段"+ans.toString()+"有活动使用,无法删除");
         }
-        removeById(id);
         return ResponseResult.okResult();
     }
 

@@ -5,6 +5,8 @@ import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddPostDto;
 import com.jx.domain.entity.Post;
 
+import java.util.List;
+
 
 /**
  * (Post)表服务接口
@@ -22,7 +24,7 @@ public interface PostService extends IService<Post> {
 
     ResponseResult addPost(AddPostDto addPostDto);
 
-    ResponseResult deletePost(Long id);
+    ResponseResult deletePost(List<Long> postIds);
 
     ResponseResult changeStatus(AddPostDto addPostDto);
 
