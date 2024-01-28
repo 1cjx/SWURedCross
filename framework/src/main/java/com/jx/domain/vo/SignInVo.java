@@ -28,12 +28,9 @@ public class SignInVo {
 
     //对应排班id
     private Long assignmentId;
-    //签到开始时间
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    private Date signInBegin;
     //签到结束时间
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    private Date signInEnd;
+    private Date expireTime;
     private String status;
     private String type;
 }

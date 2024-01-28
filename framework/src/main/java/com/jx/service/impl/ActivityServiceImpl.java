@@ -44,6 +44,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     @Autowired
     PostMapper postMapper;
     @Autowired
+    SignInUserMapper signInUserMapper;
+    @Autowired
     PostService postService;
     @Autowired
     LocationMapper locationMapper;
@@ -61,6 +63,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     CategoryService categoryService;
     @Autowired
     PostAssignmentMapper postAssignmentMapper;
+    @Autowired
+    SignInService signInService;
     /**
      * 获取活动列表
      * 返回活动名、活动主题、活动时间
@@ -219,7 +223,19 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                     //将志愿者信息封装
                     userActivityVo.setVolunteersInfo(postNeedBoList);
                 }
-                userActivityVos.add(userActivityVo);
+                if(type.equals("1")){
+                    userActivityVos.add(userActivityVo);
+                }
+                else{
+                    //创建签到时的查询 过滤掉已创建签退的活动
+                    LambdaQueryWrapper<SignIn> signInLambdaQueryWrapper = new LambdaQueryWrapper<>();
+                    signInLambdaQueryWrapper.eq(SignIn::getAssignmentId,userActivityVo.getActivityInfo().getActivityAssignmentId());
+                    signInLambdaQueryWrapper.eq(SignIn::getType,"3");
+                    //说明未创建过签退才展示
+                    if(signInService.count(signInLambdaQueryWrapper)==0){
+                        userActivityVos.add(userActivityVo);
+                    }
+                }
             }
         }
         Page<UserActivityVo> pageUserActivityVos = PageUtils.listToPage(userActivityVos,pageNum,pageSize);

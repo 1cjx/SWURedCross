@@ -35,7 +35,6 @@ public class SignInUserServiceImpl extends ServiceImpl<SignInUserMapper, SignInU
     SignInUserMapper signInUserMapper;
     @Override
     public ResponseResult listSignIns(Long pageNum, Long pageSize, ListSignInDto listSignInDto) {
-        System.err.println(listSignInDto);
         List<ListSignInUserVo> listSignInUserVos = signInUserMapper.listSignIns(listSignInDto.getActivityName(),listSignInDto.getLocationId(),listSignInDto.getTypeId(),listSignInDto.getTimeSlotId());
         Page<ListSignInUserVo> listSignInUserVoPage = PageUtils.listToPage(listSignInUserVos,pageNum,pageSize);
         PageVo pageVo = new PageVo(listSignInUserVoPage.getRecords(),listSignInUserVoPage.getTotal());
@@ -67,7 +66,6 @@ public class SignInUserServiceImpl extends ServiceImpl<SignInUserMapper, SignInU
                     o.setSignInType("错误");
                 }
             });
-            System.err.println(excelCategoryVos);
             //把数据写入到Excel中
             EasyExcel.write(httpServletResponse.getOutputStream(), ExcelSignInUserVo.class).autoCloseStream(Boolean.FALSE).sheet("签到记录")
                     .doWrite(excelCategoryVos);

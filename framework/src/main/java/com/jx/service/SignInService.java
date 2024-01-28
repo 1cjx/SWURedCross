@@ -3,11 +3,10 @@ package com.jx.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddSignInDto;
-import com.jx.domain.dto.AddSignInUserDto;
-import com.jx.domain.dto.ListSignInDto;
 import com.jx.domain.entity.SignIn;
 
-import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 
 /**
@@ -22,11 +21,12 @@ public interface SignInService extends IService<SignIn> {
 
     ResponseResult addSignIn(AddSignInDto addSignInDto);
 
-    ResponseResult QRCodeSignIn(AddSignInUserDto addSignInUserDto);
+    ResponseResult QRCodeSignIn(Long signInId);
 
     ResponseResult getChildrenSign(Long activityAssignmentId);
 
     ResponseResult getQRCodeSignInList(Long signInId);
 
+    void getQRCode(Long signInId, HttpServletResponse response) throws IOException;
 }
 

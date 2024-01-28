@@ -1,5 +1,6 @@
 package com.jx.domain.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QRCodeSignInListVo {
-    private Long signInId;
     private String userName;
-    @TableField(fill= FieldFill.INSERT)
-    private Date createTime;
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Date signInTime;
 }

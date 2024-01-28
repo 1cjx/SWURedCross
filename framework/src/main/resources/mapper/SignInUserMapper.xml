@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.jx.mapper.SignInUserMapper">
+    <update id="updateByMppId">
+        UPDATE t_signin_user su
+        SET  su.`sign_in_time` = #{signInTime},
+            su.`mid_time` = #{midTime} , su.`sign_out_time` = #{signOutTime} , su.`sign_in_count` = #{signInCount}
+        Where su.`assignment_id` = #{assignmentId} AND  su.`user_id` = #{userId}
+    </update>
     <select id="listSignIns" resultType="com.jx.domain.vo.ListSignInUserVo">
         SELECT a.name AS activityName,l.name AS locationName,ts.`begin_time` AS timeSlotBegin,ts.`end_time` AS timeSlotEnd,u.name AS userName, si.`type` AS signInTypeId,su.`create_time` AS signInTime,aa.time
         FROM t_sign_in si LEFT JOIN t_activity_assignment aa ON aa.id = si.`assignment_id` LEFT JOIN t_activity a ON a.`id` = aa.`activity_id` LEFT JOIN t_signin_user su ON su.`sign_in_id` = si.`id`
                           LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.`id` = aa.`time_slot_id`  LEFT JOIN t_user u ON u.id = su.`user_id`
         WHERE
             a.status = '1'
-          <if test='activityName!=""'>
+          <if test='activityName!="" and activityName!=null'>
               AND a.name LIKE concat('%',#{activityName},'%')
           </if>
           <if test="locationId!=null">
@@ -21,5 +27,10 @@
           </if>
            AND a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0         AND si.`del_flag` = 0         AND aa.`del_flag` = 0
         ORDER BY aa.time DESC, a.id DESC,aa.id DESC,si.create_time DESC
+    </select>
+    <select id="selectByMppId" resultType="com.jx.domain.entity.SignInUser">
+        SELECT *
+        FROM t_signin_user su
+        WHERE su.`assignment_id` = #{assignmentId} AND su.`user_id` = #{userId}
     </select>
 </mapper>

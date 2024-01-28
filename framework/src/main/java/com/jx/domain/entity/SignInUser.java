@@ -23,9 +23,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 @NoArgsConstructor
 @TableName("t_signin_user")
 public class SignInUser  {
-    private Long signInId;
+    private Long assignmentId;
     private Long userId;
-    @TableField(fill= FieldFill.INSERT)
-    private Date createTime;
+    private Date signInTime;
+    private Date midTime;
+    private Date signOutTime;
+    private Long signInCount;
 }
 

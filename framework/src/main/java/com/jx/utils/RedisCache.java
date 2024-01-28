@@ -118,11 +118,25 @@ public class RedisCache
      * @param key 缓存的键值
      * @return 缓存键值对应的数据
      */
-    public <T> List<T> getCacheList(final String key)
+    public <T> List<T> getCacheList(final String key,final Long start,final Long end)
     {
-        return redisTemplate.opsForList().range(key, 0, -1);
+        if(redisTemplate.opsForList().size(key)>(end-start+1)){
+            return redisTemplate.opsForList().range(key, start, end);
+        }
+        else{
+            return redisTemplate.opsForList().range(key, 0, -1);
+        }
     }
 
+    /**
+     * 向list中添加数据
+     * @param setKey
+     * @param key
+     * @param <T>
+     */
+    public <T>void addListMember(String setKey,T key){
+        redisTemplate.opsForList().leftPush(setKey, key);
+    }
     /**
      * 缓存Set
      *

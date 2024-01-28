@@ -13,10 +13,8 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddSignInDto {
-    public Long assignmentId;
-
+    private Long assignmentId;
+    private String type;
     @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    public Date signInBegin;
-    @JSONField(format="yyyy-MM-dd HH:mm:ss")
-    public Date signInEnd;
+    private Date expireTime;
 }

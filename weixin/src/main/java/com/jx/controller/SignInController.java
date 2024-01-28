@@ -2,7 +2,6 @@ package com.jx.controller;
 
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddSignInDto;
-import com.jx.domain.dto.AddSignInUserDto;
 import com.jx.service.SignInService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,8 +9,8 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
-import java.util.Date;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/signIn")
@@ -44,14 +43,24 @@ public class SignInController {
     }
 
     /**
+     *  生成二维码
+     * @param signInId 是签到id
+
+     * */
+    @GetMapping(value = "/getQRCode")
+    @ApiOperation("生成活动详情二维码")
+    public void getQRCode(Long signInId , HttpServletResponse response) throws IOException {
+        signInService.getQRCode(signInId,response);
+    }
+    /**
      * 扫码签到
-     * @param addSignInUserDto
+     * @param signInId
      * @return
      */
     @ApiOperation("扫码签到")
-    @PostMapping("/QRCodeSignIn")
-    public ResponseResult QRCodeSignIn(@RequestBody AddSignInUserDto addSignInUserDto){
-        return signInService.QRCodeSignIn(addSignInUserDto);
+    @GetMapping("/QRCodeSignIn")
+    public ResponseResult QRCodeSignIn(Long signInId){
+        return signInService.QRCodeSignIn(signInId);
     }
 
     /**

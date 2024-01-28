@@ -5,9 +5,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改后台相关批量删除,优化部分后台修改机制">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_javase_3_0_0.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/QRCodeUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInUserDto.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignIn.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignInUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignInUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/QRCodeSignInListVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/QRCodeSignInListVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/SignInVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/SignInVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/SignInUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/SignInUserMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/RedisCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/RedisCache.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +56,11 @@
       <list>
         <option value="1CJX &lt;1500206893@qq.com&gt;" />
       </list>
+    </option>
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
     </option>
   </component>
   <component name="MarkdownSettingsMigration">
@@ -115,7 +142,7 @@
       <recent name="com.jx.domain.vo" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.AdminApplication">
+  <component name="RunManager" selected="Spring Boot.WeiXinApplication">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -319,6 +346,9 @@
       <workItem from="1706065946495" duration="5742000" />
       <workItem from="1706104111831" duration="953000" />
       <workItem from="1706152938340" duration="5330000" />
+      <workItem from="1706239716418" duration="61000" />
+      <workItem from="1706319545465" duration="12166000" />
+      <workItem from="1706409039248" duration="22909000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -355,7 +385,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706166798720</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="修改后台相关批量删除,优化部分后台修改机制">
+      <created>1706173624400</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706173624400</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -379,17 +416,6 @@
     <MESSAGE value="修改了用户批量导入，新增了职称导入" />
     <MESSAGE value="修改后台相关批量删除,优化部分后台修改机制" />
     <option name="LAST_COMMIT_MESSAGE" value="修改后台相关批量删除,优化部分后台修改机制" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java</url>
-          <line>263</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

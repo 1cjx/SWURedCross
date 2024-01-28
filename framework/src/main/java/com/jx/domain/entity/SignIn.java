@@ -4,6 +4,7 @@ import java.util.Date;
 
 import java.io.Serializable;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
@@ -29,20 +30,15 @@ public class SignIn  {
 
     //对应排班id
     private Long assignmentId;
-    //签到开始时间
-    private Date signInBegin;
     //签到结束时间
-    private Date signInEnd;
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
+    private Date expireTime;
     private String status;
     private String type;
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
     @TableField(fill = FieldFill.INSERT)
     private Date createTime;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Long updateBy;
-    @TableField(fill = FieldFill.INSERT_UPDATE)
-    private Date updateTime;
     
     private Integer delFlag;
 

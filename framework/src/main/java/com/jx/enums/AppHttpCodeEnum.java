@@ -11,7 +11,7 @@ public enum AppHttpCodeEnum {
     REQUIRE_USERNAME(503, "必需填写用户名"),
     REQUIRE_PASSWORD(504,"必须填写密码"),
     LOGIN_ERROR(505,"用户名或密码错误"),
-    SIGN_IN_EXCEED_UPPER_LIMIT(506,"签到数量超出上限"),
+    SIGN_IN_EXIST(506,"该签到已存在"),
     SET_MENU_ERROR(509,"修改菜单'活动发布'失败，上级菜单不能选择自己"),
     HAS_CHILD_MENU(510,"存在子菜单不允许删除"),
     ROLE_EXIST(511, "角色已存在"),
@@ -36,7 +36,7 @@ public enum AppHttpCodeEnum {
     REQUEST_AGAIN(530,"请求重复"),
     FILE_TYPE_ERROR(531,"上传图片类型错误，请选择png、jpg格式图片" ),
     SIGN_IN_TIME_PASS(532,"签到时间已过"),
-    SIGN_NOT_START(533,"签到还未开始"),
+    SING_IN_NEED_BEFORE_SIGN_OUT(533,"请先创建签到再选择签退"),
     ADD_SCHEDULE_ERROR(534,"报班失败"),
     PARAM_NOT_NULL(535,"参数不能为空"),
     KILL_NOT_START(536,"报班还没有开始，请等待"),
@@ -54,7 +54,9 @@ public enum AppHttpCodeEnum {
     PHONE_NUMBER_NOT_NULL(548,"电话不能为空"),
     QQ_NOT_NULL(549,"qq不能为空"),
     CODE_NOT_NULL(550,"微信授权失败"),
-    PEOPLE_NUM_ERROR(551,"当前报名人数大于修改后的人数");
+    PEOPLE_NUM_ERROR(551,"当前报名人数大于修改后的人数"),
+    SIGN_IN_TYPE_ERROR(552,"签到类型错误");
+
 
 
     int code;
