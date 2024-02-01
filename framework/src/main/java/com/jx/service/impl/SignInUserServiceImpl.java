@@ -1,25 +1,35 @@
 package com.jx.service.impl;
 
 import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelWriter;
 import com.alibaba.fastjson.JSON;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jx.constants.SystemConstants;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.ListSignInDto;
 import com.jx.domain.entity.SignInUser;
+import com.jx.domain.entity.UserImportDetail;
 import com.jx.domain.vo.ExcelSignInUserVo;
 import com.jx.domain.vo.ListSignInUserVo;
 import com.jx.domain.vo.PageVo;
+import com.jx.domain.vo.SignInUserExportVo;
 import com.jx.enums.AppHttpCodeEnum;
+import com.jx.exception.SystemException;
 import com.jx.mapper.SignInUserMapper;
 import com.jx.service.SignInUserService;
 import com.jx.utils.BeanCopyUtils;
 import com.jx.utils.PageUtils;
+import com.jx.utils.TimeUtils;
 import com.jx.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLEncoder;
 import java.util.List;
 
 /**
@@ -35,45 +45,73 @@ public class SignInUserServiceImpl extends ServiceImpl<SignInUserMapper, SignInU
     SignInUserMapper signInUserMapper;
     @Override
     public ResponseResult listSignIns(Long pageNum, Long pageSize, ListSignInDto listSignInDto) {
-        List<ListSignInUserVo> listSignInUserVos = signInUserMapper.listSignIns(listSignInDto.getActivityName(),listSignInDto.getLocationId(),listSignInDto.getTypeId(),listSignInDto.getTimeSlotId());
+        List<ListSignInUserVo> listSignInUserVos = signInUserMapper.listSignIns(listSignInDto);
         Page<ListSignInUserVo> listSignInUserVoPage = PageUtils.listToPage(listSignInUserVos,pageNum,pageSize);
         PageVo pageVo = new PageVo(listSignInUserVoPage.getRecords(),listSignInUserVoPage.getTotal());
         return ResponseResult.okResult(pageVo);
     }
 
     @Override
-    public void export(HttpServletResponse httpServletResponse, ListSignInDto listSignInDto) {
+    public void export(HttpServletResponse response, ListSignInDto listSignInDto) {
+        //查询导出签到记录
+        List<SignInUserExportVo> listSignInUserVos = signInUserMapper.exportSignInUser(listSignInDto);
+        boolean flag = "1".equals(listSignInDto.getFlag());
+        listSignInUserVos.stream().forEach(o->{
+            //将isRedCrossMember标识转换成字符串,userNeed标识转换成字符串
+            o.setIsRedCrossMember(("1".equals(o.getIsRedCrossMember())?"是":"否"));
+            if(!StringUtils.hasText(o.getUserNeed())){
+                o.setUserNeed("暂未选择方式");
+            }
+            else{
+                o.setUserNeed("1".equals(o.getUserNeed())?"开志愿证明":"录入时长进入系统");
+            }
+            //计算服务时长
+            if(flag) {
+                double volunteerTime = TimeUtils.calculateHour(o.getSignInTime(), o.getSignOutTime());
+                o.setVolunteerTime(volunteerTime);
+            }
+        });
         try {
-            //设置下载文件的请求头
-            WebUtils.setDownLoadHeader("签到记录导出.xlsx",httpServletResponse);
-            //获取需要导出的数据
-            List<ListSignInUserVo> listSignInUserVos =signInUserMapper.listSignIns(listSignInDto.getActivityName(),listSignInDto.getLocationId(),listSignInDto.getTypeId(),listSignInDto.getTimeSlotId());
-            System.err.println(listSignInUserVos);
-            List<ExcelSignInUserVo> excelCategoryVos = BeanCopyUtils.copyBeanList(listSignInUserVos, ExcelSignInUserVo.class);
-            excelCategoryVos.stream().forEach(o->{
-                o.setTimeSlot(o.getTimeSlotBegin()+"-"+o.getTimeSlotEnd());
-                Long signInTypeId = o.getSignInTypeId();
-                if(signInTypeId==1L){
-                    o.setSignInType("签到");
-                }
-                else if(signInTypeId==2L){
-                    o.setSignInType("考勤");
-                }
-                else if(signInTypeId==3L){
-                    o.setSignInType("签退");
-                }
-                else{
-                    o.setSignInType("错误");
-                }
-            });
-            //把数据写入到Excel中
-            EasyExcel.write(httpServletResponse.getOutputStream(), ExcelSignInUserVo.class).autoCloseStream(Boolean.FALSE).sheet("签到记录")
-                    .doWrite(excelCategoryVos);
-
+            ClassPathResource resource = new ClassPathResource("/template/签到记录导出模板.xlsx");
+            String filename  = URLEncoder.encode("签到记录" + System.currentTimeMillis(),"UTF-8");
+            response.setHeader("Content-disposition","attachment;filename="+filename+".xlsx");
+            ExcelWriter writer = EasyExcel.write(response.getOutputStream()).withTemplate(resource.getInputStream()).build();
+            writer.fill(listSignInUserVos,EasyExcel.writerSheet(0).build());
+            writer.finish();
         } catch (Exception e) {
-            //如果出现异常也要响应json
-            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
-            WebUtils.renderString(httpServletResponse, JSON.toJSONString(result));
+            throw new SystemException(AppHttpCodeEnum.TEMPLATE_DOWNLOAD_ERROR);
         }
+
+//        try {
+//            //设置下载文件的请求头
+//            WebUtils.setDownLoadHeader("签到记录导出.xlsx",httpServletResponse);
+//            //获取需要导出的数据
+//            List<ListSignInUserVo> listSignInUserVos =signInUserMapper.listSignIns(listSignInDto);
+//            List<ExcelSignInUserVo> excelCategoryVos = BeanCopyUtils.copyBeanList(listSignInUserVos, ExcelSignInUserVo.class);
+//            excelCategoryVos.stream().forEach(o->{
+//                o.setTimeSlot(o.getTimeSlotBegin()+"-"+o.getTimeSlotEnd());
+//                Long signInTypeId = o.getSignInTypeId();
+//                if(signInTypeId==1L){
+//                    o.setSignInType("签到");
+//                }
+//                else if(signInTypeId==2L){
+//                    o.setSignInType("考勤");
+//                }
+//                else if(signInTypeId==3L){
+//                    o.setSignInType("签退");
+//                }
+//                else{
+//                    o.setSignInType("错误");
+//                }
+//            });
+//            //把数据写入到Excel中
+//            EasyExcel.write(httpServletResponse.getOutputStream(), ExcelSignInUserVo.class).autoCloseStream(Boolean.FALSE).sheet("签到记录")
+//                    .doWrite(excelCategoryVos);
+//
+//        } catch (Exception e) {
+//            //如果出现异常也要响应json
+//            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
+//            WebUtils.renderString(httpServletResponse, JSON.toJSONString(result));
+//        }
     }
 }

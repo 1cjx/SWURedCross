@@ -2,6 +2,7 @@ package com.jx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jx.domain.entity.College;
+import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -12,5 +13,6 @@ import com.jx.domain.entity.College;
  */
 public interface CollegeMapper extends BaseMapper<College> {
 
+    Long selectByName(@Param("collegeName") String collegeName);
 }
 

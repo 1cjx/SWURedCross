@@ -4,32 +4,34 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改后台相关批量删除,优化部分后台修改机制">
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_core_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_google_zxing_javase_3_0_0.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/QRCodeUtils.java" afterDir="false" />
+    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了微信小程序端的签到，改为从后端生成二维码到前端，同时对数据库有修改">
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/TestDemo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/TestApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/SignInUserExportVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/CollegeMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/framework.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddSignInUserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignIn.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignIn.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignInUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/SignInUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/QRCodeSignInListVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/QRCodeSignInListVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/SignInVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/SignInVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/template/导入失败模板.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/template/导入失败模板.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/template/用户数据批量导入模板.xlsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListSignInDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListSignInDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListUserDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListUserDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportDetail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ListSignInUserVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ListSignInUserVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/UserVolunteerRecordVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/UserVolunteerRecordVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/CollegeMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/CollegeMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/SignInUserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/SignInUserMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/VolunteerRecordMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/VolunteerRecordMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DashboardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DashboardServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/RoleServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/RedisCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/RedisCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/TimeUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/SignInUserMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/VolunteerRecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/VolunteerRecordMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,8 +48,8 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
-        <option value="Mybatis Mapper" />
         <option value="Class" />
+        <option value="Mybatis Mapper" />
       </list>
     </option>
   </component>
@@ -142,7 +144,30 @@
       <recent name="com.jx.domain.vo" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.WeiXinApplication">
+  <component name="RunManager" selected="Spring Boot.AdminApplication">
+    <configuration name="TestDemo" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestDemo" />
+      <module name="admin" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TestApplication.testDemo" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="admin" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.jx.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.jx" />
+      <option name="MAIN_CLASS_NAME" value="com.jx.TestApplication" />
+      <option name="METHOD_NAME" value="testDemo" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -172,6 +197,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="应用程序.TestDemo" />
+        <item itemvalue="JUnit.TestApplication.testDemo" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -348,7 +379,9 @@
       <workItem from="1706152938340" duration="5330000" />
       <workItem from="1706239716418" duration="61000" />
       <workItem from="1706319545465" duration="12166000" />
-      <workItem from="1706409039248" duration="22909000" />
+      <workItem from="1706409039248" duration="23810000" />
+      <workItem from="1706505893058" duration="18853000" />
+      <workItem from="1706765337113" duration="6512000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -392,7 +425,14 @@
       <option name="project" value="LOCAL" />
       <updated>1706173624400</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="修改了微信小程序端的签到，改为从后端生成二维码到前端，同时对数据库有修改">
+      <created>1706455167899</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706455167899</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -415,7 +455,8 @@
     <MESSAGE value="修改了用户批量导入，失败数据导出的内容（增加了用户学号）" />
     <MESSAGE value="修改了用户批量导入，新增了职称导入" />
     <MESSAGE value="修改后台相关批量删除,优化部分后台修改机制" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改后台相关批量删除,优化部分后台修改机制" />
+    <MESSAGE value="修改了微信小程序端的签到，改为从后端生成二维码到前端，同时对数据库有修改" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了微信小程序端的签到，改为从后端生成二维码到前端，同时对数据库有修改" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

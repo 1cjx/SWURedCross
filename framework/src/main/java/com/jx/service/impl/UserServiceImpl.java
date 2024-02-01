@@ -90,7 +90,6 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         Double userVolunteerTimes =volunteerRecordMapper.getUserTotalVolunteerTimes(userId);
         if(Objects.isNull(userVolunteerTimes)) {
             volunteerVo.setTotalVolunteerTime(0.0);
-
         }
         else{
             volunteerVo.setTotalVolunteerTime(userVolunteerTimes);

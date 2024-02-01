@@ -11,5 +11,6 @@ public class ListSignInDto {
     private String activityName;
     private Long locationId;
     private Long timeSlotId;
-    private Long typeId;
+    //是否所有签到都签到了
+    private String flag;
 }

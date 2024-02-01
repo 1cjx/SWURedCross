@@ -38,7 +38,7 @@ public class DashboardServiceImpl implements DashboardService {
 
     @Override
     public ResponseResult getTotalVolunteerTimes() {
-       Long totalVolunteerTimes =  volunteerRecordMapper.getTotalVolunteerTimes();
+       Double totalVolunteerTimes =  volunteerRecordMapper.getTotalVolunteerTimes();
         return ResponseResult.okResult(totalVolunteerTimes);
     }
 

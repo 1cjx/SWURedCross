@@ -31,13 +31,13 @@
         FROM t_activity_assignment aa LEFT JOIN t_volunteer_record vr ON vr.`activity_assignment_id` = aa.`id`
         WHERE aa.`activity_id` = #{activityId} AND vr.`user_id`=#{userId} AND vr.`status` = '1'         AND aa.`del_flag` = 0
     </select>
-    <select id="getTotalVolunteerTimes" resultType="java.lang.Long">
+    <select id="getTotalVolunteerTimes" resultType="java.lang.Double">
         SELECT SUM(vr.`volunteer_time`)
         FROM t_volunteer_record vr
     </select>
     <select id="getUserVolunteerRecordList" resultType="com.jx.domain.vo.UserVolunteerRecordVo">
         SELECT vr.`user_id` AS userId ,u.name AS userName,d.`name`AS departmentName,SUM(vr.`volunteer_time`) AS userVolunteerTimes,COUNT(vr.`status`) AS userParticipateInActivityNum
-        FROM t_volunteer_record vr LEFT JOIN t_user u ON u.id = vr.`user_id` LEFT JOIN t_department d ON d.id = u.`department_id`
+        FROM t_volunteer_record vr RIGHT JOIN t_user u ON u.id = vr.`user_id` LEFT JOIN t_department d ON d.id = u.`department_id`
         WHERE vr.`status` = '1'
         <if test="departmentId!=null">
             AND d.`id` = #{departmentId}

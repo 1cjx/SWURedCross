@@ -19,7 +19,11 @@ public class ListSignInUserVo {
    private String timeSlotEnd;
    private String userName;
    private String time;
-   private Long signInTypeId;
    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
    private Date signInTime;
+
+   @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+   private Date midTime;
+   @JSONField(format = "yyyy-MM-dd HH:mm:ss")
+   private Date signOutTime;
 }

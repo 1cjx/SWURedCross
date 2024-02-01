@@ -3,6 +3,8 @@ package com.jx.utils;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 
+import java.util.Date;
+
 public class TimeUtils {
     public static boolean timeJudge(String beginTime,String endTime){
         if(!beginTime.contains(":")||!endTime.contains(":")){
@@ -34,5 +36,16 @@ public class TimeUtils {
         else{
             return 0<=time&&time<60;
         }
+    }
+
+    public static double calculateHour(Date start, Date end){
+        Long time = end.getTime() - start.getTime() ;
+        time/=(1000*60);//转化为分钟
+        Long remainder = time%60L;
+        Long temp = remainder < 20L ? 0L : (remainder < 40L ? 30L : 60L);
+        Long hour = time -remainder + temp;
+        double resultHour = (double)hour/60;
+        System.err.println(resultHour);
+        return resultHour;
     }
 }

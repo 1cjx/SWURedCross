@@ -29,6 +29,7 @@ public class UserImportDetail  {
     private Long recordId;
     private String name;
     private String sex;
+    private String collegeName;
     private String phoneNumber;
     
     private String qq;

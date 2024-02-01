@@ -29,6 +29,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -105,7 +106,7 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
             throw new SystemException(AppHttpCodeEnum.SIGN_IN_EXIST);
         }
         //创建签退时判断是否先创建过签到
-        if(addSignInDto.getType().equals("3")){
+        if(addSignInDto.getType().equals("3")||addSignInDto.getType().equals("2")){
             LambdaQueryWrapper<SignIn> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(SignIn::getAssignmentId,addSignInDto.getAssignmentId());
             queryWrapper.eq(SignIn::getType,"1");
@@ -170,7 +171,6 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
             Long count = newSignInUser.getSignInCount();
             LambdaQueryWrapper<SignIn> signInLambdaQueryWrapper = new LambdaQueryWrapper<>();
             signInLambdaQueryWrapper.eq(SignIn::getAssignmentId,assignmentId);
-
             //志愿记录创建
             VolunteerRecord volunteerRecord = new VolunteerRecord();
             volunteerRecord.setActivityAssignmentId(assignmentId);
@@ -178,13 +178,8 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
             //签到个数与创建个数相同
             if(count(signInLambdaQueryWrapper)==count){
                 //计算时长
-                Long time = newSignInUser.getSignOutTime().getTime() - newSignInUser.getSignInTime().getTime();
-                time/=1000*60;//转化为分钟
-                double hour = (double)time/60;
-                BigDecimal b = new BigDecimal(hour);
-                //保留两位小数
-                double resultHour = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-                volunteerRecord.setVolunteerTime(resultHour);
+                double volunteerTime = TimeUtils.calculateHour(newSignInUser.getSignInTime(),newSignInUser.getSignOutTime());
+                volunteerRecord.setVolunteerTime(volunteerTime);
             }
             else{
                 //设置状态为失败，以及少了签到次数

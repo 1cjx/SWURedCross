@@ -12,5 +12,5 @@ public class UserVolunteerRecordVo {
     private String userName;
     private String departmentName;
     private Long userParticipateInActivityNum;
-    private Long userVolunteerTimes;
+    private Double userVolunteerTimes;
 }

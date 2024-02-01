@@ -9,6 +9,7 @@ import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.entity.*;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
+import com.jx.mapper.CollegeMapper;
 import com.jx.mapper.UserImportRecordMapper;
 import com.jx.service.*;
 import com.jx.service.impl.UserServiceImpl;
@@ -29,7 +30,7 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     private static PasswordEncoder passwordEncoder;
     private static DepartmentService departmentService;
     private static UserImportDetailService userImportDetailService;
-    private static CollegeService collegeService;
+    private static CollegeMapper collegeMapper;
     private static RoleService roleService;
     @Autowired
     public void setUserService(UserService userService) {
@@ -49,8 +50,8 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     }
 
     @Autowired
-    public void setCollegeService(CollegeService collegeService) {
-        this.collegeService = collegeService;
+    public void setCollegeMapper(CollegeMapper collegeMapper) {
+        this.collegeMapper = collegeMapper;
     }
     @Autowired
     public void setRoleService(RoleService roleService) {
@@ -89,8 +90,8 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
                 ||!headMap.containsKey(6) ||!headMap.containsKey(7)
                 || !headMap.get(0).equals("部门")  || !headMap.get(1).equals("职称")
                 || !headMap.get(2).equals("学号") || !headMap.get(3).equals("姓名")
-                || !headMap.get(4).equals("性别") || !headMap.get(5).equals("电话号码")
-                || !headMap.get(6).equals("qq")  || !headMap.get(7).equals("电子邮箱")
+                || !headMap.get(4).equals("性别") ||!headMap.get(5).equals("学院")|| !headMap.get(6).equals("电话号码")
+                || !headMap.get(7).equals("qq")  || !headMap.get(8).equals("电子邮箱")
                );
         }
         catch(Exception e) {
@@ -228,16 +229,18 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
             return false;
         }
 
-        String userId = addUserDto.getId().toString();
-        Long collegeId = Long.valueOf(userId.substring(6,9));
-        LambdaQueryWrapper<College> collegeLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        collegeLambdaQueryWrapper.eq(College::getId,collegeId);
-        College college = collegeService.getOne(collegeLambdaQueryWrapper);
-        if(Objects.isNull(college)){
-            fail.setReason("学号中所对应的学院信息不存在");
+        if(!StringUtils.hasText(addUserDto.getCollegeName())){
+            fail.setReason("学院不能为空");
             return false;
         }
-        addUserDto.setCollegeId(collegeId);
+        else{
+            Long collegeId = collegeMapper.selectByName(addUserDto.getCollegeName());
+            if(Objects.isNull(collegeId)){
+                fail.setReason("学院信息有误");
+                return false;
+            }
+            addUserDto.setCollegeId(collegeId);
+        }
         return true;
     }
 }

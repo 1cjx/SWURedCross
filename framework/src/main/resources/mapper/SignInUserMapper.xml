@@ -8,29 +8,67 @@
         Where su.`assignment_id` = #{assignmentId} AND  su.`user_id` = #{userId}
     </update>
     <select id="listSignIns" resultType="com.jx.domain.vo.ListSignInUserVo">
-        SELECT a.name AS activityName,l.name AS locationName,ts.`begin_time` AS timeSlotBegin,ts.`end_time` AS timeSlotEnd,u.name AS userName, si.`type` AS signInTypeId,su.`create_time` AS signInTime,aa.time
-        FROM t_sign_in si LEFT JOIN t_activity_assignment aa ON aa.id = si.`assignment_id` LEFT JOIN t_activity a ON a.`id` = aa.`activity_id` LEFT JOIN t_signin_user su ON su.`sign_in_id` = si.`id`
-                          LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.`id` = aa.`time_slot_id`  LEFT JOIN t_user u ON u.id = su.`user_id`
+        SELECT aa.`time`,a.`name` AS activityName,l.`name` AS locationName,ts.`begin_time` AS timeSlotBegin,ts.`end_time` AS timeSlotEnd,
+               u.name AS userName,su.`sign_in_time` AS signInTime,su.`mid_time` AS midTime, su.`sign_out_time` AS signOutTime
+        FROM t_signin_user su LEFT JOIN t_activity_assignment aa ON aa.`id` = su.`assignment_id`
+            LEFT JOIN t_activity a ON a.id = aa.`activity_id`
+            LEFT JOIN t_location l ON l.id = aa.`location_id`
+            LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id`
+            LEFT JOIN t_user u ON u.id = su.`user_id`
         WHERE
-            a.status = '1'
+             a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
+            <if test='flag!="" and flag!=null'>
+            AND   su.`sign_in_count` = (
+                    SELECT COUNT(*)
+                    FROM t_sign_in si
+                    WHERE si.`assignment_id` = su.`assignment_id`
+                )
+            </if>
           <if test='activityName!="" and activityName!=null'>
               AND a.name LIKE concat('%',#{activityName},'%')
           </if>
           <if test="locationId!=null">
-           AND aa.location_id = #{locationId}
+            AND aa.location_id = #{locationId}
           </if>
           <if test="timeSlotId!=null">
               AND aa.`time_slot_id` = #{timeSlotId}
           </if>
-          <if test="typeId!=null">
-            AND si.`type` = #{typeId}
-          </if>
-           AND a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0         AND si.`del_flag` = 0         AND aa.`del_flag` = 0
-        ORDER BY aa.time DESC, a.id DESC,aa.id DESC,si.create_time DESC
+
+        ORDER BY aa.time DESC, a.id DESC,aa.id DESC,su.sign_in_time DESC,su.mid_time DESC,su.sign_out_time DESC
     </select>
     <select id="selectByMppId" resultType="com.jx.domain.entity.SignInUser">
         SELECT *
         FROM t_signin_user su
         WHERE su.`assignment_id` = #{assignmentId} AND su.`user_id` = #{userId}
+    </select>
+    <select id="exportSignInUser" resultType="com.jx.domain.vo.SignInUserExportVo">
+        SELECT a.`name` AS activityName,u.id AS userId,u.name AS userName,c.name AS collegeName,
+            CASE
+                WHEN u.`department_id` = 9 THEN 0
+                ELSE 1
+            END AS isRedCrossMember,
+            u.qq,u.phone_number AS phoneNumber,u.email,u.need AS userNeed,su.sign_in_time AS signInTime,su.mid_time AS midTime,su.sign_out_time AS signOutTime
+        FROM t_signin_user su LEFT JOIN t_activity_assignment aa ON aa.`id` = su.`assignment_id` LEFT JOIN t_activity a ON a.id = aa.`activity_id`
+        LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id` LEFT JOIN t_user u ON u.id = su.`user_id` LEFT JOIN t_college c ON c.id = u.`college_id`
+        WHERE
+        a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
+        <if test='flag!="" and flag!=null'>
+            AND   su.`sign_in_count` = (
+            SELECT COUNT(*)
+            FROM t_sign_in si
+            WHERE si.`assignment_id` = su.`assignment_id`
+            )
+        </if>
+        <if test='activityName!="" and activityName!=null'>
+            AND a.name LIKE concat('%',#{activityName},'%')
+        </if>
+        <if test="locationId!=null">
+            AND aa.location_id = #{locationId}
+        </if>
+        <if test="timeSlotId!=null">
+            AND aa.`time_slot_id` = #{timeSlotId}
+        </if>
+
+        ORDER BY aa.time DESC, a.id DESC,aa.id DESC,su.sign_in_time DESC,su.mid_time DESC,su.sign_out_time DESC
     </select>
 </mapper>

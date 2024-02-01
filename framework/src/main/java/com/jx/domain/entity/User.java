@@ -50,6 +50,7 @@ public class User  {
     private Long roleId;
     //注册日期
     private Date registerdate;
+    private String need;
     //最后登录日期
     private Date lastlogindate;
     private String email;
