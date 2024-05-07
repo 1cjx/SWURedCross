@@ -2,10 +2,7 @@ package com.jx.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.jx.domain.ResponseResult;
-import com.jx.domain.dto.AddActivityDto;
-import com.jx.domain.dto.ChangeActivityStatusDto;
-import com.jx.domain.dto.ListActivityDto;
-import com.jx.domain.dto.UpdateActivityDto;
+import com.jx.domain.dto.*;
 import com.jx.domain.entity.Activity;
 import com.jx.domain.entity.Scheduled;
 
@@ -20,7 +17,7 @@ public interface ActivityService extends IService<Activity> {
 
     ResponseResult getActivityList(String status,Long locationId,Long categoryId,String activityName,Long pageNum,Long pageSize);
 
-    ResponseResult addSchedule(Scheduled scheduled);
+    ResponseResult addSchedule(AddScheduledDto addScheduledDto);
 
     ResponseResult getActivityDetail(Long activityId);
 
@@ -41,8 +38,9 @@ public interface ActivityService extends IService<Activity> {
 
     ResponseResult deleteActivity(Long id);
 
-    ResponseResult getActivityAssignmentDetail(Long id);
 
     ResponseResult changeActivityStatus(ChangeActivityStatusDto changeActivityStatusDto);
+
+    ResponseResult cancelSchedule(AddScheduledDto addScheduledDto);
 }
 

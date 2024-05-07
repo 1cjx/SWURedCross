@@ -37,6 +37,7 @@ public class Menu  {
     private String path;
     //组件路径
     private String component;
+    private String perms;
     //是否为外链（0是 1否）
     private Integer isFrame;
     //菜单类型（M目录 C菜单 F按钮）
@@ -46,7 +47,6 @@ public class Menu  {
     //菜单状态（0正常 1停用）
     private String status;
     //权限标识
-    private String perms;
     //菜单图标
     private String icon;
     //创建者

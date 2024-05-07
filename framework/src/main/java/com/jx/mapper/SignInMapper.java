@@ -17,5 +17,7 @@ import java.util.List;
 public interface SignInMapper extends BaseMapper<SignIn> {
 
     List<Date> getSignInTimeList(@Param("assignmentId") Long assignmentId, @Param("userId") Long userId);
+
+    void removeByAssignmentId(@Param("activityAssignmentId") Long activityAssignmentId);
 }
 

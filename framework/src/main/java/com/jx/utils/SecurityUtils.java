@@ -25,7 +25,6 @@ public class SecurityUtils
     }
 
     public static Boolean isAdmin(){
-        System.err.println("isAdmin");
         Long id = getLoginUser().getUser().getId();
         return id != null && id == 222021321262020L ;
     }

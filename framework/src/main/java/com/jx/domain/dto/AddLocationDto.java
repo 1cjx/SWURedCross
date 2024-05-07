@@ -11,5 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class AddLocationDto {
     private Long id;
     private String name;
+    //经度
+    private Double longitude;
+    //纬度
+    private Double latitude;
     private String status;
 }

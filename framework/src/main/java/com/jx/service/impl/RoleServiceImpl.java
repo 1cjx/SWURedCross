@@ -11,15 +11,15 @@ import com.jx.domain.dto.ListRoleDto;
 import com.jx.domain.entity.Role;
 import com.jx.domain.entity.RoleMenu;
 import com.jx.domain.entity.User;
+import com.jx.domain.vo.ListRoleVo;
 import com.jx.domain.vo.PageVo;
 import com.jx.domain.vo.RoleVo;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import com.jx.mapper.RoleMapper;
-import com.jx.service.RoleMenuService;
-import com.jx.service.RoleService;
-import com.jx.service.UserService;
+import com.jx.service.*;
 import com.jx.utils.BeanCopyUtils;
+import com.jx.utils.PageUtils;
 import com.jx.utils.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -40,6 +41,12 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
 
     @Autowired
     private RoleMenuService roleMenuService;
+    @Autowired
+    private RoleMapper roleMapper;
+    @Autowired
+    private DepartmentService departmentService;
+    @Autowired
+    private TitleService titleService;
     @Autowired
     private UserService userService;
     @Override
@@ -56,25 +63,19 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     }
 
     @Override
-    public ResponseResult listRoles(Integer pageNum, Integer pageSize, ListRoleDto listRoleDto) {
+    public ResponseResult listRoles(Long pageNum, Long pageSize, ListRoleDto listRoleDto) {
+        //按条件查询
+        List<ListRoleVo>roleVos = roleMapper.getRoleList(listRoleDto);
         //分页查询
-        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(StringUtils.hasText(listRoleDto.getStatus()),Role::getStatus,listRoleDto.getStatus());
-        wrapper.like(StringUtils.hasText(listRoleDto.getRoleName()),Role::getRoleName,listRoleDto.getRoleName());
-        wrapper.orderByDesc(Role::getRoleSort);
-        Page<Role> page = new Page<>();
-        page.setCurrent(pageNum);
-        page.setSize(pageSize);
-        page(page,wrapper);
         //封装数据返回
-        List<RoleVo>roleVos = BeanCopyUtils.copyBeanList(page.getRecords(),RoleVo.class);
-        PageVo pageVo = new PageVo(roleVos,page.getTotal());
+        Page roleVoPage = PageUtils.listToPage(roleVos,pageNum,pageSize);
+        PageVo pageVo = new PageVo(roleVoPage.getRecords(),roleVoPage.getTotal());
         return ResponseResult.okResult(pageVo);
     }
 
     @Override
     public ResponseResult changeStatus(ChangeRoleStatusDto changeRoleStatusDto) {
-        Role role = getById(changeRoleStatusDto.getRoleID());
+        Role role = getById(changeRoleStatusDto.getRoleId());
         role.setStatus(changeRoleStatusDto.getStatus());
         updateById(role);
         return ResponseResult.okResult();
@@ -83,12 +84,16 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
     @Override
     public ResponseResult addRole(AddRoleDto addRoleDto) {
         LambdaQueryWrapper<Role>wrapper =new LambdaQueryWrapper<>();
-        wrapper.eq(Role::getRoleName,addRoleDto.getRoleName());
+        wrapper.eq(!Objects.isNull(addRoleDto.getTitleId()),Role::getTitleId,addRoleDto.getTitleId());
+        wrapper.eq(!Objects.isNull(addRoleDto.getDepartmentId()),Role::getDepartmentId,addRoleDto.getDepartmentId());
         if(count(wrapper)>0) {
             throw new SystemException(AppHttpCodeEnum.ROLE_EXIST);
         }
-        if(!StringUtils.hasText(addRoleDto.getRoleName())){
-            throw new SystemException((AppHttpCodeEnum.ROLE_NAME_NOT_NULL));
+        if(Objects.isNull(addRoleDto.getDepartmentId())){
+            throw new SystemException((AppHttpCodeEnum.ROLE_DEPARTMENT_NOT_NULL));
+        }
+        if(Objects.isNull(addRoleDto.getDepartmentId())){
+            throw new SystemException((AppHttpCodeEnum.ROLE_TITLE_NOT_NULL));
         }
         if(!StringUtils.hasText(addRoleDto.getRoleKey())) {
             throw new SystemException((AppHttpCodeEnum.ROLE_KEY_NOT_NULL));
@@ -124,31 +129,27 @@ public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements Ro
         return  ResponseResult.okResult();
     }
 
-    @Override
-    public ResponseResult listAllRole() {
-        LambdaQueryWrapper<Role> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(Role::getStatus, SystemConstants.STATUS_NORMAL);
-        List<RoleVo>  roles = BeanCopyUtils.copyBeanList(list(wrapper),RoleVo.class);
-        return ResponseResult.okResult(roles);
-    }
 
     @Override
     public ResponseResult deleteRoles(List<Long> roleIds) {
         List<String> ans = new ArrayList<>();
         roleIds.stream().forEach(o->{
+            Role role = getById(o);
             LambdaQueryWrapper<User> lambdaQueryWrapper = new LambdaQueryWrapper<User>();
-            lambdaQueryWrapper.eq(User::getRoleId,o);
+            lambdaQueryWrapper.eq(User::getDepartmentId,role.getDepartmentId());
+            lambdaQueryWrapper.eq(User::getTitleId,role.getTitleId());
             if(userService.count(lambdaQueryWrapper)>0){
                 //说明该角色有绑定用户
-                Role role = getById(o);
-                ans.add(role.getRoleName());
+                String departmentName = departmentService.getById(role.getDepartmentId()).getName();
+                String titleName = titleService.getById(role.getTitleId()).getName();
+                ans.add(departmentName+titleName);
             }
             else{
                 //删除角色
                 removeById(o);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"角色"+ans.toString()+"有绑定用户,无法删除");
         }
         return ResponseResult.okResult();

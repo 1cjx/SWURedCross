@@ -1,5 +1,6 @@
 package com.jx.domain.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,10 +35,11 @@ public class MenuVo {
     private String visible;
     //菜单状态（0正常 1停用）
     private String status;
-
+    private String perms;
     //菜单图标
     private String icon;
     //创建时间
+    @JSONField(format="yyyy-MM-dd HH:mm:ss")
     private Date createTime;
     //更新者
     private List<MenuVo> children;

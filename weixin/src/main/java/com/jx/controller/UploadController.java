@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.service.UploadService;
 import io.swagger.annotations.Api;
@@ -17,7 +18,7 @@ public class UploadController {
     @Autowired
     private UploadService uploadService;
 
-    @ApiOperation("上传头像")
+    @SystemLog(businessName = "上传头像",type="1")
     @PostMapping("/upload")
     public ResponseResult uploadImg(MultipartFile img,String path) {
         return uploadService.uploadImg(img,path);

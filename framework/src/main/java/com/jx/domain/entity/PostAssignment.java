@@ -31,7 +31,7 @@ public class PostAssignment  {
     //为0表示没有限制
     private Long allowedDepartmentId;
     //为0表示没有限制
-    private Long allowedRoleId;
+    private Long allowedTitleId;
 
 
 

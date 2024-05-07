@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddCategoryDto;
 import com.jx.domain.dto.AddDepartmentDto;
@@ -10,6 +11,7 @@ import com.jx.service.DepartmentService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -28,28 +30,33 @@ public class CategoryController {
      * @param listCategoryDto
      * @return
      */
-    @ApiOperation("分页查询分类")
     @GetMapping("/list")
+    @SystemLog(businessName = "分页查询分类",type="2")
+    @PreAuthorize("@ps.hasPermission('content:category:query')")
     public ResponseResult list(Integer pageNum, Integer pageSize, ListCategoryDto listCategoryDto){
         return categoryService.listCategory(pageNum,pageSize,listCategoryDto);
     }
-    @ApiOperation("查询选中分类详情信息")
     @GetMapping("/{id}")
+    @SystemLog(businessName = "查询选中分类详情信息",type="2")
+    @PreAuthorize("@ps.hasPermission('content:category:edit')")
     public ResponseResult getCategoryDetail(@PathVariable("id") Long id){
         return categoryService.getCategoryDetail(id);
     }
-    @ApiOperation("更新分类信息")
     @PutMapping
+    @SystemLog(businessName = "更新分类信息",type="2")
+    @PreAuthorize("@ps.hasPermission('content:category:edit')")
     public ResponseResult updateCategory(@RequestBody AddCategoryDto addCategoryDto){
         return categoryService.updateCategory(addCategoryDto);
     }
-    @ApiOperation("新增分类")
     @PostMapping
+    @SystemLog(businessName = "新增分类",type="2")
+    @PreAuthorize("@ps.hasPermission('content:category:add')")
     public ResponseResult addCategory(@RequestBody AddCategoryDto addCategoryDto){
         return categoryService.addCategory(addCategoryDto);
     }
-    @ApiOperation("删除选中分类")
     @DeleteMapping
+    @SystemLog(businessName = "删除选中分类",type="2")
+    @PreAuthorize("@ps.hasPermission('content:category:remove')")
     public ResponseResult deleteCategory(@RequestBody List<Long> categoryId){
         return categoryService.deleteCategory(categoryId);
     }

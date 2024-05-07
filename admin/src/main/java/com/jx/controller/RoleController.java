@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddRoleDto;
 import com.jx.domain.dto.ChangeRoleStatusDto;
@@ -8,6 +9,7 @@ import com.jx.service.RoleService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,33 +20,39 @@ import java.util.List;
 public class RoleController {
     @Autowired
     RoleService roleService;
-    @ApiOperation("分页查询角色信息")
+    @SystemLog(businessName = "分页查询角色信息",type="2")
     @GetMapping("/list")
-    public ResponseResult list(Integer pageNum, Integer pageSize, ListRoleDto listRoleDto){
+    @PreAuthorize("@ps.hasPermission('system:role:query')")
+    public ResponseResult list(Long pageNum, Long pageSize, ListRoleDto listRoleDto){
         return roleService.listRoles(pageNum,pageSize,listRoleDto);
     }
-    @ApiOperation("修改角色状态")
+    @SystemLog(businessName = "修改角色状态",type="2")
     @PutMapping("/changeStatus")
+    @PreAuthorize("@ps.hasPermission('system:role:changeStatus')")
     public ResponseResult changeRoleStatus(@RequestBody ChangeRoleStatusDto changeRoleStatusDto){
         return roleService.changeStatus(changeRoleStatusDto);
     }
-    @ApiOperation("新增角色")
+    @SystemLog(businessName = "新增角色",type="2")
     @PostMapping
+    @PreAuthorize("@ps.hasPermission('system:role:add')")
     public ResponseResult addRole(@RequestBody AddRoleDto addRoleDto){
         return roleService.addRole(addRoleDto);
     }
-    @ApiOperation("查询选中角色详情信息")
+    @SystemLog(businessName = "查询选中角色详情信息",type="2")
     @GetMapping("/{id}")
+    @PreAuthorize("@ps.hasPermission('system:role:edit')")
     public ResponseResult getRoleDetail(@PathVariable("id") Long id){
         return roleService.getRoleDetail(id);
     }
-    @ApiOperation("更新角色信息")
+    @SystemLog(businessName = "更新角色信息",type="2")
     @PutMapping
+    @PreAuthorize("@ps.hasPermission('system:role:edit')")
     public ResponseResult updateRole(@RequestBody AddRoleDto addRoleDto){
         return roleService.updateRole(addRoleDto);
     }
-    @ApiOperation("删除角色")
+    @SystemLog(businessName = "删除角色",type="2")
     @DeleteMapping
+    @PreAuthorize("@ps.hasPermission('system:role:remove')")
     public ResponseResult Delete(@RequestBody List<Long> roleIds){
         return roleService.deleteRoles(roleIds);
     }

@@ -12,4 +12,20 @@
             r.`status` = 0 AND
             r.`del_flag` = 0
     </select>
+    <select id="getRoleList" resultType="com.jx.domain.vo.ListRoleVo">
+        SELECT r.id,t.name AS titleName,d.name AS departmentName,r.`role_key` AS roleKey,r.`role_sort` AS roleSort,r.`status`,r.`remark`,r.`create_time` AS createTime
+        FROM sys_role r LEFT JOIN t_title t ON t.id = r.`title_id` LEFT JOIN t_department d ON d.id = r.`department_id`
+        <where>
+            <if test="departmentId!=null">
+                AND r.`department_id` = #{departmentId}
+            </if>
+            <if test="titleId!=null">
+                AND r.`title_id` = #{titleId}
+            </if>
+            <if test="status!=null and status!=''">
+                AND r.`status` = #{status}
+            </if>
+        </where>
+        ORDER BY r.`role_sort` DESC
+    </select>
 </mapper>

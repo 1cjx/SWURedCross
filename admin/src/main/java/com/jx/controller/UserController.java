@@ -1,6 +1,7 @@
 package com.jx.controller;
 
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.dto.ListUserDto;
@@ -8,6 +9,7 @@ import com.jx.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,8 +32,9 @@ public class UserController {
      * @param listUserDto
      * @return
      */
-    @ApiOperation("分页查询用户")
+    @SystemLog(businessName = "分页查询用户",type="2")
     @GetMapping("/list")
+    @PreAuthorize("@ps.hasPermission('system:user:query')")
     public ResponseResult list(Long pageNum, Long pageSize, ListUserDto listUserDto){
         return userService.listUsers(pageNum,pageSize, listUserDto);
     }
@@ -41,8 +44,9 @@ public class UserController {
      * @param id
      * @return
      */
-    @ApiOperation("查询选中用户详情信息")
+    @SystemLog(businessName = "查询选中用户详情信息",type="2")
     @GetMapping("/{id}")
+    @PreAuthorize("@ps.hasPermission('system:user:edit')")
     public ResponseResult getUserDetail(@PathVariable("id") Long id){
         return userService.getUserDetail(id);
     }
@@ -52,8 +56,9 @@ public class UserController {
      * @param addUserDto
      * @return
      */
-    @ApiOperation("更新用户信息")
+    @SystemLog(businessName = "更新用户信息",type="2")
     @PutMapping
+    @PreAuthorize("@ps.hasPermission('system:user:edit')")
     public ResponseResult updateUser(@RequestBody AddUserDto addUserDto){
         return userService.updateUser(addUserDto);
     }
@@ -63,8 +68,9 @@ public class UserController {
      * @param response
      * @return
      */
-    @ApiOperation("用户批量导入模板下载")
+    @SystemLog(businessName = "用户批量导入模板下载",type="2")
     @GetMapping("/templateDownLoad")
+    @PreAuthorize("@ps.hasPermission('system:user:add')")
     public ResponseResult templateDownLoad(HttpServletResponse response){
         return userService.templateDownLoad(response);
     }
@@ -73,8 +79,9 @@ public class UserController {
      * 通过excel数据批量插入用户
      * @return
      */
-    @ApiOperation("通过模板excel数据批量新增用户")
+    @SystemLog(businessName = "通过模板excel数据批量新增用户",type="2")
     @PostMapping("/excelAddUsers")
+    @PreAuthorize("@ps.hasPermission('system:user:import')")
     public ResponseResult excelAddUsers(MultipartFile multipartFile) throws IOException {
         return userService.excelAddUsers(multipartFile);
     }
@@ -85,19 +92,23 @@ public class UserController {
      * @param response
      * @return
      */
-    @ApiOperation("当前选中用户新增记录的失败数据导出为excel")
+    @SystemLog(businessName = "当前选中用户新增记录的失败数据导出为excel",type="2")
     @GetMapping("/failUploadDownload/{recordId}")
+    @PreAuthorize("@ps.hasPermission('system:user:export')")
     public ResponseResult failUploadDownload(@PathVariable("recordId") Long recordId,HttpServletResponse response){
         return userService.failUploadDownload(recordId,response);
     }
-    @ApiOperation("查询当前用户的新增用户记录")
+    @SystemLog(businessName = "查询当前用户的新增用户记录",type="2")
     @GetMapping("/userImportRecordList")
+    @PreAuthorize("@ps.hasPermission('system:user:queryImport')")
     public ResponseResult userImportRecordList(Long pageNum, Long pageSize){
         return userService.userImportRecordList(pageNum,pageSize);
     }
 
 
     @DeleteMapping
+    @SystemLog(businessName = "删除选中用户",type="2")
+    @PreAuthorize("@ps.hasPermission('system:user:remove')")
     public ResponseResult deleteUsers(@RequestBody List<Long> userIds){
         return userService.deleteUsers(userIds);
     }

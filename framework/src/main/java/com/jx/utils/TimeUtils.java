@@ -2,10 +2,16 @@ package com.jx.utils;
 
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
+import io.swagger.models.auth.In;
 
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.time.temporal.TemporalAdjusters;
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeUtils {
+    //比较时间大小
     public static boolean timeJudge(String beginTime,String endTime){
         if(!beginTime.contains(":")||!endTime.contains(":")){
             throw new SystemException(AppHttpCodeEnum.TIME_FORMAT_ERROR);
@@ -38,6 +44,7 @@ public class TimeUtils {
         }
     }
 
+    //计算志愿时长
     public static double calculateHour(Date start, Date end){
         Long time = end.getTime() - start.getTime() ;
         time/=(1000*60);//转化为分钟
@@ -47,5 +54,18 @@ public class TimeUtils {
         double resultHour = (double)hour/60;
         System.err.println(resultHour);
         return resultHour;
+    }
+    //获取距离本月结束还有多少秒
+    public static Integer getSecondToNextMonth(){
+        LocalDate today = LocalDate.now();
+        //本月的最后一天
+        LocalDate lastDay = today.with(TemporalAdjusters.lastDayOfMonth());
+        Date endTimeInMonth = Date.from(lastDay.atStartOfDay(ZoneOffset.ofHours(8)).toInstant());
+        Calendar calendar = Calendar.getInstance();
+        if(null != endTimeInMonth ) {calendar.setTime(endTimeInMonth );}
+        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH), 23, 59, 59);
+        calendar.set(Calendar.MILLISECOND, 999);
+        Date date = calendar.getTime();
+        return Math.toIntExact((date.getTime() - System.currentTimeMillis())/1000);
     }
 }

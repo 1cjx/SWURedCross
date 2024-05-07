@@ -13,5 +13,5 @@ public class PostAssignmentVo {
     private String postName;
     private Long reqPeople;
     private Long allowedDepartmentId;
-    private Long allowedRoleId;
+    private Long allowedTitleId;
 }

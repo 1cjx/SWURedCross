@@ -18,7 +18,6 @@ public class ApiIdempotentInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.err.println("doInterceptor");
         if (!(handler instanceof HandlerMethod)) {
             return true;
         }

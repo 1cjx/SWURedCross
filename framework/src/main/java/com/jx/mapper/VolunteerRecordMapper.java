@@ -31,5 +31,7 @@ public interface VolunteerRecordMapper extends BaseMapper<VolunteerRecord> {
     Double getTotalVolunteerTimes();
 
     List<UserVolunteerRecordVo> getUserVolunteerRecordList(@Param("departmentId") Long departmentId, @Param("sortType") Long sortType);
+
+    void removeByAssignmentId(@Param("activityAssignmentId") Long activityAssignmentId);
 }
 

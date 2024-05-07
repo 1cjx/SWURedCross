@@ -12,7 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 public class AddRoleDto {
     private Long id;
-    private String roleName;
+    private Long departmentId;
+    private Long titleId;
     private String roleKey;
     private Integer roleSort;
     private String status;

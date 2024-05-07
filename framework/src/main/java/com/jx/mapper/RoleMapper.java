@@ -1,7 +1,10 @@
 package com.jx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jx.domain.dto.ListRoleDto;
 import com.jx.domain.entity.Role;
+import com.jx.domain.vo.ListRoleVo;
+import com.jx.domain.vo.RoleVo;
 
 import java.util.List;
 
@@ -14,5 +17,7 @@ import java.util.List;
  */
 public interface RoleMapper extends BaseMapper<Role> {
     List<String> selectRoleKeyByUserId(Long userId);
+
+    List<ListRoleVo> getRoleList(ListRoleDto listRoleDto);
 }
 

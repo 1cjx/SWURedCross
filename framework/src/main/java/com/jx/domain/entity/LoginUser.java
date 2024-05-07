@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Data
@@ -29,12 +30,10 @@ public class LoginUser implements UserDetails {
         if(authorities!=null){
             return authorities;
         }
-
 //        把permissions中的权限信息封装成SimpleGrantedAuthority对象
-        authorities = permissions.stream()
+        authorities = permissions.stream().filter(o->!Objects.isNull(o))
                                     .map(SimpleGrantedAuthority::new)
                                     .collect(Collectors.toList());
-        System.out.println(authorities);
         return authorities;
     }
 

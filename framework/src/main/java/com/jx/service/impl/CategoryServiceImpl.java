@@ -107,7 +107,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
                 removeById(o);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"分类"+ans.toString()+"有活动使用,无法删除");
         }
         return  ResponseResult.okResult();

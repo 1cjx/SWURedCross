@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.service.CategoryService;
 import com.jx.service.LocationService;
@@ -16,12 +17,12 @@ public class SelectOptionController {
     CategoryService categoryService;
     @Autowired
     LocationService locationService;
-    @ApiOperation("查询所有活动分类")
+    @SystemLog(businessName = "查询所有活动分类",type="1")
     @GetMapping("/category/getCategoryList")
     public ResponseResult getCategoryList(){
         return categoryService.listAllCategory();
     }
-    @ApiOperation("查询所有活动地点")
+    @SystemLog(businessName = "查询所有活动地点",type="1")
     @GetMapping("/location/getLocationList")
     public ResponseResult getLocationList(){
         return locationService.listAllLocation();

@@ -16,5 +16,5 @@ public class ListUserDto {
     private String status;
     private Long collegeId;
     private Long departmentId;
-    private Long roleId;
+    private Long titleId;
 }

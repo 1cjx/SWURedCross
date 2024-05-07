@@ -33,7 +33,6 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         //获取请求头中的token
         String token = request.getHeader("token");
-        System.err.println("doFilter");
         if(!StringUtils.hasText(token)){
             //说明该接口不需要登录  直接放行
             filterChain.doFilter(request, response);
@@ -54,14 +53,14 @@ public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
         String userId = claims.getSubject();
         //从redis中获取用户信息
         User user = redisCache.getCacheObject("weixinLogin:" + userId);
-        LoginUser loginUser = new LoginUser(user,null);
         //如果获取不到
-        if(Objects.isNull(loginUser)){
+        if(Objects.isNull(user)){
             //说明登录过期  提示重新登录
             ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.NEED_LOGIN);
             WebUtils.renderString(response, JSON.toJSONString(result));
             return;
         }
+        LoginUser loginUser = new LoginUser(user,null);
         //存入SecurityContextHolder
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(loginUser,null,null);
         SecurityContextHolder.getContext().setAuthentication(authenticationToken);

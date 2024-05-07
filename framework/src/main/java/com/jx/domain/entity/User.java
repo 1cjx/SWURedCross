@@ -47,7 +47,7 @@ public class User  {
     //所属部门id
     private Long departmentId;
     //职称(0干事,1部长,2会长)
-    private Long roleId;
+    private Long titleId;
     //注册日期
     private Date registerdate;
     private String need;

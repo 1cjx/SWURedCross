@@ -18,17 +18,13 @@ import java.util.List;
  */
 public interface PostMapper extends BaseMapper<Post> {
     /**
-     * 根据活动id,时间段id、时间、地点获取所需岗位列表
-     * @param timeSlotId
-     * @param locationId
-     * @param time
+     * 根据班次id获取所需岗位列表
+     * @param activityAssignmentId
      * @param ignorePostName
      * @return
      */
-    List<PostNeedBo> getPostNeedVoList(@Param("activityId")Long activityId, @Param("typeId")Long typeId,
-                                       @Param("timeSlotId") Long timeSlotId, @Param("locationId")
-    Long locationId, @Param("time") Date time, @Param("ignorePostName")String ignorePostName,
-                                       @Param("userDepartmentId") Long userDepartmentId, @Param("userRoleId") Long userRoleId);
+    List<PostNeedBo> getPostNeedVoList(@Param("activityAssignmentId") Long activityAssignmentId, @Param("ignorePostName")String ignorePostName,
+                                       @Param("userDepartmentId") Long userDepartmentId, @Param("userTitleId") Long userTitleId);
 
     /**
      * 根据排班id 获取岗位信息

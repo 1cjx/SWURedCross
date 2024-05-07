@@ -98,7 +98,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
     @Override
     public ResponseResult getLocationDetail(Long id) {
         Location location = getById(id);
-        LocationVo locationVo = BeanCopyUtils.copyBean(location,LocationVo.class);
+        AddLocationDto locationVo = BeanCopyUtils.copyBean(location,AddLocationDto.class);
         return ResponseResult.okResult(locationVo);
     }
 
@@ -116,7 +116,7 @@ public class LocationServiceImpl extends ServiceImpl<LocationMapper, Location> i
                 removeById(id);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"地点"+ans.toString()+"有活动使用,无法删除");
         }
         return  ResponseResult.okResult();

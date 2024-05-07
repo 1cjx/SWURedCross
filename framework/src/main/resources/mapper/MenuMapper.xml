@@ -4,14 +4,14 @@
 
     <select id="selectPermsByUserId" resultType="java.lang.String">
         SELECT
-            DISTINCT m.perms
-        FROM
-            `t_user` u
-                LEFT JOIN `sys_role_menu` rm ON u.`role_id` = rm.`role_id`
-                LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
+            DISTINCT m.`perms`
+        FROM  `sys_role_menu` rm         LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
         WHERE
-            u.`id` = #{userId} AND
-            m.`menu_type` IN ('C','F') AND
+                rm.`role_id` = (
+                SELECT r.`id`
+                FROM t_user u RIGHT JOIN sys_role r ON r.`department_id` = u.`department_id` AND r.`title_id` = u.`title_id`
+                WHERE u.id = #{userId}) AND
+            m.`menu_type` = 'F' AND
             m.`status` = '1' AND
             m.`del_flag` = 0
     </select>
@@ -31,11 +31,12 @@
         SELECT
             DISTINCT m.id, m.parent_id, m.menu_name, m.path, m.component, m.visible, m.status, IFNULL(m.perms,'') AS perms, m.is_frame,  m.menu_type, m.icon, m.order_num, m.create_time
         FROM
-            `t_user` u
-                LEFT JOIN `sys_role_menu` rm ON u.`role_id` = rm.`role_id`
-                LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
+            `sys_role_menu` rm LEFT JOIN `sys_menu` m ON m.`id` = rm.`menu_id`
         WHERE
-            u.`id` = #{userId} AND
+                rm.`role_id` = (
+                SELECT r.`id`
+                FROM t_user u RIGHT JOIN sys_role r ON r.`department_id` = u.`department_id` AND r.`title_id` = u.`title_id`
+                WHERE u.id = #{userId}) AND
             m.`menu_type` IN ('C','M') AND
             m.`status` = '1' AND
             m.`del_flag` = 0

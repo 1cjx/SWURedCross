@@ -69,7 +69,6 @@ public class OssUploadService implements UploadService {
                 return "http://redcross.heping.fun/"+key;
             } catch (QiniuException ex) {
                 Response r = ex.response;
-                System.err.println(r.toString());
                 try {
                     System.err.println(r.bodyString());
                 } catch (QiniuException ex2) {

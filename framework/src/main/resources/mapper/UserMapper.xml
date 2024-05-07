@@ -7,8 +7,8 @@
         WHERE u.id = #{id} AND u.name = #{name}
     </select>
     <select id="getUserInfo" resultType="com.jx.domain.vo.UserInfoVo">
-        SELECT u.id,u.name,u.`avatar`,u.`phone_number`,u.`qq`,u.`sex`,d.`name` AS department,c.`name` AS college,u.email,t.`role_name` AS role
-        FROM t_user u LEFT JOIN t_department d ON d.`id` = u.department_id LEFT JOIN t_college c ON  u.`college_id` = c.`id` LEFT JOIN sys_role t ON t.`id` = u.`role_id`
+        SELECT u.id,u.name,u.`avatar`,u.`phone_number`,u.`qq`,u.`sex`,d.`name` AS department,c.`name` AS college,u.email,t.`name` AS title
+        FROM t_user u LEFT JOIN t_department d ON d.`id` = u.department_id LEFT JOIN t_college c ON  u.`college_id` = c.`id` LEFT JOIN t_title t ON t.`id` = u.`title_id`
         WHERE u.id = #{id}    AND d.`del_flag` = 0         AND t.`del_flag` = 0
     </select>
     <select id="getLeaderInfo" resultType="com.jx.domain.vo.UserInfoVo">

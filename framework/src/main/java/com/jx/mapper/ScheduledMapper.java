@@ -12,5 +12,6 @@ import com.jx.domain.entity.Scheduled;
  */
 public interface ScheduledMapper extends BaseMapper<Scheduled> {
 
+    void remove(Scheduled scheduled);
 }
 

@@ -18,4 +18,6 @@ public class ListLocationVo  {
 
     //地点名
     private String name;
+    private Double latitude;
+    private Double longitude;
 }

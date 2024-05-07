@@ -20,7 +20,7 @@ public interface RoleService extends IService<Role> {
 
     List<String> selectRoleKeyByUserId(Long id);
 
-    ResponseResult listRoles(Integer pageNum, Integer pageSize, ListRoleDto listRoleDto);
+    ResponseResult listRoles(Long pageNum, Long pageSize, ListRoleDto listRoleDto);
 
     ResponseResult changeStatus(ChangeRoleStatusDto changeRoleStatusDto);
 
@@ -30,7 +30,6 @@ public interface RoleService extends IService<Role> {
 
     ResponseResult updateRole(AddRoleDto addRoleDto);
 
-    ResponseResult listAllRole();
 
     ResponseResult deleteRoles(List<Long> roleIds);
 }

@@ -2,6 +2,7 @@ package com.jx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jx.domain.entity.Menu;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -13,10 +14,10 @@ import java.util.List;
  * @since 2023-10-14 15:09:48
  */
 public interface MenuMapper extends BaseMapper<Menu> {
-    List<String> selectPermsByUserId(Long id);
+    List<String> selectPermsByUserId(@Param("userId") Long userId);
 
     List<Menu> selectAllRouterMenu();
 
-    List<Menu> selectRouterMenuTreeByUserId(Long userId);
+    List<Menu> selectRouterMenuTreeByUserId(@Param("userId") Long userId);
 }
 

@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.service.ActivityAssignmentTypeService;
 import io.swagger.annotations.Api;
@@ -23,7 +24,7 @@ public class ActivityAssignmentTypeController {
      * @param name
      * @return
      */
-    @ApiOperation("分页查询班次类型")
+    @SystemLog(businessName = "分页查询班次类型",type="2")
     @GetMapping("/list")
     public ResponseResult listActivityAssignmentType(Long pageSize,Long pageNum,String name){
         return activityAssignmentTypeService.listActivityAssignmentType(pageSize,pageNum,name);

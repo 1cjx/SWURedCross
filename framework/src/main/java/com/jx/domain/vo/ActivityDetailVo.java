@@ -22,6 +22,8 @@ public class ActivityDetailVo {
     private String theme;
     //分类名
     private String categoryName;
+    private String status;
+    private Long allowedDepartmentId;
     //地点列表
     private List<ListLocationVo> locations;
     //活动开始日期

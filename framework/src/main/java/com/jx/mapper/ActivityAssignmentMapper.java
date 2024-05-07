@@ -1,6 +1,8 @@
 package com.jx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jx.domain.bo.ClassBo;
+import com.jx.domain.bo.EmailInfoBo;
 import com.jx.domain.entity.ActivityAssignment;
 import com.jx.domain.vo.ActivityAssignmentVo;
 import com.jx.domain.bo.ActivityAssignmentsBo;
@@ -32,11 +34,13 @@ public interface ActivityAssignmentMapper extends BaseMapper<ActivityAssignment>
      * @param time
      * @return
      */
-    List<TimeSlotBo> getTimeSlotVoList(@Param("activityId")Long activityId,@Param("typeId")Long typeId,@Param("locationId") Long locationId, @Param("time") Date time);
+    List<ClassBo> getTimeSlotVoList(@Param("activityId")Long activityId, @Param("typeId")Long typeId, @Param("locationId") Long locationId, @Param("time") Date time);
 
     ActivityAssignmentVo getActivityAssignmentVo(@Param("activityAssignmentId") Long activityAssignmentId);
 
 
     Long getUserIsInThisTimeSlot(@Param("userId") Long userId, @Param("postAssignmentId") Long postAssignmentId);
+
+    EmailInfoBo getEmailInfoByPostAssignmentId(@Param("postAssignmentId") Long postAssignmentId);
 }
 

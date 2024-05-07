@@ -37,11 +37,11 @@ spring:
       max-request-size: 5MB
   redis:
     # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
-    host: localhost
+    host: 192.168.139.4
     # Redis服务器端口,默认为6379.若有改动按改动后的来
     port: 6379
     #Redis服务器连接密码，默认为空，若有设置按设置的来
-    password:
+    password: 123456
     jedis:
       pool:
         # 连接池最大连接数，若为负数则表示没有任何限制
@@ -50,10 +50,45 @@ spring:
         max-wait: -1
         # 连接池中的最大空闲连接
         max-idle: 8
+  rabbitmq:
+    host: 192.168.139.4
+    port: 5672
+    username: jx
+    password: 123456
+    # 开启confirms回调 P -> Exchange
+    publisher-confirm-type: correlated
+    # 开启returnedMessage回调 Exchange -> Queue
+    #    publisher-returns: true
+    listener:
+      simple:
+        # 设置手动确认(ack) Queue -> C
+        acknowledge-mode: auto
+        prefetch: 100
+        retry:
+          enabled: true # 开启消费者失败重试
+          initial-interval: 1000ms # 初始的失败等待时长未1秒
+          multiplier: 1 # 下次失败的等待时长倍数
+          max-attempts: 3 # 最大重试次数
+          stateless: true # true是无状态;false有状态,如果业务中包含事务,这里改为false
+  mail:
+    host: smtp.qq.com
+    username: 1500206893@qq.com
+    password: jqcmcxjdfbmijfhc
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+  properties:
+    mail:
+      smtp:
+      auth: true
+      starttls:
+        enable: true
+        required: true
 mybatis-plus:
-  configuration:
-  # 日志
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#  # 日志
+#      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   global-config:
     db-config:
       logic-delete-field: delFlag

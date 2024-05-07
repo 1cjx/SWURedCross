@@ -13,16 +13,15 @@ import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import com.jx.mapper.*;
 import com.jx.service.*;
-import com.jx.utils.BeanCopyUtils;
-import com.jx.utils.PageUtils;
-import com.jx.utils.RedisCache;
-import com.jx.utils.SecurityUtils;
+import com.jx.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 /**
  * (Activity)表服务实现类
@@ -39,6 +38,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     ScheduledService scheduledService;
     @Autowired
     ActivityAssignmentMapper activityAssignmentMapper;
+    @Autowired
+    ScheduledMapper scheduledMapper;
     @Autowired
     ActivityAssignmentService activityAssignmentService;
     @Autowired
@@ -65,6 +66,11 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     PostAssignmentMapper postAssignmentMapper;
     @Autowired
     SignInService signInService;
+    @Autowired
+    SignInMapper signInMapper;
+    @Autowired
+    EmailService emailService;
+
     /**
      * 获取活动列表
      * 返回活动名、活动主题、活动时间
@@ -89,21 +95,91 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         return ResponseResult.okResult(pageVo);
     }
 
+    public void judgeSchedule(AddScheduledDto addScheduledDto){
+        //判断活动是否还存在
+        Activity activity = activityService.getById(addScheduledDto.getActivityId());
+        if(Objects.isNull(activity)){
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_NOT_EXITS);
+        }
+        //判断该活动是否还招募
+        if(activity.getStatus().equals(SystemConstants.STATUS_ERROR)){
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_NOT_RECRUIT);
+        }
+        ActivityAssignment activityAssignment = activityAssignmentService.getById(addScheduledDto.getActivityAssignmentId());
+        //判断班次是否存在
+        if(Objects.isNull(activityAssignment)){
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_ASSIGNMENT_NOT_EXITS);
+        }
+        //判断该班次是否还招募
+        if(activityAssignment.getStatus().equals(SystemConstants.STATUS_ERROR)){
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_ASSIGNMENT_NOT_RECRUIT);
+        }
+    }
     @Override
-    public ResponseResult addSchedule(Scheduled scheduled) {
-        Long userId = SecurityUtils.getUserId();
-        scheduled.setUserId(userId);
-        //TODO 判断该活动是否还招募
-        //TODO 判断该班次是否还招募
-        //TODO 该用户角色和部门是否符合条件
+    @Transactional
+    public ResponseResult addSchedule(AddScheduledDto addScheduledDto) {
+        User user = SecurityUtils.getLoginUser().getUser();
+        Long userId = user.getId();
+        addScheduledDto.setUserId(userId);
+        //判断活动和班次
+        judgeSchedule(addScheduledDto);
+        //该用户角色和部门是否符合条件
+        PostAssignment postAssignment = postAssignmentService.getById(addScheduledDto.getPostAssignmentId());
+        Long postAllowedTitleId = postAssignment.getAllowedTitleId();
+        Long postDepartmentId = postAssignment.getAllowedDepartmentId();
+        // 判断角色
+        if(!postAllowedTitleId.equals(0L)&&!postAllowedTitleId.equals(user.getTitleId())){
+            throw new SystemException(AppHttpCodeEnum.USER_PERMISSION_NOT_ENOUGH);
+        }
+        //判断部门
+        if(!postDepartmentId.equals(0L)&&!postDepartmentId.equals(user.getDepartmentId())){
+            throw new SystemException(AppHttpCodeEnum.USER_PERMISSION_NOT_ENOUGH);
+        }
         //判断在同一时间段是否报班
-        Long cnt = activityAssignmentMapper.getUserIsInThisTimeSlot(userId,scheduled.getPostAssignmentId());
+        Long cnt = activityAssignmentMapper.getUserIsInThisTimeSlot(userId,addScheduledDto.getPostAssignmentId());
         if(cnt>0L){
             throw new SystemException(AppHttpCodeEnum.JUST_ONE_POST);
         }
-        if(doSecKill(scheduled.getUserId(),scheduled.getPostAssignmentId())){
+        Scheduled scheduled = BeanCopyUtils.copyBean(addScheduledDto,Scheduled.class);
+        if(Objects.isNull(user.getEmail())){
+            throw new SystemException(AppHttpCodeEnum.EMAIL_NOT_NULL);
+        }
+        //报名
+        if(doSecKill(addScheduledDto.getUserId(),addScheduledDto.getPostAssignmentId())){
             scheduledService.save(scheduled);
         }
+        //报名成功 发送邮件
+        emailService.sendEmail(scheduled);
+        return ResponseResult.okResult();
+    }
+
+    @Override
+    @Transactional
+    public ResponseResult cancelSchedule(AddScheduledDto addScheduledDto) {
+        judgeSchedule(addScheduledDto);
+        Long userId = SecurityUtils.getUserId();
+        Long postAssignmentId = addScheduledDto.getPostAssignmentId();
+        //限制每个月只能退选两次
+        Integer num = redisCache.getCacheObject("cancelSchedule:"+userId);
+        if(Objects.isNull(num)){
+            redisCache.setCacheObject("cancelSchedule:"+userId,2, TimeUtils.getSecondToNextMonth(), TimeUnit.SECONDS);
+        }
+        else if(num<=0){
+            throw new SystemException(AppHttpCodeEnum.THIS_MONTH_CANCEL_NUMBER_RUN_OUT);
+        }
+        redisCache.decrementCount("cancelSchedule:"+userId,1L);
+        // 库存key
+        String kcKey = "sk:" + postAssignmentId + ":qt";
+        // 秒杀成功用户key
+        String userKey = "sk:" + postAssignmentId + ":user";
+        // 库存+1
+        redisCache.addCount(kcKey,1L);
+        // 用户从清单里面删除
+        redisCache.deleteMember(userKey,String.valueOf(userId));
+        //从数据库中删除信息
+        Scheduled scheduled = BeanCopyUtils.copyBean(addScheduledDto,Scheduled.class);
+        scheduled.setUserId(userId);
+        scheduledMapper.remove(scheduled);
         return ResponseResult.okResult();
     }
 
@@ -111,21 +187,32 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     public ResponseResult getActivityDetail(Long activityId) {
         //根据活动id获取活动的基本信息
         ActivityDetailVo activityDetailVo = activityMapper.getActivityDetails(activityId);
+        //获取当前用户信息
+        User user = SecurityUtils.getLoginUser().getUser();
+        //这个活动当前是否允许查看
+        // 1.判断状态是否是发布状态
+        if(activityDetailVo.getStatus().equals(SystemConstants.STATUS_ERROR)) {
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_NOT_EXITS);
+        }
+        // 2.判断允许部门是否包括 用户所在部门
+        Long activityAllowedDepartmentId = activityDetailVo.getAllowedDepartmentId();
+        if(!activityAllowedDepartmentId.equals(user.getDepartmentId())&&!activityAllowedDepartmentId.equals(0L)&&!activityAllowedDepartmentId.equals(-1L)) {
+            throw new SystemException(AppHttpCodeEnum.ACTIVITY_NOT_EXITS);
+        }
         //获取活动的举办地点
         activityDetailVo.setLocations(activityMapper.getActivityLocations(activityId));
-        //活动排班信息为列表 时间+地点+班次列表为元素
-        //获取活动的排班信息中的时间和地点
+        //活动排班信息为列表 日期+地点+班次列表为元素
+        //获取活动的排班信息中的日期和地点
         List<ActivityAssignmentsBo> schedule = activityAssignmentMapper.getActivityAssignmentsVoList(activityId);
-        //根据时间和地点获取班次列表
-        if(schedule.size()>0) {
+        //根据日期、地点、班次类型获取班次列表
+        if(!schedule.isEmpty()) {
             schedule.stream().forEach(
                     o -> {
-                        List<ClassBo> classBos = new ArrayList<>();
-                        activityAssignmentMapper.getTimeSlotVoList(activityId,o.getTypeId(),o.getLocationId(), o.getTime()).stream().forEach(
+                        List<ClassBo> classBos = activityAssignmentMapper.getTimeSlotVoList(activityId,o.getTypeId(),o.getLocationId(), o.getTime());
+                        classBos.stream().forEach(
                                 e -> {
-                                    //根据时间段id、时间、地点获取岗位列表
-                                    User user = SecurityUtils.getLoginUser().getUser();
-                                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(activityId,o.getTypeId(),e.getId(), o.getLocationId(), o.getTime(),null,user.getDepartmentId(),user.getRoleId());
+                                    //根据时间段id、日期、地点获取岗位列表
+                                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(e.getActivityAssignmentId(),null,user.getDepartmentId(),user.getTitleId());
                                     postNeedBoList.stream().forEach(
                                             k -> {
                                                 String needPeople = k.getReqPeople();
@@ -144,14 +231,18 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                                                 }
                                             }
                                     );
-                                    ClassBo classBo = new ClassBo(e, postNeedBoList);
-                                    if (!Objects.isNull(classBo)) classBos.add(classBo);
+                                    e.setPostNeedBoList(postNeedBoList);
                                 }
                         );
                         o.setAssignmentVoList(classBos);
                     }
             );
         }
+        //进行一个过滤处理,筛选掉为空的信息
+        schedule = schedule.stream().map(o->{
+            o.setAssignmentVoList(o.getAssignmentVoList().stream().filter(e->!e.getPostNeedBoList().isEmpty()).collect(Collectors.toList()));
+            return o;
+        }).filter(o->!o.getAssignmentVoList().isEmpty()).collect(Collectors.toList());
         activityDetailVo.setScheduled(schedule);
 
         //班次岗位列表以排班岗位+所需人数为元素
@@ -166,6 +257,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         LambdaQueryWrapper<Scheduled> scheduledLambdaQueryWrapper = new LambdaQueryWrapper<>();
         //获取用户参与的排班
         scheduledLambdaQueryWrapper.eq(Scheduled::getUserId,userId);
+        //按照时间降序排列
+        scheduledLambdaQueryWrapper.orderByDesc(Scheduled::getCreateTime);
         List<Scheduled> scheduled = scheduledService.list(scheduledLambdaQueryWrapper);
         List<UserActivityVo> userActivityVos = new ArrayList<>();
         for (Scheduled s:scheduled) {
@@ -174,7 +267,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             //根据用户所报岗位信息 查询班次id
             PostAssignment postAssignment = postAssignmentService.getById(s.getPostAssignmentId());
             ActivityAssignmentVo activityAssignmentVoList = activityAssignmentMapper.getActivityAssignmentVo(postAssignment.getActivityAssignmentId());
-            UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList,postName,null,null);
+            UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList,s.getCreateTime(),postName,null,null);
             //封装leader信息
             if(!postName.equals(SystemConstants.IS_LEADER)){
                 UserInfoVo leaderInfo = userMapper.getLeaderInfo(s.getPostAssignmentId());
@@ -192,6 +285,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         Long userId = SecurityUtils.getUserId();
         LambdaQueryWrapper<Scheduled> scheduledLambdaQueryWrapper = new LambdaQueryWrapper<>();
         scheduledLambdaQueryWrapper.eq(Scheduled::getUserId,userId);
+        //按照时间降序排列
+        scheduledLambdaQueryWrapper.orderByDesc(Scheduled::getCreateTime);
         List<Scheduled> scheduled = scheduledService.list(scheduledLambdaQueryWrapper);
         List<UserActivityVo> userActivityVos = new ArrayList<>();
         for (Scheduled s:scheduled) {
@@ -200,15 +295,13 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             if(postName.equals(SystemConstants.IS_LEADER)) {
                 PostAssignment postAssignment = postAssignmentService.getById(s.getPostAssignmentId());
                 ActivityAssignmentVo activityAssignmentVoList = activityAssignmentMapper.getActivityAssignmentVo(postAssignment.getActivityAssignmentId());
-                UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList, null, null, null);
+                UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList,null, null, null, null);
                 //封装volunteer信息
                 if (type.equals("1")) {
                     //获取当前排班的信息
                     ActivityAssignment activityAssignment = activityAssignmentService.getById(postAssignment.getActivityAssignmentId());
                     //查询本班次的岗位信息
-                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(activityAssignmentVoList.getActivityId(),
-                            activityAssignment.getTypeId(),activityAssignment.getTimeSlotId(), activityAssignment.getLocationId(),
-                            activityAssignment.getTime(), SystemConstants.IS_LEADER,0L,0L);
+                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList( postAssignment.getActivityAssignmentId(),SystemConstants.IS_LEADER,0L,0L);
                     //查询本班次各个岗位志愿者信息
                     postNeedBoList.stream().forEach(o -> {
                                 o.setVolunteerInfoBoList(userMapper.getVolunteerInfo(o.getId()));
@@ -349,7 +442,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                 // 插入新岗位需求 返回岗位需求id
                 postAssignmentMapper.insert(postAssignment);
                 Long postAssignmentId = postAssignment.getId();
-                Integer reqVolunteerNum =postAssignment.getPeopleNumber().intValue();
+                Integer reqVolunteerNum = postAssignment.getPeopleNumber().intValue();
                 // redis创建报班申请
                 String key = "sk:" + postAssignmentId +":qt";
                 redisCache.setCacheObject(key,reqVolunteerNum);
@@ -368,7 +461,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         List<UpdateActivityAssignmentDto> updateActivityAssignmentDtoList =  updateActivityDto.getActivityAssignmentList();
         updateActivityAssignmentDtoList.stream().forEach(o->{
             //根据班次id修改班次信息 如果id不存在 则说明是新增的班次
-
             ActivityAssignment activityAssignment = BeanCopyUtils.copyBean(o,ActivityAssignment.class);
             Long activityAssignmentId = activityAssignment.getId();
             if(!Objects.isNull(activityAssignmentId)){
@@ -376,7 +468,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                     //删除与之相关的信息
                     activityAssignmentId = -activityAssignmentId;
                     deletePostAssignment(activityAssignmentId);
-                    System.err.println(activityAssignmentId);
                     activityAssignmentService.removeById(activityAssignmentId);
                 }
                 else{
@@ -444,20 +535,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         return ResponseResult.okResult();
     }
 
-    @Override
-    public ResponseResult getActivityAssignmentDetail(Long id) {
-        ActivityAssignment activityAssignment = activityAssignmentService.getById(id);
-        ActivityAssignmentDetailVo activityAssignmentVo = BeanCopyUtils.copyBean(activityAssignment,ActivityAssignmentDetailVo.class);
-        LambdaQueryWrapper<PostAssignment> lambdaQueryWrapper =new LambdaQueryWrapper<>();
-        lambdaQueryWrapper.eq(PostAssignment::getActivityAssignmentId,id);
-        List<PostAssignmentVo> postAssignmentVos = BeanCopyUtils.copyBeanList(postAssignmentService.list(lambdaQueryWrapper),PostAssignmentVo.class);
-        postAssignmentVos.stream().forEach(o->{
-            o.setPostName(postService.getById(o.getPostId()).getName());
-            o.setReqPeople(postAssignmentService.getById(o.getId()).getPeopleNumber());
-        });
-        activityAssignmentVo.setPostList(postAssignmentVos);
-        return ResponseResult.okResult(activityAssignmentVo);
-    }
 
     @Override
     public ResponseResult changeActivityStatus(ChangeActivityStatusDto changeActivityStatusDto) {
@@ -467,6 +544,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         return ResponseResult.okResult();
     }
 
+
+
     public void deleteActivityAssignment(Long activityId){
         // 查询当前活动的班次
         LambdaQueryWrapper<ActivityAssignment> activityAssignmentLambdaQueryWrapper = new LambdaQueryWrapper<>();
@@ -475,6 +554,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         activityAssignments.stream().forEach(o-> {
             //删除岗位信息
             deletePostAssignment(o.getId());
+            signInMapper.removeByAssignmentId(o.getId());
+            signInUserMapper.removeByAssignmentId(o.getId());
+            volunteerRecordMapper.removeByAssignmentId(o.getId());
         });
         //删除该活动班次信息
         activityAssignmentService.remove(activityAssignmentLambdaQueryWrapper);
@@ -485,6 +567,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         postAssignmentLambdaQueryWrapper.eq(PostAssignment::getActivityAssignmentId,activityAssignmentId);
         List<PostAssignment> postAssignments = postAssignmentService.list(postAssignmentLambdaQueryWrapper);
         postAssignments.stream().forEach(e->{
+            //删除招募信息
+            redisCache.deleteObject("sk:"+e.getId()+":qt");
+            redisCache.deleteObject("sk:"+e.getId()+":user");
             //删除志愿者信息
             deleteVolunteer(e.getId());
         });

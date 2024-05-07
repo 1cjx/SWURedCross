@@ -26,5 +26,7 @@ public interface SignInUserMapper extends BaseMapper<SignInUser> {
     void updateByMppId(SignInUser newSignInUser);
 
     List<SignInUserExportVo> exportSignInUser(ListSignInDto listSignInDto);
+
+    void removeByAssignmentId(@Param("activityAssignmentId") Long activityAssignmentId);
 }
 

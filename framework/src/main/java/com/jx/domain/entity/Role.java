@@ -27,8 +27,10 @@ public class Role  {
     @TableId
     private Long id;
 
-    //角色名称
-    private String roleName;
+    //部门ID
+    private Long departmentId;
+    //职称ID
+    private Long titleId;
     //角色权限字符串
     private String roleKey;
     //显示顺序

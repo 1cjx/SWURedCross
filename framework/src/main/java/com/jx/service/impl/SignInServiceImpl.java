@@ -121,6 +121,9 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
         signInMapper.insert(newSignIn);
         //插入redis中并设置过期时间
         Integer timeout = Math.toIntExact(newSignIn.getExpireTime().getTime() - new Date().getTime());
+        if(timeout<0){
+            throw new SystemException(AppHttpCodeEnum.SIGN_IN_TIME_PASS);
+        }
         redisCache.setCacheObject("signIn:"+newSignIn.getId(),newSignIn,timeout, TimeUnit.MILLISECONDS);
         // 创建签到后 负责人自己签到
         QRCodeSignIn(newSignIn.getId());

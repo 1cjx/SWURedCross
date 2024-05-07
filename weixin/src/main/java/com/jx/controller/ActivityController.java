@@ -1,8 +1,10 @@
 package com.jx.controller;
 
 import com.jx.anatation.ApiIdempotent;
+import com.jx.anatation.SystemLog;
 import com.jx.constants.SystemConstants;
 import com.jx.domain.ResponseResult;
+import com.jx.domain.dto.AddScheduledDto;
 import com.jx.domain.entity.Scheduled;
 import com.jx.service.ActivityService;
 import io.swagger.annotations.Api;
@@ -29,7 +31,7 @@ public class ActivityController {
      * @param categoryId
      * @return
      */
-    @ApiOperation("分页查询活动列表")
+    @SystemLog(businessName = "分页查询活动列表",type="1")
     @GetMapping("/getActivityList")
     public ResponseResult getActivityList(@Param("status") String status, @Param("locationId") Long locationId,
                                           @Param("categoryId") Long categoryId,
@@ -40,13 +42,19 @@ public class ActivityController {
 
     /**
      * 根据活动排班的id与用户的id 绑定排班
-     * @param scheduled
+     * @param addScheduledDto
      * @return
      */
-    @ApiOperation("报名活动班次")
+    @SystemLog(businessName = "报名活动班次",type="1")
     @PostMapping("/addSchedule")
-    public ResponseResult addSchedule(@RequestBody Scheduled scheduled){
-        return activityService.addSchedule(scheduled);
+    public ResponseResult addSchedule(@RequestBody AddScheduledDto addScheduledDto){
+        return activityService.addSchedule(addScheduledDto);
+    }
+
+    @SystemLog(businessName = "取消报名班次",type="1")
+    @PostMapping("/cancelSchedule")
+    public ResponseResult cancelSchedule(@RequestBody AddScheduledDto addScheduledDto){
+        return activityService.cancelSchedule(addScheduledDto);
     }
 
     /**
@@ -54,7 +62,7 @@ public class ActivityController {
      * @param activityId
      * @return
      */
-    @ApiOperation("查询选中活动详情信息")
+    @SystemLog(businessName = "查询选中活动详情信息",type="1")
     @GetMapping("/getActivityDetail")
     public ResponseResult getActivityDetail(Long activityId){
         return activityService.getActivityDetail(activityId);
@@ -65,7 +73,7 @@ public class ActivityController {
      * @param activityName
      * @return
      */
-    @ApiOperation("根据活动名模糊查询活动")
+    @SystemLog(businessName = "根据活动名模糊查询活动",type="1")
     @GetMapping("/selectActivity")
     public ResponseResult selectActivity( @Param("pageNum") Long pageNum,
                                           @Param("pageSize") Long pageSize,
@@ -80,7 +88,7 @@ public class ActivityController {
      * @param pageSize
      * @return
      */
-    @ApiOperation("查询用户参与的活动")
+    @SystemLog(businessName = "查询用户参与的活动",type="1")
     @GetMapping("/userActivityList")
     public ResponseResult userActivityList(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize){
         return activityService.userActivityList(pageNum,pageSize);
@@ -92,13 +100,12 @@ public class ActivityController {
      *  否则表示获取用户作为负责人的活动列表，用于创建签到使用
      * @return
      */
-    @ApiOperation(value="查询用户作为负责人的活动信息",notes = "type为 1表示获取用户作为负责人的活动，查询参与该班志愿者的信息\n" +
-            " 否则表示获取用户作为负责人的活动列表，用于创建签到使用")
+    @SystemLog(businessName = "查询用户作为负责人的活动信息",type="1")
     @GetMapping("/userAsLeaderActivityList")
     public ResponseResult userAsLeaderActivityList(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize,@Param("type")String type){
         return activityService.userAsLeaderActivityList(pageNum,pageSize,type);
     }
-    @ApiOperation("查询用户已参加活动的情况")
+    @SystemLog(businessName = "查询用户已参加活动的情况",type="1")
     @GetMapping("/userVolunteerInfo")
     public ResponseResult userVolunteerInfo(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize){
         return activityService.userVolunteerInfo(pageNum,pageSize);

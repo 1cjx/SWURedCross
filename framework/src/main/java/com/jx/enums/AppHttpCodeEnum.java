@@ -15,7 +15,8 @@ public enum AppHttpCodeEnum {
     SET_MENU_ERROR(509,"修改菜单'活动发布'失败，上级菜单不能选择自己"),
     HAS_CHILD_MENU(510,"存在子菜单不允许删除"),
     ROLE_EXIST(511, "角色已存在"),
-    ROLE_NAME_NOT_NULL(512,"角色名不能为空"),
+    ROLE_DEPARTMENT_NOT_NULL(512,"角色对应部门不能为空"),
+    ROLE_TITLE_NOT_NULL(512,"角色对应职称不能为空"),
     ROLE_KEY_NOT_NULL(513,"权限不能为空"),
     USER_IS_NOT_BIND(514,"该微信暂未绑定"),
     SIGNED_IN(515,"您已签到过"),
@@ -55,8 +56,16 @@ public enum AppHttpCodeEnum {
     QQ_NOT_NULL(549,"qq不能为空"),
     CODE_NOT_NULL(550,"微信授权失败"),
     PEOPLE_NUM_ERROR(551,"当前报名人数大于修改后的人数"),
-    SIGN_IN_TYPE_ERROR(552,"签到类型错误");
-
+    SIGN_IN_TYPE_ERROR(552,"签到类型错误"),
+    ACTIVITY_NOT_EXITS(553,"当前活动不存在请刷新后重试"),
+    ACTIVITY_NOT_RECRUIT(554,"当前活动已停止招募"),
+    ACTIVITY_ASSIGNMENT_NOT_RECRUIT(555,"当前班次已停止招募"),
+    USER_PERMISSION_NOT_ENOUGH(556,"用户权限不足"),
+    ACTIVITY_ASSIGNMENT_NOT_EXITS(557,"当前班次不存在请刷新后重试" ),
+    THIS_MONTH_CANCEL_NUMBER_RUN_OUT(558,"本月退选次数已用完"),
+    EMAIL_SEND_ERROR(559,"邮件发送失败"),
+    POST_NAME_EMPTY(560,"岗位名不为空"),
+    CATEGORY_EMPTY(560,"分类不为空");
 
 
     int code;

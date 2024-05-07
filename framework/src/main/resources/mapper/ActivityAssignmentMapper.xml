@@ -6,9 +6,10 @@
         FROM t_activity a LEFT JOIN t_activity_assignment aa  ON a.`id` = aa.`activity_id` LEFT JOIN t_location l ON l.`id` = aa.`location_id` LEFT JOIN t_activity_assignment_type aat ON aat.id = aa.type_id
         WHERE  a.`id` = #{activityId}
         AND a.`del_flag` = 0 AND aa.`del_flag` = 0
+        ORDER BY aa.`type_id`,aa.`time`,l.`id`
     </select>
-    <select id="getTimeSlotVoList" resultType="com.jx.domain.bo.TimeSlotBo">
-        SELECT distinct ts.`id`,ts.`begin_time`,ts.`end_time`
+    <select id="getTimeSlotVoList" resultType="com.jx.domain.bo.ClassBo">
+    SELECT DISTINCT aa.id AS activityAssignmentId,ts.`id` AS `timeSlotBo.id`,ts.`begin_time` AS `timeSlotBo.beginTime`,ts.`end_time` AS `timeSlotBo.endTime`
         FROM t_location l LEFT JOIN t_activity_assignment aa ON l.`id` = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.`id` = aa.`time_slot_id`
         WHERE l.id = #{locationId} AND aa.time = #{time} AND aa.activity_id =#{activityId} AND aa.type_id = #{typeId}
         AND ts.`del_flag` = 0 AND aa.`del_flag` = 0
@@ -18,6 +19,7 @@
         FROM t_activity_assignment aa LEFT JOIN t_activity a ON aa.`activity_id` = a.`id` LEFT JOIN t_time_slot ts ON ts.`id` = aa.`time_slot_id` LEFT JOIN t_location l ON l.`id` = aa.`location_id`
             LEFT JOIN t_activity_assignment_type aat  ON aat.`id` = aa.`type_id`
         WHERE aa.`id` = #{activityAssignmentId}         AND aa.`del_flag` = 0
+        ORDER BY
     </select>
     <select id="getUserIsInThisTimeSlot" resultType="java.lang.Long">
         SELECT COUNT(*)
@@ -30,5 +32,16 @@
                                                    WHERE pa.`id` = #{postAssignmentId} )  AND aa.`del_flag` = 0
         )
           AND s.`user_id` = #{userId}  AND aa.`del_flag` = 0
+    </select>
+    <select id="getEmailInfoByPostAssignmentId" resultType="com.jx.domain.bo.EmailInfoBo">
+        SELECT a.`name` AS activityName,aa.`time` AS activityDate,ts.`begin_time`,ts.`end_time`,p.name AS postName,l.`name` AS locationName,aat.`name` AS activityTypeName
+        FROM t_post_assignment ps
+                 LEFT JOIN t_activity_assignment aa ON ps.`activity_assignment_id` = aa.`id`
+                 LEFT JOIN t_activity a ON a.id = aa.`activity_id`
+                 LEFT JOIN t_time_slot ts ON ts.`id`  = aa.`time_slot_id`
+                 LEFT JOIN t_post p ON p.id = ps.`post_id`
+                 LEFT JOIN t_location l ON l.id = aa.`location_id`
+                 LEFT JOIN t_activity_assignment_type aat ON aa.`type_id` = aat.`id`
+        WHERE ps.id = #{postAssignmentId}
     </select>
 </mapper>

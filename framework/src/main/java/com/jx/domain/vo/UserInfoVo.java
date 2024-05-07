@@ -24,7 +24,7 @@ public class UserInfoVo {
      */
     private String department;
     private String college;
-    private String role;
+    private String title;
 
     /**
      * 头像

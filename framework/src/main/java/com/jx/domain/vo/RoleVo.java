@@ -12,8 +12,8 @@ import lombok.experimental.Accessors;
 public class RoleVo {
     private Long id;
 
-    //角色名称
-    private String roleName;
+    private Long titleId;
+    private Long departmentId;
     //角色权限字符串
     private String roleKey;
     //显示顺序

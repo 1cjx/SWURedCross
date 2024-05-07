@@ -1,5 +1,6 @@
 package com.jx.domain.dto;
 
+import com.alibaba.excel.annotation.ExcelIgnoreUnannotated;
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,11 +11,12 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ExcelIgnoreUnannotated //忽略掉不加@ExcelProperty的属性
 public class AddUserDto {
     @ExcelProperty(index=0)
     private String departmentName;
     @ExcelProperty(index=1)
-    private String roleName;
+    private String titleName;
     @ExcelProperty(index=2)
     private  Long id;
     @ExcelProperty(index=3)
@@ -35,7 +37,7 @@ public class AddUserDto {
     private String type;
     private String avatar;
     private String status;
-    private Long roleId;
+    private Long titleId;
     private Long departmentId;
     private Long collegeId;
 }

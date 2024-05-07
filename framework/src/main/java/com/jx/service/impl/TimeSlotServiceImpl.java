@@ -75,7 +75,7 @@ public class TimeSlotServiceImpl extends ServiceImpl<TimeSlotMapper, TimeSlot> i
                 removeById(id);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"时间段"+ans.toString()+"有活动使用,无法删除");
         }
         return ResponseResult.okResult();

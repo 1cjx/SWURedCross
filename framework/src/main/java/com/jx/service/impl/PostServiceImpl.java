@@ -107,6 +107,12 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
     @Transactional
     @Override
     public ResponseResult addPost(AddPostDto addPostDto) {
+        if(!StringUtils.hasText(addPostDto.getName())){
+            throw new SystemException(AppHttpCodeEnum.POST_NAME_EMPTY);
+        }
+        if(Objects.isNull(addPostDto.getCategoryId())){
+            throw new SystemException(AppHttpCodeEnum.CATEGORY_EMPTY);
+        }
         LambdaQueryWrapper<Post>lambdaQueryWrapper = new LambdaQueryWrapper<>();
         lambdaQueryWrapper.eq(Post::getName,addPostDto.getName());
         int cnt = count(lambdaQueryWrapper);
@@ -142,7 +148,7 @@ public class PostServiceImpl extends ServiceImpl<PostMapper, Post> implements Po
                 removeById(id);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"岗位"+ans.toString()+"有活动使用,无法删除");
         }
         return ResponseResult.okResult();

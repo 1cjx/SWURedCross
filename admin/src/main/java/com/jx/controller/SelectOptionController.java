@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.service.*;
 import io.swagger.annotations.Api;
@@ -15,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(tags = "下拉选择项获取相关接口")
 public class SelectOptionController {
     @Autowired
-    RoleService roleService;
+    TitleService titleService;
     @Autowired
     ActivityAssignmentTypeService activityAssignmentTypeService;
     @Autowired
@@ -30,42 +31,42 @@ public class SelectOptionController {
     PostService postService;
     @Autowired
     TimeSlotService timeSlotService;
-    @ApiOperation("查询所有班次类型")
+    @SystemLog(businessName = "查询所有班次类型",type="2")
     @GetMapping("/listAllActivityAssignmentType")
     public ResponseResult listAllActivityAssignmentType(){
         return activityAssignmentTypeService.listAllActivityAssignmentType();
     }
-    @ApiOperation("查询所有角色")
-    @GetMapping("/listAllRole")
-    public ResponseResult listAllRole(){
-        return roleService.listAllRole();
+    @SystemLog(businessName = "查询所有职称",type="2")
+    @GetMapping("/listAllTitle")
+    public ResponseResult listAllTitle(){
+        return titleService.listAllTitle();
     }
-    @ApiOperation("查询所有学院")
+    @SystemLog(businessName = "查询所有学院",type="2")
     @GetMapping("/listAllCollege")
     public ResponseResult listAllCollege(){
         return collegeService.listAllCollege();
     }
-    @ApiOperation("查询所有部门")
+    @SystemLog(businessName = "查询所有部门",type="2")
     @GetMapping("/listAllDepartment")
     public ResponseResult listAllDepartment(){
         return departmentService.listAllDepartment();
     }
-    @ApiOperation("查询所有活动地点")
+    @SystemLog(businessName = "查询所有活动地点",type="2")
     @GetMapping("/listAllLocation")
     public ResponseResult listAllLocation(){
         return locationService.listAllLocation();
     }
-    @ApiOperation("查询当前活动分类下的所有岗位")
+    @SystemLog(businessName = "查询当前活动分类下的所有岗位",type="2")
     @GetMapping("/listAllPost/{categoryId}")
     public ResponseResult listAllPost(@PathVariable("categoryId") Long categoryId){
         return postService.listAllPost(categoryId);
     }
-    @ApiOperation("查询所有活动时间段")
+    @SystemLog(businessName = "查询所有活动时间段",type="2")
     @GetMapping("/listAllTimeSlot")
     public ResponseResult listAllTimeSlot(){
         return timeSlotService.listAllTimeSlot();
     }
-    @ApiOperation("查询所有活动分类")
+    @SystemLog(businessName = "查询所有活动分类",type="2")
     @GetMapping("/listAllCategory")
     public ResponseResult listAllCategory(){
         return categoryService.listAllCategory();

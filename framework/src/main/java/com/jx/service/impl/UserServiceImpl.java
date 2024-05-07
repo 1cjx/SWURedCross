@@ -107,10 +107,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         wrapper.eq(StringUtils.hasText(listUserDto.getStatus()),User::getStatus, listUserDto.getStatus());
         wrapper.like(!Objects.isNull(listUserDto.getDepartmentId()),User::getDepartmentId, listUserDto.getDepartmentId());
         wrapper.like(!Objects.isNull(listUserDto.getCollegeId()),User::getCollegeId, listUserDto.getCollegeId());
-        wrapper.like(!Objects.isNull(listUserDto.getRoleId()),User::getRoleId, listUserDto.getRoleId());
+        wrapper.like(!Objects.isNull(listUserDto.getTitleId()),User::getTitleId, listUserDto.getTitleId());
         wrapper.eq(StringUtils.hasText(listUserDto.getIsBind()),User::getIsBind, listUserDto.getIsBind());
         wrapper.like(!Objects.isNull(listUserDto.getId()),User::getId, listUserDto.getId());
-        wrapper.orderByAsc(User::getRoleId);
+        wrapper.orderByAsc(User::getTitleId);
         wrapper.orderByAsc(User::getDepartmentId);
         List<User> userList = list(wrapper);
         List<UserInfoVo> userInfoVos = userList.stream().map(o->userMapper.getUserInfo(o.getId()).setIsBind(o.getIsBind())).collect(Collectors.toList());
@@ -170,7 +170,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
         userImportRecordMapper.insert(userImportRecord);
         Long recordId = userImportRecord.getId();
         MyListener lister = new MyListener(recordId);
-                EasyExcel.read(multipartFile.getInputStream(),AddUserDto.class,lister).sheet().doRead();
+        EasyExcel.read(multipartFile.getInputStream(),AddUserDto.class,lister).sheet().doRead();
         userImportRecord.setAllNum(lister.getAllNum());
         userImportRecord.setFailNum(lister.getFailNum());
         userImportRecord.setSucceedNum(lister.getSuccessNum());

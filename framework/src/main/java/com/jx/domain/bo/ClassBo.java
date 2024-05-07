@@ -12,6 +12,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClassBo {
+    //班次id
+    private Long activityAssignmentId;
     //时间段
     private TimeSlotBo timeSlotBo;
     //所需岗位列表

@@ -22,5 +22,5 @@ public class UserVo {
     private String status;
     private String department;
     private String college;
-    private String role;
+    private String title;
 }

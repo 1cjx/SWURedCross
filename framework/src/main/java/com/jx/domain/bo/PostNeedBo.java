@@ -19,7 +19,7 @@ public class PostNeedBo {
     private String reqPeople;
     private Long nowPeople;
     private Long allowedDepartmentId;
-    private Long allowedRoleId;
+    private Long allowedTitleId;
     private boolean isChoose;
     private List<VolunteerInfoBo> volunteerInfoBoList;
 }

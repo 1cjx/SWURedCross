@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.vo.UserInfoVo;
@@ -20,7 +21,7 @@ public class UserController {
      * 获取用户信息
      * @return
      */
-    @ApiOperation("查询用户个人信息")
+    @SystemLog(businessName = "查询用户个人信息",type="1")
     @GetMapping("/getUserInfo")
     public ResponseResult getUserInfo(){
         return userService.getUserInfo();
@@ -30,7 +31,7 @@ public class UserController {
      * 获取用户参与的活动数目与总志愿时长
      * @return
      */
-    @ApiOperation("查询用户参与的活动数目与总志愿时长")
+    @SystemLog(businessName = "查询用户参与的活动数目与总志愿时长",type="1")
     @GetMapping("/getUserActivityNumsAndVolunteerTimes")
     public ResponseResult getUserActivityNumsAndVolunteerTimes(){
         return userService.getUserActivityNumsAndVolunteerTimes();
@@ -41,7 +42,7 @@ public class UserController {
      * @param addUserDto
      * @return
      */
-    @ApiOperation("修改个人信息")
+    @SystemLog(businessName = "修改个人信息",type="1")
     @PutMapping("/updateUserInfo")
     public ResponseResult updateUserInfo(@RequestBody AddUserDto addUserDto){
         return userService.updateUser(addUserDto);

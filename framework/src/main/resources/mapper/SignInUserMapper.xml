@@ -7,6 +7,10 @@
             su.`mid_time` = #{midTime} , su.`sign_out_time` = #{signOutTime} , su.`sign_in_count` = #{signInCount}
         Where su.`assignment_id` = #{assignmentId} AND  su.`user_id` = #{userId}
     </update>
+    <delete id="removeByAssignmentId">
+        DELETE FROM t_signin_user
+        WHERE assignment_id = #{activityAssignmentId}
+    </delete>
     <select id="listSignIns" resultType="com.jx.domain.vo.ListSignInUserVo">
         SELECT aa.`time`,a.`name` AS activityName,l.`name` AS locationName,ts.`begin_time` AS timeSlotBegin,ts.`end_time` AS timeSlotEnd,
                u.name AS userName,su.`sign_in_time` AS signInTime,su.`mid_time` AS midTime, su.`sign_out_time` AS signOutTime
@@ -16,7 +20,7 @@
             LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id`
             LEFT JOIN t_user u ON u.id = su.`user_id`
         WHERE
-             a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
+             a.`del_flag` = 0         AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
             <if test='flag!="" and flag!=null'>
             AND   su.`sign_in_count` = (
                     SELECT COUNT(*)
@@ -51,7 +55,7 @@
         FROM t_signin_user su LEFT JOIN t_activity_assignment aa ON aa.`id` = su.`assignment_id` LEFT JOIN t_activity a ON a.id = aa.`activity_id`
         LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id` LEFT JOIN t_user u ON u.id = su.`user_id` LEFT JOIN t_college c ON c.id = u.`college_id`
         WHERE
-        a.`del_flag` = 0         AND l.`del_flag` = 0         AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
+        a.`del_flag` = 0          AND ts.`del_flag` = 0          AND aa.`del_flag` = 0
         <if test='flag!="" and flag!=null'>
             AND   su.`sign_in_count` = (
             SELECT COUNT(*)

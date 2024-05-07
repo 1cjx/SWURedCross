@@ -45,7 +45,7 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         if(SecurityUtils.isAdmin()){
             //返回所有的权限
             LambdaQueryWrapper<Menu> wrapper = new LambdaQueryWrapper<>();
-            wrapper.in(Menu::getMenuType, SystemConstants.MENU,SystemConstants.BUTTON);
+            wrapper.in(Menu::getMenuType,SystemConstants.BUTTON);
             wrapper.eq(Menu::getStatus,SystemConstants.STATUS_NORMAL);
             List<Menu>menus = list(wrapper);
             List<String> perms =  menus.stream().map(Menu::getPerms).collect(Collectors.toList());
@@ -60,11 +60,11 @@ public class MenuServiceImpl extends ServiceImpl<MenuMapper, Menu> implements Me
         MenuMapper menuMapper = getBaseMapper();
         //判断是否是管理员
         List<Menu>menus = null;
+        //如果是 返回所有符合要求的menu
         if(SecurityUtils.isAdmin()){
             menus = menuMapper.selectAllRouterMenu();
         }
         else {
-            //如果是 返回所有符合要求的menu
             //否则 当前用户所具有的menu
             menus = menuMapper.selectRouterMenuTreeByUserId(userId);
         }

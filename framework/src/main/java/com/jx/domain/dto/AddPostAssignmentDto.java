@@ -11,5 +11,5 @@ public class AddPostAssignmentDto {
     private Long postId;
     private Long reqPeople;
     private Long allowedDepartmentId;
-    private Long allowedRoleId;
+    private Long allowedTitleId;
 }

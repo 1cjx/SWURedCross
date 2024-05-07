@@ -28,6 +28,10 @@ public class Location  {
 
     //地点名
     private String name;
+    //经度
+    private Double longitude;
+    //纬度
+    private Double latitude;
     //0为不可用 1为可用
     private String status;
     @TableField(fill = FieldFill.INSERT)
@@ -38,8 +42,6 @@ public class Location  {
     private Long updateBy;
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
-    //删除标志（0代表未删除，1代表已删除）
-    private Integer delFlag;
 
 
 

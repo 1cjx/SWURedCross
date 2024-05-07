@@ -117,7 +117,6 @@ public class WeiXinLoginServiceImpl implements WeiXinLoginService {
             throw new SystemException(AppHttpCodeEnum.WX_IS_BIND);
         }
         User newUser = BeanCopyUtils.copyBean(wxUserRegisterDto, User.class);
-        System.err.println(newUser);
         String encodePassword = passwordEncoder.encode(SystemConstants.DEFAULT_PASSWD);
         newUser.setPassword(encodePassword);
         newUser.setStatus(SystemConstants.STATUS_NORMAL);
@@ -126,7 +125,7 @@ public class WeiXinLoginServiceImpl implements WeiXinLoginService {
         newUser.setCollegeId(Long.valueOf(String.valueOf(newUser.getId()).substring(6,9)));
         newUser.setDepartmentId(SystemConstants.OUT_DEPARTMENT);
         newUser.setType(SystemConstants.NOT_ADMIN);
-        newUser.setRoleId(SystemConstants.ROLE_IS_VOLUNTEER);
+        newUser.setTitleId(SystemConstants.ROLE_IS_VOLUNTEER);
         newUser.setRegisterdate(new Date());
         userService.save(newUser);
         return ResponseResult.okResult();

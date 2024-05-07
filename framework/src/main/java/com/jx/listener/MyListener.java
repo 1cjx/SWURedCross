@@ -31,7 +31,7 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
     private static DepartmentService departmentService;
     private static UserImportDetailService userImportDetailService;
     private static CollegeMapper collegeMapper;
-    private static RoleService roleService;
+    private static TitleService titleService;
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
@@ -54,9 +54,10 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
         this.collegeMapper = collegeMapper;
     }
     @Autowired
-    public void setRoleService(RoleService roleService) {
-        this.roleService = roleService;
+    public void setTitleService(TitleService titleService) {
+        this.titleService = titleService;
     }
+
     private Long failNum =0L;
     private Long successNum = 0L;
     private Long allNum = 0L;
@@ -110,30 +111,28 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
         detail.setRecordId(recordId);
         UserImportFail fail = new UserImportFail();
         allNum++;
-        if (checkImportData(addUserDto,fail)) {
-            successNum++;
-            hasEffectiveData = true;
-            detail.setStatus(SystemConstants.IMPORT_USER_SUCCESS);
-            userImportDetailService.save(detail);
-            //插入用户
-            User user = BeanCopyUtils.copyBean(addUserDto,User.class);
-            user.setId(addUserDto.getId());
-            user.setPassword(passwordEncoder.encode("redcross666"));
-            //判断用户是否存在 存在则修改信息
-            User tempUser = userService.getById(user.getId());
-            if(Objects.isNull(tempUser)) {
-                userService.save(user);
+            if (checkImportData(addUserDto, fail)) {
+                successNum++;
+                hasEffectiveData = true;
+                detail.setStatus(SystemConstants.IMPORT_USER_SUCCESS);
+                userImportDetailService.save(detail);
+                //插入用户
+                User user = BeanCopyUtils.copyBean(addUserDto, User.class);
+                user.setId(addUserDto.getId());
+                user.setPassword(passwordEncoder.encode("redcross666"));
+                //判断用户是否存在 存在则修改信息
+                User tempUser = userService.getById(user.getId());
+                if (Objects.isNull(tempUser)) {
+                    userService.save(user);
+                } else {
+                    userService.updateById(user);
+                }
+            } else {
+                detail.setReason(fail.getReason());
+                detail.setStatus(SystemConstants.IMPORT_USER_ERROR);
+                failNum++;
+                userImportDetailService.save(detail);
             }
-            else{
-                userService.updateById(user);
-            }
-        }
-        else{
-            detail.setReason(fail.getReason());
-            detail.setStatus(SystemConstants.IMPORT_USER_ERROR);
-            failNum++;
-            userImportDetailService.save(detail);
-        }
     }
     @Override
     public void doAfterAllAnalysed(AnalysisContext context) {
@@ -159,20 +158,20 @@ public class MyListener extends AnalysisEventListener<AddUserDto> {
                 addUserDto.setDepartmentId(department.getId());
             }
         }
-        if(!StringUtils.hasText(addUserDto.getRoleName())){
+        if(!StringUtils.hasText(addUserDto.getTitleName())){
             fail.setReason("职称不能为空");
             return false;
         }
         else{
-            LambdaQueryWrapper<Role> roleLambdaQueryWrapper = new LambdaQueryWrapper<>();
-            roleLambdaQueryWrapper.eq(Role::getRoleName,addUserDto.getRoleName());
-            Role role = roleService.getOne(roleLambdaQueryWrapper);
-            if(Objects.isNull(role)){
+            LambdaQueryWrapper<Title> titleLambdaQueryWrapper = new LambdaQueryWrapper<>();
+            titleLambdaQueryWrapper.eq(Title::getName,addUserDto.getTitleName());
+            Title title = titleService.getOne(titleLambdaQueryWrapper);
+            if(Objects.isNull(title)){
                 fail.setReason("该职称不存在");
                 return false;
             }
             else{
-                addUserDto.setRoleId(role.getId());
+                addUserDto.setTitleId(title.getId());
             }
         }
         if(Objects.isNull(addUserDto.getId())){

@@ -107,7 +107,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
                 removeById(id);
             }
         });
-        if(ans.size()>0){
+        if(!ans.isEmpty()){
             return ResponseResult.errorResult(550,"部门"+ans.toString()+"有用户使用,无法删除");
         }
         return ResponseResult.okResult();

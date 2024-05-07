@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.AddSignInDto;
 import com.jx.service.SignInService;
@@ -25,7 +26,7 @@ public class SignInController {
      * @param pageSize
      * @return
      */
-    @ApiOperation("分页查询用户发起的签到")
+    @SystemLog(businessName = "分页查询用户发起的签到",type="1")
     @GetMapping("/getSignInList")
     public ResponseResult getSignInList( @Param("pageNum")Long pageNum, @Param("pageSize")Long pageSize){
         return signInService.getSignInList(pageNum,pageSize);
@@ -36,7 +37,7 @@ public class SignInController {
      * @param addSignInDto
      * @return
      */
-    @ApiOperation("创建签到")
+    @SystemLog(businessName = "创建签到",type="1")
     @PostMapping("/addSignIn")
     public ResponseResult addSignIn(@RequestBody AddSignInDto addSignInDto){
         return signInService.addSignIn(addSignInDto);
@@ -47,8 +48,8 @@ public class SignInController {
      * @param signInId 是签到id
 
      * */
+    @SystemLog(businessName = "生成活动详情二维码",type="1")
     @GetMapping(value = "/getQRCode")
-    @ApiOperation("生成活动详情二维码")
     public void getQRCode(Long signInId , HttpServletResponse response) throws IOException {
         signInService.getQRCode(signInId,response);
     }
@@ -57,7 +58,7 @@ public class SignInController {
      * @param signInId
      * @return
      */
-    @ApiOperation("扫码签到")
+    @SystemLog(businessName = "扫码签到",type="1")
     @GetMapping("/QRCodeSignIn")
     public ResponseResult QRCodeSignIn(Long signInId){
         return signInService.QRCodeSignIn(signInId);
@@ -68,12 +69,12 @@ public class SignInController {
      * @param activityAssignmentId
      * @return
      */
-    @ApiOperation("查询当前签到的子签到")
+    @SystemLog(businessName = "查询当前签到的子签到",type="1")
     @GetMapping("/getSignDetail")
     public ResponseResult getChildrenSign(Long activityAssignmentId){
         return signInService.getChildrenSign(activityAssignmentId);
     }
-    @ApiOperation("查询最新扫码签到的十个用户")
+    @SystemLog(businessName = "查询最新扫码签到的十个用户",type="1")
     @GetMapping("/getQRCodeSignInList")
     public ResponseResult getQRCodeSignInList(Long signInId){
         return signInService.getQRCodeSignInList(signInId);

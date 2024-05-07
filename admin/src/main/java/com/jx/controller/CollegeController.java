@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.service.CollegeService;
 import io.swagger.annotations.Api;
@@ -23,7 +24,7 @@ public class CollegeController {
      * @param name
      * @return
      */
-    @ApiOperation("根据学院名模糊查询学院")
+    @SystemLog(businessName = "根据学院名模糊查询学院",type="2")
     @GetMapping("/select")
     public ResponseResult list(String name){
         return collegeService.selectColleges(name);

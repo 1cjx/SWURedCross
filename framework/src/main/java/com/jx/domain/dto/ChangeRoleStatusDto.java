@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChangeRoleStatusDto {
-    private Long roleID;
+    private Long roleId;
     private String status;
 }

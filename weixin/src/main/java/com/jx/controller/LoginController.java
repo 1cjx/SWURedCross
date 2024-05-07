@@ -1,5 +1,6 @@
 package com.jx.controller;
 
+import com.jx.anatation.SystemLog;
 import com.jx.domain.ResponseResult;
 import com.jx.domain.dto.WxUserDto;
 import com.jx.domain.dto.WxUserRegisterDto;
@@ -19,17 +20,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class LoginController {
     @Autowired
     WeiXinLoginService weiXinLoginService;
-    @ApiOperation("用户登录")
+    @SystemLog(businessName = "用户登录",type="1")
     @PostMapping("/login")
     public ResponseResult login(@RequestBody WxUserDto wxUserDto){
         return weiXinLoginService.login(wxUserDto);
     }
-    @ApiOperation("用户登出")
+    @SystemLog(businessName = "用户登出",type="1")
     @PostMapping("/logout")
     public ResponseResult logout(){
         return weiXinLoginService.logout();
     }
-    @ApiOperation("用户注册")
+    @SystemLog(businessName = "用户注册",type="1")
     @PostMapping("/register")
     public ResponseResult register(@RequestBody WxUserRegisterDto wxUserRegisterDto){
         return weiXinLoginService.register(wxUserRegisterDto);
