@@ -82,28 +82,29 @@ public class ActivityController {
     }
 
     /**
-     * 分页获取用户参与的活动信息，同时查询该班负责人的信息
-     * 若为负责人 则不查询负责人信息
-     * @param pageNum
-     * @param pageSize
+     * 分页获取用户参与的活动信息,仅包括活动不查询到具体班次
+     * @param pageNum 当前页号
+     * @param pageSize 页大小
+     * @param type type=true查询用户作为班次负责人的活动
      * @return
      */
-    @SystemLog(businessName = "查询用户参与的活动",type="1")
+    @SystemLog(businessName = "分页查询用户参与的活动",type="1")
     @GetMapping("/userActivityList")
-    public ResponseResult userActivityList(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize){
-        return activityService.userActivityList(pageNum,pageSize);
+    public ResponseResult userActivityList(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize,@Param("type")Boolean type){
+        return activityService.userActivityList(pageNum,pageSize,type);
     }
 
     /**
-     *
-     * type为 1表示获取用户作为负责人的活动，查询参与该班志愿者的信息
-     *  否则表示获取用户作为负责人的活动列表，用于创建签到使用
+     * 获取用户当前活动报名的班次信息
+     * @param activityId 活动id
+     * @param type type为false 查询各班次负责人的信息，若为负责人则不查询负责人信息
+     *            type=true 查询各班负责人管理的志愿者信息
      * @return
      */
-    @SystemLog(businessName = "查询用户作为负责人的活动信息",type="1")
-    @GetMapping("/userAsLeaderActivityList")
-    public ResponseResult userAsLeaderActivityList(@Param("pageNum")Long pageNum,@Param("pageSize")Long pageSize,@Param("type")String type){
-        return activityService.userAsLeaderActivityList(pageNum,pageSize,type);
+    @SystemLog(businessName = "查询用户当前活动的班次信息",type="1")
+    @GetMapping("/userActivityDetail")
+    public ResponseResult userActivityDetail(@Param("activityId")Long activityId,@Param("type")Boolean type){
+        return activityService.userActivityDetail(activityId,type);
     }
     @SystemLog(businessName = "查询用户已参加活动的情况",type="1")
     @GetMapping("/userVolunteerInfo")

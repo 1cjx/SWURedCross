@@ -105,7 +105,7 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
         if(count(lambdaQueryWrapper)>0) {
             throw new SystemException(AppHttpCodeEnum.SIGN_IN_EXIST);
         }
-        //创建签退时判断是否先创建过签到
+        //创建签退、考勤时判断是否先创建过签到
         if(addSignInDto.getType().equals("3")||addSignInDto.getType().equals("2")){
             LambdaQueryWrapper<SignIn> queryWrapper = new LambdaQueryWrapper<>();
             queryWrapper.eq(SignIn::getAssignmentId,addSignInDto.getAssignmentId());
@@ -113,6 +113,16 @@ public class SignInServiceImpl extends ServiceImpl<SignInMapper, SignIn> impleme
             //说明没有创建过签到
             if(count(queryWrapper)==0){
                 throw new SystemException(AppHttpCodeEnum.SING_IN_NEED_BEFORE_SIGN_OUT);
+            }
+        }
+        //创建考勤时判断是否创建过签退
+        if(addSignInDto.getType().equals("2")){
+            LambdaQueryWrapper<SignIn> queryWrapper = new LambdaQueryWrapper<>();
+            queryWrapper.eq(SignIn::getAssignmentId,addSignInDto.getAssignmentId());
+            queryWrapper.eq(SignIn::getType,"3");
+            //说明创建过签退
+            if(count(queryWrapper)!=0){
+                throw new SystemException(AppHttpCodeEnum.SIGN_IN_COMPLETED);
             }
         }
         //创建新签到

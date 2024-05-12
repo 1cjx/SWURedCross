@@ -5,4 +5,12 @@
         DELETE FROM t_scheduled
         WHERE post_assignment_id = #{postAssignmentId} AND user_id = #{userId}
     </delete>
+    <select id="getUserInThisActivitySchedules" resultType="com.jx.domain.entity.Scheduled">
+        SELECT s.*
+        FROM t_scheduled s LEFT JOIN t_post_assignment pa ON pa.id = s.`post_assignment_id`
+                           LEFT JOIN t_activity_assignment aa  ON aa.id = pa.`activity_assignment_id`
+                           LEFT JOIN t_activity a ON a.id = aa.`activity_id`
+        WHERE a.id = #{activityId} AND s.`user_id` = #{userId}
+        ORDER BY s.`create_time` DESC
+    </select>
 </mapper>

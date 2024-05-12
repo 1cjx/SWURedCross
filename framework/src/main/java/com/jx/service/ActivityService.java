@@ -22,9 +22,8 @@ public interface ActivityService extends IService<Activity> {
     ResponseResult getActivityDetail(Long activityId);
 
 
-    ResponseResult userActivityList(Long pageNum, Long pageSize);
-
-    ResponseResult userAsLeaderActivityList(Long pageNum, Long pageSize,String type);
+    ResponseResult userActivityList(Long pageNum, Long pageSize,Boolean type);
+    ResponseResult userActivityDetail(Long activityId,Boolean type);
 
     ResponseResult userVolunteerInfo(Long pageNum, Long pageSize);
 
@@ -42,5 +41,6 @@ public interface ActivityService extends IService<Activity> {
     ResponseResult changeActivityStatus(ChangeActivityStatusDto changeActivityStatusDto);
 
     ResponseResult cancelSchedule(AddScheduledDto addScheduledDto);
+
 }
 

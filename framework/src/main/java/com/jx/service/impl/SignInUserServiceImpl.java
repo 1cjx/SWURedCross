@@ -81,37 +81,5 @@ public class SignInUserServiceImpl extends ServiceImpl<SignInUserMapper, SignInU
         } catch (Exception e) {
             throw new SystemException(AppHttpCodeEnum.TEMPLATE_DOWNLOAD_ERROR);
         }
-
-//        try {
-//            //设置下载文件的请求头
-//            WebUtils.setDownLoadHeader("签到记录导出.xlsx",httpServletResponse);
-//            //获取需要导出的数据
-//            List<ListSignInUserVo> listSignInUserVos =signInUserMapper.listSignIns(listSignInDto);
-//            List<ExcelSignInUserVo> excelCategoryVos = BeanCopyUtils.copyBeanList(listSignInUserVos, ExcelSignInUserVo.class);
-//            excelCategoryVos.stream().forEach(o->{
-//                o.setTimeSlot(o.getTimeSlotBegin()+"-"+o.getTimeSlotEnd());
-//                Long signInTypeId = o.getSignInTypeId();
-//                if(signInTypeId==1L){
-//                    o.setSignInType("签到");
-//                }
-//                else if(signInTypeId==2L){
-//                    o.setSignInType("考勤");
-//                }
-//                else if(signInTypeId==3L){
-//                    o.setSignInType("签退");
-//                }
-//                else{
-//                    o.setSignInType("错误");
-//                }
-//            });
-//            //把数据写入到Excel中
-//            EasyExcel.write(httpServletResponse.getOutputStream(), ExcelSignInUserVo.class).autoCloseStream(Boolean.FALSE).sheet("签到记录")
-//                    .doWrite(excelCategoryVos);
-//
-//        } catch (Exception e) {
-//            //如果出现异常也要响应json
-//            ResponseResult result = ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR);
-//            WebUtils.renderString(httpServletResponse, JSON.toJSONString(result));
-//        }
     }
 }

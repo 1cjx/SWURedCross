@@ -12,17 +12,16 @@
         ORDER BY
             l.name
     </select>
-    <select id="getUserActivity" resultType="com.jx.domain.entity.Activity">
-        SELECT DISTINCT
-            a.*
-        FROM
-            t_activity_assignment aa LEFT JOIN t_scheduled s ON aa.`id` = s.`activity_assignment_id`
-                                      LEFT JOIN t_user u ON s.`user_id` = u.`id`
-                                      LEFT JOIN t_activity a ON a.`id` = aa.`activity_id`
-        WHERE
-            u.`id` = #{userId}   AND aa.`del_flag` = 0   AND a.`del_flag` = 0
-        ORDER BY
-            a.`begin_date`,a.`status`
+    <select id="getUserActivity" resultType="com.jx.domain.vo.ActivityVo">
+        SELECT DISTINCT a.id,a.`name`,a.`begin_date`,a.`end_date`,a.`theme`
+        FROM t_scheduled s LEFT JOIN t_post_assignment pa ON s.`post_assignment_id` = pa.`id`
+                           LEFT JOIN t_activity_assignment aa ON aa.id = pa.`activity_assignment_id` LEFT JOIN t_activity a ON a.id = aa.`activity_id`
+                           LEFT JOIN t_post p ON p.id = pa.`post_id`
+        WHERE s.`user_id` = #{userId}
+          <if test='postName !=null'>
+              AND p.name = #{postName}
+          </if>
+        ORDER BY a.id DESC
     </select>
     <select id="getActivityList" resultType="com.jx.domain.entity.Activity">
         SELECT DISTINCT a.id,a.name,a.theme,a.category_id,a.status,a.allowed_department_id,DATE(a.begin_date) AS begin_date,

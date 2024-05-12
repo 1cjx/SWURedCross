@@ -5,9 +5,9 @@ import com.jx.domain.bo.ActivityAssignmentInfoBo;
 import com.jx.domain.entity.Activity;
 import com.jx.domain.vo.ActivityCategoryHoldVo;
 import com.jx.domain.vo.ActivityDetailVo;
+import com.jx.domain.vo.ActivityVo;
 import com.jx.domain.vo.ListLocationVo;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.security.core.parameters.P;
 
 import java.util.List;
 
@@ -28,10 +28,11 @@ public interface ActivityMapper extends BaseMapper<Activity> {
 
     /**
      * 查询当前用户参与的志愿活动
+     * type为 1 就只查询用户作为班次负责人的活动
      * @param userId
      * @return
      */
-    List<Activity> getUserActivity(Long userId);
+    List<ActivityVo> getUserActivity(@Param("userId") Long userId, @Param("postName") String postName);
 
     /**
      * 根据状态、地点id、分类id、用户所在部门id获取活动列表

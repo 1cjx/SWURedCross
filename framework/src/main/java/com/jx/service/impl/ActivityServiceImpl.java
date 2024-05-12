@@ -208,13 +208,16 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         if(!schedule.isEmpty()) {
             schedule.stream().forEach(
                     o -> {
+                        System.out.println(11);
                         List<ClassBo> classBos = activityAssignmentMapper.getTimeSlotVoList(activityId,o.getTypeId(),o.getLocationId(), o.getTime());
                         classBos.stream().forEach(
                                 e -> {
+                                    System.out.println(22);
                                     //根据时间段id、日期、地点获取岗位列表
                                     List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(e.getActivityAssignmentId(),null,user.getDepartmentId(),user.getTitleId());
                                     postNeedBoList.stream().forEach(
                                             k -> {
+                                                System.out.println(33);
                                                 String needPeople = k.getReqPeople();
                                                 LambdaQueryWrapper<Scheduled> lambdaQueryWrapper = new LambdaQueryWrapper<>();
                                                 lambdaQueryWrapper.eq(Scheduled::getPostAssignmentId, k.getId());
@@ -239,6 +242,7 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             );
         }
         //进行一个过滤处理,筛选掉为空的信息
+        System.out.println(schedule);
         schedule = schedule.stream().map(o->{
             o.setAssignmentVoList(o.getAssignmentVoList().stream().filter(e->!e.getPostNeedBoList().isEmpty()).collect(Collectors.toList()));
             return o;
@@ -251,57 +255,35 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
 
 
     @Override
-    public ResponseResult userActivityList(Long pageNum, Long pageSize) {
+    public ResponseResult userActivityList(Long pageNum, Long pageSize,Boolean type) {
         //获取用户id
         Long userId = SecurityUtils.getUserId();
-        LambdaQueryWrapper<Scheduled> scheduledLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        //获取用户参与的排班
-        scheduledLambdaQueryWrapper.eq(Scheduled::getUserId,userId);
-        //按照时间降序排列
-        scheduledLambdaQueryWrapper.orderByDesc(Scheduled::getCreateTime);
-        List<Scheduled> scheduled = scheduledService.list(scheduledLambdaQueryWrapper);
-        List<UserActivityVo> userActivityVos = new ArrayList<>();
-        for (Scheduled s:scheduled) {
-            String postName = postMapper.getPostByActivityAssignmentId(s.getPostAssignmentId());
-            //封装活动信息
-            //根据用户所报岗位信息 查询班次id
-            PostAssignment postAssignment = postAssignmentService.getById(s.getPostAssignmentId());
-            ActivityAssignmentVo activityAssignmentVoList = activityAssignmentMapper.getActivityAssignmentVo(postAssignment.getActivityAssignmentId());
-            UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList,s.getCreateTime(),postName,null,null);
-            //封装leader信息
-            if(!postName.equals(SystemConstants.IS_LEADER)){
-                UserInfoVo leaderInfo = userMapper.getLeaderInfo(s.getPostAssignmentId());
-                userActivityVo.setLeaderInfo(leaderInfo);
-            }
-            userActivityVos.add(userActivityVo);
-        }
-        Page<UserActivityVo> pageUserActivityVos = PageUtils.listToPage(userActivityVos,pageNum,pageSize);
+        String postName = type?SystemConstants.IS_LEADER:null;
+        List<ActivityVo> activityVos =  activityMapper.getUserActivity(userId,postName);
+        Page<ActivityVo> pageUserActivityVos = PageUtils.listToPage(activityVos,pageNum,pageSize);
         PageVo pageVo = new PageVo(pageUserActivityVos.getRecords(),pageUserActivityVos.getTotal());
         return ResponseResult.okResult(pageVo);
     }
 
     @Override
-    public ResponseResult userAsLeaderActivityList(Long pageNum, Long pageSize,String type) {
+    public ResponseResult userActivityDetail(Long activityId,Boolean type) {
+        //获取用户id
         Long userId = SecurityUtils.getUserId();
-        LambdaQueryWrapper<Scheduled> scheduledLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        scheduledLambdaQueryWrapper.eq(Scheduled::getUserId,userId);
-        //按照时间降序排列
-        scheduledLambdaQueryWrapper.orderByDesc(Scheduled::getCreateTime);
-        List<Scheduled> scheduled = scheduledService.list(scheduledLambdaQueryWrapper);
-        List<UserActivityVo> userActivityVos = new ArrayList<>();
+        //获取用户在当前活动参与的排班
+        List<Scheduled> scheduled = scheduledMapper.getUserInThisActivitySchedules(activityId,userId);
+        List<UserActivityAssignmentVo> userActivityAssignmentVos = new ArrayList<>();
         for (Scheduled s:scheduled) {
             String postName = postMapper.getPostByActivityAssignmentId(s.getPostAssignmentId());
-            //封装活动信息
-            if(postName.equals(SystemConstants.IS_LEADER)) {
-                PostAssignment postAssignment = postAssignmentService.getById(s.getPostAssignmentId());
-                ActivityAssignmentVo activityAssignmentVoList = activityAssignmentMapper.getActivityAssignmentVo(postAssignment.getActivityAssignmentId());
-                UserActivityVo userActivityVo = new UserActivityVo(activityAssignmentVoList,null, null, null, null);
-                //封装volunteer信息
-                if (type.equals("1")) {
+            PostAssignment postAssignment = postAssignmentService.getById(s.getPostAssignmentId());
+            ActivityAssignmentVo activityAssignmentVoList = activityAssignmentMapper.getActivityAssignmentVo(postAssignment.getActivityAssignmentId());
+            if(type) {
+                if(postName.equals(SystemConstants.IS_LEADER)) {
+                    UserActivityAssignmentVo userActivityAssignmentVo = new UserActivityAssignmentVo(activityAssignmentVoList, null, null, null, null);
+                    //封装volunteer信息
                     //获取当前排班的信息
                     ActivityAssignment activityAssignment = activityAssignmentService.getById(postAssignment.getActivityAssignmentId());
                     //查询本班次的岗位信息
-                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList( postAssignment.getActivityAssignmentId(),SystemConstants.IS_LEADER,0L,0L);
+                    List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(postAssignment.getActivityAssignmentId(), SystemConstants.IS_LEADER, 0L, 0L);
                     //查询本班次各个岗位志愿者信息
                     postNeedBoList.stream().forEach(o -> {
                                 o.setVolunteerInfoBoList(userMapper.getVolunteerInfo(o.getId()));
@@ -314,32 +296,33 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
                             }
                     );
                     //将志愿者信息封装
-                    userActivityVo.setVolunteersInfo(postNeedBoList);
-                }
-                if(type.equals("1")){
-                    userActivityVos.add(userActivityVo);
-                }
-                else{
-                    //创建签到时的查询 过滤掉已创建签退的活动
-                    LambdaQueryWrapper<SignIn> signInLambdaQueryWrapper = new LambdaQueryWrapper<>();
-                    signInLambdaQueryWrapper.eq(SignIn::getAssignmentId,userActivityVo.getActivityInfo().getActivityAssignmentId());
-                    signInLambdaQueryWrapper.eq(SignIn::getType,"3");
-                    //说明未创建过签退才展示
-                    if(signInService.count(signInLambdaQueryWrapper)==0){
-                        userActivityVos.add(userActivityVo);
-                    }
+                    userActivityAssignmentVo.setVolunteersInfo(postNeedBoList);
+                    userActivityAssignmentVos.add(userActivityAssignmentVo);
                 }
             }
+            else{
+                    //封装活动信息
+                    //根据用户所报岗位信息 查询班次id
+                UserActivityAssignmentVo userActivityAssignmentVo = new UserActivityAssignmentVo(activityAssignmentVoList, s.getCreateTime(), postName, null, null);
+                    //封装leader信息
+                    if(!postName.equals(SystemConstants.IS_LEADER)){
+                        UserInfoVo leaderInfo = userMapper.getLeaderInfo(s.getPostAssignmentId());
+                        userActivityAssignmentVo.setLeaderInfo(leaderInfo);
+                    }
+                userActivityAssignmentVos.add(userActivityAssignmentVo);
+            }
         }
-        Page<UserActivityVo> pageUserActivityVos = PageUtils.listToPage(userActivityVos,pageNum,pageSize);
-        PageVo pageVo = new PageVo(pageUserActivityVos.getRecords(),pageUserActivityVos.getTotal());
-        return ResponseResult.okResult(pageVo);
+        Activity activity = getById(activityId);
+        ActivityVo activityVo = BeanCopyUtils.copyBean(activity,ActivityVo.class);
+        UserActivityVo userActivityVo = new UserActivityVo(userActivityAssignmentVos,activityVo);
+        return ResponseResult.okResult(userActivityVo);
     }
+
 
     @Override
     public ResponseResult userVolunteerInfo(Long pageNum, Long pageSize) {
         Long userId = SecurityUtils.getUserId();
-        //获取用户参加的活动id列表
+        //获取用户已完成签到的活动列表
         List<VolunteerRecordVo> volunteerRecordVos =volunteerRecordMapper.getUserVolunteerActivityInfo(userId);
         //封装信息
         volunteerRecordVos.stream().forEach(o->{

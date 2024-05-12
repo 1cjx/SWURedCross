@@ -12,8 +12,6 @@ import java.util.Date;
 @AllArgsConstructor
 public class ActivityAssignmentVo {
     private Long activityAssignmentId;
-    private String activityName;
-    private Long activityId;
     private String timeSlotBegin;
     private String timeSlotEnd;
     private String location;

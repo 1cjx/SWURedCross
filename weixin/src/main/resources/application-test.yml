@@ -1,0 +1,116 @@
+server:
+  port: 7777
+spring:
+  datasource:
+    url: jdbc:mysql://124.70.136.242:3306/redcross?characterEncoding=utf-8&&serverTimezone=Asia/Shanghai
+    username: root
+    password: theRedCross1993
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+    #Spring Boot 默认是不注入这些属性值的，需要自己绑定
+    #druid 数据源专有配置
+    initialSize: 5
+    minIdle: 5
+    maxActive: 20
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    # 打开PSCache
+    poolPreparedStatements: true
+    #配置监控统计拦截的filters，stat:监控统计、log4j：日志记录、wall：防御sql注入
+    #如果运行时报错  java.lang.ClassNotFoundException: org.apache.log4j.Priority
+    #则导入 log4j 依赖即可，Maven 地址： https://mvnrepository.com/artifact/log4j/log4j
+    filters: stat,wall
+    #指定每个连接上PSCache的大小
+    maxPoolPreparedStatementPerConnectionSize: 20
+    #合并多个DruidDataSource的监控数据
+    useGlobalDataSourceStat: true
+    #通过connectProperties属性来打开mergeSql功能；慢SQL记录
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  freemarker:
+    suffix: .ftl   # 模板文件后缀
+    content-type: text/html
+    charset: utf-8
+    cache: false
+    template-loader-path: classpath:/templates/freemarker/     # 模板存放处
+    check-template-location: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 5MB
+  redis:
+    # Redis本地服务器地址，注意要开启redis服务，即那个redis-server.exe
+    host: 124.70.136.242
+    # Redis服务器端口,默认为6379.若有改动按改动后的来
+    port: 6379
+    #Redis服务器连接密码，默认为空，若有设置按设置的来
+    password: theRedCross1993
+    jedis:
+      pool:
+        # 连接池最大连接数，若为负数则表示没有任何限制
+        max-active: 8
+        # 连接池最大阻塞等待时间，若为负数则表示没有任何限制
+        max-wait: -1
+        # 连接池中的最大空闲连接
+        max-idle: 8
+  # rabbitmq
+  rabbitmq:
+    host: 124.70.136.242
+    port: 5672
+    username: theRedCross
+    password: theRedCross1993
+    # 开启confirms回调 P -> Exchange
+    publisher-confirm-type : correlated
+    # 开启returnedMessage回调 Exchange -> Queue
+    #    publisher-returns: true
+    listener:
+      simple:
+        # 设置手动确认(ack) Queue -> C
+        acknowledge-mode: auto
+        prefetch: 100
+        retry:
+          enabled: true # 开启消费者失败重试
+          initial-interval: 1000ms # 初始的失败等待时长未1秒
+          multiplier: 1 # 下次失败的等待时长倍数
+          max-attempts: 3 # 最大重试次数
+          stateless: true # true是无状态;false有状态,如果业务中包含事务,这里改为false
+  # mail
+  mail:
+    host: smtp.qq.com
+    username: 1500206893@qq.com
+    password: jqcmcxjdfbmijfhc
+    #服务协议
+    protocol: smtp
+    # 编码集
+    default-encoding: UTF-8
+  properties:
+    mail:
+      smtp:
+      auth: true
+      starttls:
+        enable: true
+        required: true
+mybatis-plus:
+  #  configuration:
+  #  # 日志
+  #      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: delFlag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+      id-type: auto
+  mapper-locations: classpath*:/mapper/**/*.xml
+oss:
+  accessKey: 0mxfXLyroCwjPhwjYqouj_RBehtJIUAwSHNrecd-
+  secretKey: 08ksXFk_piGxHjiS3oql8Q06bDSo6Fq-gc8ZOC_y
+  bucket: jiax-redcross
+weixin:
+  jscode2sessionUrl: https://api.weixin.qq.com/sns/jscode2session
+  appid: wxdaf3d64b1d8991c3
+  secret: a59bdd79273e47dc92ffeecdf1039710
+

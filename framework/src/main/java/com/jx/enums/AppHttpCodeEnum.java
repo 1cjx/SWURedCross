@@ -38,6 +38,7 @@ public enum AppHttpCodeEnum {
     FILE_TYPE_ERROR(531,"上传图片类型错误，请选择png、jpg格式图片" ),
     SIGN_IN_TIME_PASS(532,"签到时间已过"),
     SING_IN_NEED_BEFORE_SIGN_OUT(533,"请先创建签到再选择签退"),
+    SIGN_IN_COMPLETED(533,"该活动签到已完成"),
     ADD_SCHEDULE_ERROR(534,"报班失败"),
     PARAM_NOT_NULL(535,"参数不能为空"),
     KILL_NOT_START(536,"报班还没有开始，请等待"),

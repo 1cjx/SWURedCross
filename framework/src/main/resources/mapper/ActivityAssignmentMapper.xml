@@ -19,7 +19,6 @@
         FROM t_activity_assignment aa LEFT JOIN t_activity a ON aa.`activity_id` = a.`id` LEFT JOIN t_time_slot ts ON ts.`id` = aa.`time_slot_id` LEFT JOIN t_location l ON l.`id` = aa.`location_id`
             LEFT JOIN t_activity_assignment_type aat  ON aat.`id` = aa.`type_id`
         WHERE aa.`id` = #{activityAssignmentId}         AND aa.`del_flag` = 0
-        ORDER BY
     </select>
     <select id="getUserIsInThisTimeSlot" resultType="java.lang.Long">
         SELECT COUNT(*)

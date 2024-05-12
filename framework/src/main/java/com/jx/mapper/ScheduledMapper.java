@@ -2,6 +2,9 @@ package com.jx.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jx.domain.entity.Scheduled;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 /**
@@ -13,5 +16,7 @@ import com.jx.domain.entity.Scheduled;
 public interface ScheduledMapper extends BaseMapper<Scheduled> {
 
     void remove(Scheduled scheduled);
+
+    List<Scheduled> getUserInThisActivitySchedules(@Param("activityId") Long activityId, @Param("userId") Long userId);
 }
 
