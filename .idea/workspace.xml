@@ -4,39 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了部分活动报名时的逻辑判断">
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/admin/src/main/resources/application-test.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/UserActivityAssignmentVo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_13_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_2.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_2_2.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_2_0_Final.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hibernate_validator_hibernate_validator_6_2_0_Final.xml" afterDir="false" />
+    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了部分小bug,添加了yml版本管理">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RedCross.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RedCross.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/framework.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityAssignmentVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityAssignmentVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/UserActivityVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/UserActivityVo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ActivityMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ActivityMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ScheduledMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ScheduledMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityAssignmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityAssignmentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ScheduledMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ScheduledMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/ActivityController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -455,7 +425,7 @@
       <workItem from="1715174961392" duration="781000" />
       <workItem from="1715232855082" duration="61000" />
       <workItem from="1715412538866" duration="15374000" />
-      <workItem from="1715476348683" duration="383000" />
+      <workItem from="1715476348683" duration="1982000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -520,7 +490,21 @@
       <option name="project" value="LOCAL" />
       <updated>1715083517116</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="修改了部分小bug,添加了yml版本管理">
+      <created>1715476876930</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1715476876930</updated>
+    </task>
+    <task id="LOCAL-00011" summary="修改了部分小bug,添加了yml版本管理">
+      <created>1715476990918</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1715476990918</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -546,7 +530,8 @@
     <MESSAGE value="修改了微信小程序端的签到，改为从后端生成二维码到前端，同时对数据库有修改" />
     <MESSAGE value="修改了后台的签到导出,以及用户批量导入对学院信息的处理" />
     <MESSAGE value="修改了部分活动报名时的逻辑判断" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了部分活动报名时的逻辑判断" />
+    <MESSAGE value="修改了部分小bug,添加了yml版本管理" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了部分小bug,添加了yml版本管理" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

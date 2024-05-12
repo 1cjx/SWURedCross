@@ -208,16 +208,13 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         if(!schedule.isEmpty()) {
             schedule.stream().forEach(
                     o -> {
-                        System.out.println(11);
                         List<ClassBo> classBos = activityAssignmentMapper.getTimeSlotVoList(activityId,o.getTypeId(),o.getLocationId(), o.getTime());
                         classBos.stream().forEach(
                                 e -> {
-                                    System.out.println(22);
                                     //根据时间段id、日期、地点获取岗位列表
                                     List<PostNeedBo> postNeedBoList = postMapper.getPostNeedVoList(e.getActivityAssignmentId(),null,user.getDepartmentId(),user.getTitleId());
                                     postNeedBoList.stream().forEach(
                                             k -> {
-                                                System.out.println(33);
                                                 String needPeople = k.getReqPeople();
                                                 LambdaQueryWrapper<Scheduled> lambdaQueryWrapper = new LambdaQueryWrapper<>();
                                                 lambdaQueryWrapper.eq(Scheduled::getPostAssignmentId, k.getId());
