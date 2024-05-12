@@ -1,0 +1,91 @@
+.body{
+    min-height: 100vh;
+    width:100vm;
+    padding:20rpx 0rpx;
+    background-color: rgb(241, 241, 241);
+    .activityContainer{
+        background-color: rgb(255, 255, 255);
+        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 30rpx;
+        .activityInfo{
+            width:100%;
+            min-height: 150rpx;
+            padding:20rpx 10rpx 20rpx 20rpx;
+            border-top: grey solid 1px;
+            border-bottom: grey solid 1px;
+            display: flex;
+            justify-content: space-between;
+            .left{
+                width:58%;
+                .Theme{
+                    padding-left: 5rpx;
+                    border-radius: 10rpx;
+                    background: linear-gradient(to right, rgb(255, 153, 153), white);
+                    font-size: 32rpx;
+                }
+                .Name{
+                    margin-top: 5rpx;
+                    font-size:34rpx;
+                }
+            }
+            .right{
+                display: flex;
+                align-self: flex-end;
+                justify-content: start;
+                flex-wrap: wrap;
+                width:39%;
+                view{
+                    max-width:95%;
+                    font-size: 31rpx;
+                }
+                .showActivityTimes{
+                    width:93%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 10rpx;
+                    font-size: 30rpx;
+                    .arrow_down{
+                        width:27rpx;
+                        height:27rpx;
+                    }
+                    .arrow_right{
+                        width:27rpx;
+                        height:27rpx;
+                        transform: rotateZ(90deg);
+                        margin-top: 7rpx;
+                    }
+                }
+            }
+        }
+        .ActivityTimes{
+            margin-top: 5rpx;
+            width:100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            .Time{
+                width:95%;
+                border: rgb(85, 88, 88) solid 1px;
+                padding:10rpx 20rpx;
+                display: flex;
+                .Time_left{
+                    width:50%;
+                    font-size: 30rpx;
+                }
+                .Time_right{
+                    display: flex;
+                    align-items: center;
+                    width:50%;
+                }
+            }
+        }
+    }
+    .no_activity{
+       text-align: center;
+       font-size:18px;
+    }
+}

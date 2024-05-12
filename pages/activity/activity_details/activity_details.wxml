@@ -1,0 +1,99 @@
+<!--pages/activity/activity_details/activity_details.wxml-->
+<!-- 定义nav导航方法 -->
+<view class="body">
+  <view wx:if="{{ActivityDetail!==''}}">
+    <view class="activity_detail">
+      <view class="detail">
+        <view class="detail_left">
+          活动名称：
+        </view>
+        <view class="detail_right">
+          {{ActivityDetail.activityName}}
+        </view>
+      </view>
+      <view class="detail">
+        <view class="detail_left">
+          活动主题：
+        </view>
+        <view class="detail_right">
+          {{ActivityDetail.theme}}
+        </view>
+      </view>
+      <view class="detail">
+        <view class="detail_left">
+          活动地点：
+        </view>
+        <view class="detail_right">
+          <view class="location" bindtap="guideLocation" data-location="{{item}}" wx:for="{{ActivityLocations}}" wx:key="id">
+            <image src="/icons/location.png"></image> {{item.name}}
+          </view>
+        </view>
+      </view>
+      <view class="detail">
+        <view class="detail_left">
+          活动时间：
+        </view>
+        <view class="detail_right">
+          {{ActivityDetail.beginDate}} 至 {{ActivityDetail.endDate}}
+        </view>
+      </view>
+    </view>
+    <!-- 排班表开始 -->
+    <view class="schedule" wx:if="{{ActivityDetail.scheduled.length!==0}}">
+      <view class="title">活动排班：</view>
+      <view class="menu_contain" wx:for="{{ActivityDetail.scheduled}}" wx:for-item="schedule" wx:key="*this">
+
+        <!-- 菜单第一级开始 -->
+        <view class="menu_grade1">
+          <view class="type">{{schedule.typeName}}</view>
+          <view class="d_p">
+            <view class="d_p_1">日期：{{schedule.time}}</view>
+            <view class="d_p_2">地点：{{schedule.location}}</view>
+          </view>
+          <view class="show" bindtap="ShowPost" data-index="{{index}}" data-list="{{schedule. assignmentVoList[0].postNeedBoList}}" wx:if="{{!showpost[index][0]}}">
+            展开
+          </view>
+          <view class="show" bindtap="ShowPost" data-index="{{index}}" data-list="{{schedule. assignmentVoList[0].postNeedBoList}}" wx:if="{{showpost[index][0]}}">
+            收起
+          </view>
+        </view>
+        <!-- 菜单第一级结束 -->
+
+        <!-- 菜单第二级开始 -->
+        <view class="menu_grade2" wx:if="{{showpost[index][0]}}">
+          <!-- 左侧时间表开始 -->
+          <scroll-view scroll-y class="left">
+            <view class="time {{showpost[index][1]==childindex?'active':''}}" data-parent="{{index}}" wx:for="{{schedule.assignmentVoList}}" wx:for-index="childindex" data-index="{{childindex}}" data-list="{{item.postNeedBoList}}" bindtap="Timeselect">
+              {{item.timeSlotBo.beginTime}}-{{item.timeSlotBo.endTime}}
+            </view>
+          </scroll-view>
+          <!-- 左侧时间表结束 -->
+
+          <!-- 右侧职位表开始 -->
+          <scroll-view scroll-y class="right">
+            <view class="contain" wx:for="{{schedule.assignmentVoList[showpost[index][1]].postNeedBoList}}" wx:for-index="postIndex">
+              <view class="post">
+                职位:{{item.postName}} 需求：{{item.reqPeople}}
+              </view>
+              <view class="sign" wx:if="{{item.choose}}" bindtap="cancelBaoming" data-postAssignmentId="{{item.id}}" data-activityAssignmentId="{{schedule.assignmentVoList[showpost[index][1]].activityAssignmentId}}">
+                已报名
+              </view>
+              <view class="sign" wx:if="{{!item.choose}}" bindtap="onBaoming" data-postAssignmentId="{{item.id}}" data-activityAssignmentId="{{schedule.assignmentVoList[showpost[index][1]].activityAssignmentId}}">
+                报名
+              </view>
+            </view>
+          </scroll-view>
+          <!-- 右侧职位表结束 -->
+        </view>
+        <!-- 菜单第二级结束 -->
+      </view>
+      <!-- 排班表结束 -->
+    </view>
+    <view wx:else class="noPost">
+      暂无可报名岗位
+    </view>
+  </view>
+  <view wx:else class="bg_img">
+    <image src="../../../icons/image/ACTIVITY_NOT_FOUND.png"></image>
+  </view>
+</view>

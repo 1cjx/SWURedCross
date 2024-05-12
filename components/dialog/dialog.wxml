@@ -1,0 +1,45 @@
+<!-- <view class="update" bindtap="update" data-statu="open">修改</view> -->
+<view class="creat_sign" bindtap="update" data-statu="open">
+  <image src="/icons/add.png"></image>
+  <view>创建新签到</view>
+</view>
+<!--弹出框-->
+<view class="drawer_screen" bindtap="update" data-statu="close" wx:if="{{showModalStatus}}"></view>
+<!--content-->
+<!--使用animation属性指定需要执行的动画-->
+<view class="animation_position">
+  <view class="drawer_box" animation="{{animationData}}" wx:if="{{showModalStatus}}">
+    <!--drawer content-->
+    <view class="drawer_title">创建签到</view>
+    <view class="drawer_content">
+      <view class="grid">
+        <!--选择签到类型-->
+        <label class="title col-0 left">
+          选择签到类型：
+        </label>
+        <view class="right">
+          <view class="activity_title">
+            <picker range="{{signType}}" value="0" range-key="label" bindchange="selectType">
+              {{signId==-1?'选择签到类型':signType[signId].label}}
+            </picker>
+          </view>
+        </view>
+      </view>
+      <!--选择过期时间-->
+      <view class="grid">
+        <label class="title col-0 left">
+          过期时间:
+        </label>
+        <view class="right">
+          <view class="activity_title">
+            <picker mode="time" value="{{expireTime}}" start="{{atleast}}" bindchange="setExpireTime">
+              {{expireTime==""?'选择过期时间':expireTime}}
+            </picker>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="btn_ok" bindtap="addSignIn" data-statu="close">生成签到</view>
+  </view>
+
+</view>

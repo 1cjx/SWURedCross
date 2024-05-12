@@ -1,0 +1,44 @@
+.searchbar {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+.body {
+  padding-top: 90rpx ;
+}
+.body .index_swiper swiper {
+  width: 750rpx;
+  height: 550rpx;
+}
+.body .index_swiper swiper swiper-item image {
+  height: 100%;
+}
+.body .show_activity .title {
+  height: 100rpx;
+}
+.body .show_activity .title .Hotpoint {
+  background: linear-gradient(#fd4949, white);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body .show_activity .title .Hotpoint text {
+  font-size: large;
+}
+.body .transport_activity {
+  height: 100rpx;
+  padding-top: 20rpx;
+  padding-bottom: 20rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body .transport_activity navigator {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+.body .transport_activity navigator text {
+  font-size: 37rpx;
+}

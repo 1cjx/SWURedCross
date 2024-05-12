@@ -1,0 +1,176 @@
+.body {
+  background-color: #f6f6f6;
+  border: 1px solid #f6f6f6;
+  height: 100vh;
+}
+.activity_detail {
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 1.2ch;
+  background-color: #ffffff;
+  height: auto;
+  border: 1px solid lightgrey;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.activity_detail .detail {
+  margin-bottom: 15rpx;
+  font-size: medium;
+  display: flex;
+  font-weight: bold;
+}
+.activity_detail .detail .detail_right {
+  width: 70%;
+  display: flex;
+  font-weight: normal;
+  flex-wrap: wrap;
+}
+.activity_detail .detail .detail_right .location {
+  font-size: 25rpx;
+  border: 1px solid lightgray;
+  background-color: lightyellow;
+  border-top-right-radius: 1.2ch;
+  padding: 10rpx 10rpx 10rpx 10rpx;
+  width: fit-content;
+  margin-bottom: 10rpx;
+  margin-right: 10rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 100%;
+}
+.activity_detail .detail .detail_right .location image {
+  height: 100%;
+  width: 25rpx;
+}
+.schedule {
+  border-radius: 1.2ch;
+  margin: 20rpx;
+  padding: 20rpx;
+  background-color: white;
+  border: 1px solid lightgrey;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.schedule .title {
+  font-weight: bold;
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
+.schedule .menu_contain {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+}
+.schedule .menu_contain .menu_grade1 {
+  width: 100%;
+  height: 130rpx;
+  display: flex;
+  margin-bottom: 5rpx;
+}
+.schedule .menu_contain .menu_grade1 .type {
+  position: absolute;
+  height: 3.5%;
+  width: 16%;
+  text-align: center;
+  font-weight: bold;
+  color: yellow;
+  font-size: 25rpx;
+  padding-top: 2rpx;
+  background-color: #de1c31;
+  border-bottom-right-radius: 0.8ch;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+.schedule .menu_contain .menu_grade1 .d_p {
+  padding-left: 10rpx;
+  width: 84%;
+  border: 1px solid lightgrey;
+  display: flex;
+  align-items: center;
+  font-size: 30rpx;
+  position: relative;
+}
+.schedule .menu_contain .menu_grade1 .d_p .d_p_1 {
+  width: 50%;
+}
+.schedule .menu_contain .menu_grade1 .d_p .d_p_2 {
+  width: 50%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.schedule .menu_contain .menu_grade1 .show {
+  width: 15%;
+  border: 1px solid lightgrey;
+  border-left: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.schedule .menu_contain .menu_grade2 {
+  width: 93%;
+  display: flex;
+  background-color: #f3f5f5;
+  max-height: 280rpx;
+}
+.schedule .menu_contain .menu_grade2 .left {
+  width: 30%;
+}
+.schedule .menu_contain .menu_grade2 .left .time {
+  height: 80rpx;
+  border: 1px solid lightgray;
+  border-bottom: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.schedule .menu_contain .menu_grade2 .left .time:last-child {
+  border-bottom: solid lightgray 1px;
+}
+.schedule .menu_contain .menu_grade2 .left .active {
+  background-color: #ee3f4d;
+  color: white;
+}
+.schedule .menu_contain .menu_grade2 .right {
+  width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.schedule .menu_contain .menu_grade2 .right .contain {
+  height: 80rpx;
+  font-size: 28rpx;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  border: 1px solid lightgray;
+  border-bottom: none;
+}
+.schedule .menu_contain .menu_grade2 .right .contain .post {
+  height: 100%;
+  padding-left: 10rpx;
+  display: flex;
+  align-items: center;
+  width: 80%;
+}
+.schedule .menu_contain .menu_grade2 .right .contain .sign {
+  height: 100%;
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: solid 1px lightgray;
+}
+.schedule .menu_contain .menu_grade2 .right .contain:last-child {
+  border-bottom: solid 1px lightgray;
+}
+.noPost {
+  font-size: 20px;
+  text-align: center;
+}
+.bg_img {
+  width: 50%;
+  margin: auto;
+  margin-top: 20%;
+}

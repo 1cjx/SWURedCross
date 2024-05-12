@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+      "dialog": "../../../components/dialog/dialog"
+    },
+    "navigationBarTitleText": "我发起的签到"
+}

@@ -1,0 +1,134 @@
+/* 隐藏内容样式 */
+/*创建签到*/
+.creat_sign {
+  position: fixed;
+  top: 70vh;
+  right: 5rpx;
+  width: 140rpx;
+  text-align: center;
+}
+.creat_sign  image {
+  width: 100rpx;
+  height: 100rpx;
+  background-color: white;
+  border-radius: 100px;
+}
+.creat_sign  view {
+  font-size: 25rpx;
+  color:grey;
+  font-weight: bold;
+}
+/*签到标签*/
+.left {
+  width: 40%;
+  font-size: 35rpx;
+}
+.right {
+  height: 70rpx;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.right .activity_title {
+  border: grey solid 1px;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10rpx;
+  font-size: 31rpx;
+}
+.right .activity_title text {
+  white-space: nowrap;
+  overflow: scroll;
+  width: 80%;
+}
+.right .activity_title .arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8.7px 5px 0 5px;
+  border-color: var(--themeColor) transparent transparent transparent;
+}
+.right .activity_title picker {
+  width: 100%;
+  font-size: 32rpx;
+  text-align: center;
+}
+
+.update{
+  display: flex;justify-content: center;
+}
+.drawer_screen {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  background: #000;
+  opacity: 0.5;
+  overflow: hidden;
+}
+/*content*/
+.animation_position{
+  display: flex;
+  width:100%;
+  justify-content: center;
+}
+.drawer_box{
+  overflow: hidden;
+  position: fixed;
+  top:26%;
+  /* bottom:90px; */
+  z-index: 1001;
+  background: #FAFAFA;
+  border-radius: 3px;
+  width: 90%;
+}
+.drawer_title {
+  padding: 15px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+}
+.drawer_content {
+  overflow-y: scroll;
+  /*超出父盒子高度可滚动*/
+}
+.btn_ok {
+  margin-top:5%;
+  padding: 10px;
+  font: 20px "microsoft yahei";
+  text-align: center;
+  border-top: 1px solid #E8E8EA;
+  color: #40A4D6;
+}
+.bottom {
+  padding-bottom: 8px;
+}
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  margin:5% 0 0 0;
+  border-bottom: 2rpx solid #ccc;
+}
+.input_base {
+  width:75%;
+  margin:5% 0 0 0;
+  padding-left:5%;
+  border-bottom: 2rpx solid #ccc;
+}
+input {
+  font: 15px "microsoft yahei";
+  background: #fff;
+  color: #000;
+}
+.grid {
+  display: flex;
+  margin:20px;
+}

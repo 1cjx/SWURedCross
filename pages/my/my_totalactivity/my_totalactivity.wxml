@@ -1,0 +1,46 @@
+<!--pages/my/my_totalactivity/my_totalactivity.wxml-->
+<view class="body">
+  <view wx:if="{{activtiyList.length>0}}">
+    <view class="activityContainer" 
+        wx:for="{{activtiyList}}" 
+        wx:for-item="acti"
+        wx:key="id">
+        <view class="activityInfo">
+            <view class="left">
+                <view class="Theme">{{acti.activityVo.theme}}</view>
+                <view class="Name">{{acti.activityVo.name}}</view>
+                <view class="totalTime">{{acti.activityVo.beginDate}}-{{acti.activityVo.endDate}}</view>
+            </view>
+            <view class="right">
+                <view>
+                    总志愿时长：{{acti.totalVolunteerTime}}
+                </view>
+                <view class="showActivityTimes" bindtap="showActivityTimes" data-index="{{index}}">展开志愿时长详情
+                    <image class="{{isshowActivityTime[index]?'arrow_down':'arrow_right '}}" src="/icons/arrow.png"></image>
+                </view>
+            </view>
+        </view>
+        <view class="ActivityTimes" wx:if="{{isshowActivityTime[index]}}">
+            <view class="Time" wx:for="{{acti.volunteerRecordBoList}}">
+                <view class="Time_left">
+                    <view>日期：{{item.activityAssignmentVo.date}}</view>
+                    <view>地点：{{item.activityAssignmentVo.location}}</view>
+                    <view>时间：
+                        {{item.activityAssignmentVo.timeSlotBegin}}-
+                        {{item.activityAssignmentVo.timeSlotEnd}}
+                    </view>
+                </view>
+                <view class="Time_right" wx:if="{{item.status==1}}">
+                    <view>该次志愿时长：{{item.volunteerTime}}</view>
+                </view>
+                <view class="Time_right" wx:if="{{item.status==0}}">
+                    <view>无时长原因：{{item.reason}}</view>
+                </view>
+            </view>
+        </view>
+    </view>
+  </view>
+  <view wx:else class="no_activity">
+    当前暂未参与过活动
+  </view>
+</view>

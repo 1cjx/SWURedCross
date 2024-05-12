@@ -1,0 +1,66 @@
+.searchBar{
+    height:90rpx;
+    padding:10rpx;
+    background-color:var(--themeColor);
+    .search{
+        height:100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: azure;
+        border-radius: 215rpx;
+        color:#666;
+        padding-left: 30rpx;
+        input{
+            width: 70%;
+            height: 80%;
+            text-align: left;
+            //border: blue solid 1px;
+        }
+        .searchButton{
+            font-size: 25rpx;
+            font-weight: lighter;
+            letter-spacing:2px;
+            color:white;
+            margin-right: 7rpx;
+            background-color: rgb(255,119,44);
+            width: 18%;
+            height: 90%;
+            border-radius: 215rpx;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            padding:none;
+            //border: blue solid 1px;
+            margin-left: 0rpx;
+        }
+        .cancelButton{
+            margin-right: 0;
+            //border: blue solid 1px;
+            border-radius: 30rpx;
+            background-color: rgb(255, 255, 255);
+            width: 50rpx;
+            height: 50rpx;
+        }
+    }
+}
+.body{
+    .List_guide{
+        display: flex;
+        align-items: center;
+        padding-left: 10rpx;
+        border-bottom: grey solid 1px;
+        height:60rpx;
+        font-size: 30rpx;
+        .highlight{
+            color:red
+        }
+    }
+    .Err_Nodata{
+        height: 80rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 32rpx;
+    }
+}

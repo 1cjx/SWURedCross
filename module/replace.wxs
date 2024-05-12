@@ -1,0 +1,10 @@
+function fn(arr, arg) {
+    console.log(arr)
+    var result = {
+     indexOf: false,
+     toString: ''
+    }
+    result.indexOf = arr.indexOf(arg) > -1;
+    result.toString = arr.join(","); return result;
+   }
+   module.exports.fn = fn;

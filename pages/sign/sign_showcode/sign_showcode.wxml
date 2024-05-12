@@ -1,0 +1,12 @@
+<!--pages/sign/sign_showcode/sign_showcode.wxml-->
+<view class="code">
+	<!-- <canvas style="width: 200px; height: 200px;margin:0 auto" canvas-id="myQrcode"></canvas> -->
+  <image style="width: 200px; height: 200px" src="{{qrcodeURL}}" mode="aspectFit" />
+</view>
+<view class="record">签到记录</view>
+
+  <view class="signInUserList">
+   <view wx:for="{{signInUserList}}">
+    {{item.userName}} ,{{item.signInTime}}
+  </view>
+  </view>

@@ -1,0 +1,27 @@
+<view class="typebody">
+  <view class="typebody_title">签到列表:</view>
+  <view class="showcode_container" wx:for="{{signInList}}">
+    <!--签到类型-->
+    <view class="type" style="background-color: red;" wx:if="{{item.type==1}}">签到</view>
+    <view class="type" style="background-color: blue;" wx:if="{{item.type==2}}">考勤</view>
+    <view class="type" style="background-color: green;" wx:if="{{item.type==3}}">签退</view>
+    <!--签到截至时间-->
+    <view class="codedate">
+      <span style="font-weight: bold;"> 截至时间：</span>
+      {{item.expireTime}}
+    </view>
+
+    <view class="expire" wx:if="{{item.status==0}}">签到已过期</view>
+    <navigator class="code" url="/pages/sign/sign_showcode/sign_showcode?id={{item.id}}" wx:else>
+      生成签到二维码
+    </navigator>
+  </view>
+  <view wx:if="{{showAddSignIn}}">
+    <view wx:if="{{signInList.length>0}}">
+      <dialog bind:refresh="onShow" activityAssignmentId="{{activityAssignmentId}}"></dialog>
+    </view>
+    <view wx:else>
+      <dialog bind:refresh="onShow" activityAssignmentId="{{activityAssignmentId}}" show="open"></dialog>
+    </view>
+  </view>
+</view>

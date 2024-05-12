@@ -1,0 +1,74 @@
+<!--pages/my/my_index/my_index.wxml-->
+<view class="body">
+  <view class="title">
+    <navigator url="/pages/my/my_message/my_message">
+      <view class="title_pic">
+        <image src="{{userInfo.avatar}}">
+        </image>
+      </view>
+      <view class="title_intro">
+        <text class="title_intro_name">{{userInfo.name}}</text>
+        <view class="title_intro_position">
+          <text class="left">部门：{{userInfo.department}}</text>
+          <text class="right">职称：{{userInfo.title}}</text>
+        </view>
+      </view>
+      <view class="title_icon">
+        <text class="arrow"></text>
+      </view>
+    </navigator>
+  </view>
+
+  <view class="information">
+    <navigator url="/pages/my/my_totalactivity/my_totalactivity">
+      <view class="infor_left">
+        <view class="contain">
+          <view class="contain_title">
+            <image src="/icons/my_index/activity_nums.png"></image>
+            <text>参与活动数</text>
+          </view>
+          <view class="data">
+            {{totalActivityNums}}
+          </view>
+        </view>
+      </view>
+      <view class="infor_right">
+        <view class="contain">
+          <view class="contain_title">
+            <image src="/icons/my_index/volunteer_time.png"></image>
+            <text>志愿时长</text>
+          </view>
+          <view class="data">
+            {{totalVolunteerTime?totalVolunteerTime:0}}h
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </view>
+
+  <view class="transport" bindtap="goMyActivity">
+    <image src="/icons/my_index/my_activity.png"></image>
+    <text>我的活动</text>
+    <text class="arrow"></text>
+  </view>
+  <view class="transport" bindtap="goMySignIn">
+    <image src="/icons/my_index/my_sign.png"></image>
+    <text>我的签到</text>
+    <text class="arrow"></text>
+  </view>
+  <view class="transport" bindtap="kefu">
+    <image src="/icons/my_index/contact_customer.png"></image>
+    <text>帮助与反馈</text>
+    <text class="arrow"></text>
+  </view>
+  <view class="transport" bindtap="goAboutUs">
+    <image src="/icons/my_index/about_us.png"></image>
+    <text>关于我们</text>
+    <text class="arrow"></text>
+  </view>
+  <view class="transport" bindtap="quit">
+    <image src="/icons/my_index/logout.png"></image>
+    <text>退出登录</text>
+    <text class="arrow"></text>
+  </view>
+</view>

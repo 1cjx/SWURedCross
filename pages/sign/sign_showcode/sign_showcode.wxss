@@ -1,0 +1,31 @@
+page {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.code {
+  height: auto;
+  width: auto;
+  padding: 10rpx;
+  margin: 100rpx 0 40rpx 0;
+  border: double #ffda33 15px;
+  background-color: rgba(255, 255, 255, 0.363);
+}
+.record {
+  font-size: 40rpx;
+  font-weight: bold;
+  margin-bottom: 20rpx;
+}
+.signInUserItem {
+  font-size: 26rpx;
+  margin-top: 10rpx;
+}
+.signInUserList {
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, #000000, #ffffff);
+  /* 调整颜色范围 */
+  -webkit-background-clip: text;
+  color: transparent;
+}

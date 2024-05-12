@@ -1,0 +1,24 @@
+/* pages/my/my_about/my_about.wxss */
+.contain {
+  margin-top: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.contain image {
+  width: 150rpx;
+  height: 150rpx;
+}
+.contain .intro {
+  margin-top: 50rpx;
+  height: 400rpx;
+  width: 90%;
+  border: grey solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.contain .intro text {
+  width: 80%;
+}

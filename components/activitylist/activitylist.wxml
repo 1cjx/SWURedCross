@@ -1,0 +1,25 @@
+<!--components/activitylist.wxml-->
+<view class="activity"
+    wx:for="{{list}}"
+    wx:for-item="acti"
+    wx:key="id">
+    <navigator hover-class="none"
+     url="{{flag?'/pages/activity/activity_details/activity_details?id='+acti.id:'/pages/my_activity/my_activity_detail/my_activity_detail?id='+acti.id+'&&isLeader='+isLeader}}" >
+        <view class="acti_title">
+            <view class="acti_theme">{{acti.theme}}</view>
+            <view class="acti_name">{{acti.name}}</view>
+        </view>
+        <view class="acti_date">
+            <view>{{acti.beginDate}} 至 {{acti.endDate}}</view>
+        </view>
+        <view class="loc_list">
+            <view class="acti_loc"
+                wx:for="{{acti.locations}}"
+                wx:for-item="loc"
+                wx:if="{{index<3}}"
+                wx:key="id">{{loc.name}}
+            </view>
+            <view class="acti_loc" wx:if="{{acti.locations.length>3}}">·····</view>
+        </view>
+    </navigator>
+</view>

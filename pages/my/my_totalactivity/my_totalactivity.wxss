@@ -1,0 +1,91 @@
+.body {
+  min-height: 100vh;
+  width: 100vm;
+  padding: 20rpx 0rpx;
+  background-color: #f1f1f1;
+}
+.body .activityContainer {
+  background-color: #ffffff;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30rpx;
+}
+.body .activityContainer .activityInfo {
+  width: 100%;
+  min-height: 150rpx;
+  padding: 20rpx 10rpx 20rpx 20rpx;
+  border-top: grey solid 1px;
+  border-bottom: grey solid 1px;
+  display: flex;
+  justify-content: space-between;
+}
+.body .activityContainer .activityInfo .left {
+  width: 58%;
+}
+.body .activityContainer .activityInfo .left .Theme {
+  padding-left: 5rpx;
+  border-radius: 10rpx;
+  background: linear-gradient(to right, #ff9999, white);
+  font-size: 32rpx;
+}
+.body .activityContainer .activityInfo .left .Name {
+  margin-top: 5rpx;
+  font-size: 34rpx;
+}
+.body .activityContainer .activityInfo .right {
+  display: flex;
+  align-self: flex-end;
+  justify-content: start;
+  flex-wrap: wrap;
+  width: 39%;
+}
+.body .activityContainer .activityInfo .right view {
+  max-width: 95%;
+  font-size: 31rpx;
+}
+.body .activityContainer .activityInfo .right .showActivityTimes {
+  width: 93%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10rpx;
+  font-size: 30rpx;
+}
+.body .activityContainer .activityInfo .right .showActivityTimes .arrow_down {
+  width: 27rpx;
+  height: 27rpx;
+}
+.body .activityContainer .activityInfo .right .showActivityTimes .arrow_right {
+  width: 27rpx;
+  height: 27rpx;
+  transform: rotateZ(90deg);
+  margin-top: 7rpx;
+}
+.body .activityContainer .ActivityTimes {
+  margin-top: 5rpx;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.body .activityContainer .ActivityTimes .Time {
+  width: 95%;
+  border: #555858 solid 1px;
+  padding: 10rpx 20rpx;
+  display: flex;
+}
+.body .activityContainer .ActivityTimes .Time .Time_left {
+  width: 50%;
+  font-size: 30rpx;
+}
+.body .activityContainer .ActivityTimes .Time .Time_right {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+.body .no_activity {
+  text-align: center;
+  font-size: 18px;
+}

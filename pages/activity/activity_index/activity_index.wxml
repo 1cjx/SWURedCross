@@ -1,0 +1,37 @@
+<view class="searchbar">
+  <searchbar></searchbar>
+</view>
+<view class="body">
+  <view class="goods-type">
+    <view class="select-content">
+      <view class="select-border" bindtap="showSelectBoxDis">
+        <text>{{chooseItemDis}}</text>
+        <text class="arrow"></text>
+      </view>
+      <view class="select-box" wx:if="{{selectBoxDis}}">
+        <view class="select-item" bindtap="DeleteSelectItemDis">全部分类</view>
+        <view class="select-item" wx:for="{{categoryList}}" wx:key="{{item.id}}" wx:for-item="item" bindtap="chooseSelectItemDis" data-name="{{item.name}}" id="{{item.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+
+    <view class="select-content">
+      <view class="select-border" bindtap="showSelectBoxTim">
+        <text>{{chooseItemTim}}</text>
+        <text class="arrow"></text>
+      </view>
+      <view class="select-box" wx:if="{{selectBoxTim}}">
+        <view class="select-item" bindtap="DeleteSelectItemTim">全部地点</view>
+        <view class="select-item" wx:for="{{locationList}}" bindtap="chooseSelectItemTim" data-name="{{item.name}}" id="{{item.id}}">
+          {{item.name}}
+        </view>
+      </view>
+    </view>
+    <view class="reset">
+      <image  src="/icons/reset.png" bindtap="reset"></image>
+    </view>
+  </view>
+  <activitylist list="{{activityList}}"></activitylist>
+  <view style="width: 100%;height: calc(100rpx + env(safe-area-inset-bottom) / 2);"></view>
+</view>

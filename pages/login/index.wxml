@@ -1,0 +1,6 @@
+<!--pages/login/index.wxml-->
+<view class="body">
+    <image src="/icons/symbol.jpeg"></image>
+    <view class="title">欢迎使用红十字会志愿者中心</view>
+    <view class="login" bindtap="onlogin">立即登录</view>
+</view>

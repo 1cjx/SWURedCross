@@ -1,0 +1,78 @@
+<!--pages/sign/sign_setsign/sign_setsign.wxml-->
+<view class="container">
+    <!--选择活动-->
+    <view class="selections">
+        <view class="left">
+            选择活动：
+        </view>
+        <view class="right">
+            <view class="activity_title" bindtap="showpost"  data-id="1">
+                <text>{{activityName}}</text>
+                <text class="arrow"></text>
+            </view>
+            <view  class="activity_selectbox" 
+            wx:if="{{showpost&&showId==1}}">
+                <scroll-view  scroll-y>
+                    <view  class="activity_select {{assignmentId==item.activityInfo.activityAssignmentId?'AT_active':''}}"
+                        wx:for="{{ActivityList.rows}}"
+                        wx:key="index"
+                        data-activity="{{item.activityInfo.activityName}}{{item.activityInfo.date}}{{item.activityInfo.location}}"
+                        data-aid="{{item.activityInfo.activityAssignmentId}}"
+                        bindtap="selectActivity">
+                        {{item.activityInfo.activityName}}{{item.activityInfo.date}}{{item.activityInfo.location}}
+                    </view>    
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+    <!--选择签到类型-->
+    <view class="selections">
+        <view class="left">
+            选择签到类型：
+        </view>
+        <view class="right">
+            <view class="activity_title" bindtap="showpost"  data-id="2">
+                <text>{{signName}}</text>
+                <text class="arrow"></text>
+            </view>
+            <view  class="activity_selectbox" wx:if="{{showpost&&showId==2}}">
+            <!--animation="{{dropdown_Data}}" -->
+                <scroll-view  scroll-y>
+                    <view  class="activity_select {{signName==item.name?'AT_active':''}}"
+                        wx:for="{{signType}}"
+                        wx:key="index"
+                        bindtap="selectType"
+                        data-sign="{{item.name}}"
+                        data-sid="{{item.id}}">
+                        {{item.name}}
+                    </view>    
+                </scroll-view>
+            </view>
+        </view>
+    </view>
+
+
+    <!--选择过期时间-->
+    <view class="selections">
+        <view class="left">
+            过期时间:
+        </view>
+        <view class="right">
+            <view class="activity_title">
+                <picker mode="time" value = "{{expireTime}}" start="{{atleast}}"
+                bind:tap="clickPicker"
+                bindchange="setExpireTime">
+                        {{expireTime==""?'选择过期时间':expireTime}}
+                </picker>
+            </view>
+        </view>
+    </view>
+
+    <view class="output">
+        <view bindtap="addS">
+            生成签到
+        </view>
+    </view>
+
+</view>

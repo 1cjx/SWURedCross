@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "searchbar":"/components/searchbar/searchbar",
+    "activitylist":"/components/activitylist/activitylist"
+  }
+}

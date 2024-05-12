@@ -1,0 +1,13 @@
+.index {
+  background-color: lightgoldenrodyellow;
+}
+.index .activityList .act_list_title {
+  font-size: 17px;
+}
+.index .activityList .activitydetail {
+  font-size: 14px;
+  font-style: italic;
+  color: #f09c9c;
+  background-color: ivory;
+  padding: 5%;
+}

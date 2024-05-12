@@ -1,0 +1,47 @@
+.sign {
+  height: 40vh;
+  margin-top: 5vh;
+  margin-bottom: 5vh;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  padding: 20rpx;
+}
+.sign navigator {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.sign navigator image {
+  width: 70%;
+  height: 300rpx;
+}
+.sign navigator text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-size: medium;
+}
+.sign .contain {
+  height: 100%;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.sign .contain image {
+  width: 70%;
+  height: 300rpx;
+}
+.sign .contain text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  font-size: medium;
+}
