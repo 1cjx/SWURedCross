@@ -126,6 +126,7 @@ public class DepartmentServiceImpl extends ServiceImpl<DepartmentMapper, Departm
         LambdaQueryWrapper<Department> departmentLambdaQueryWrapper =new LambdaQueryWrapper<>();
         departmentLambdaQueryWrapper.eq(Department::getStatus, SystemConstants.STATUS_NORMAL);
         List<Department> departmentList = list(departmentLambdaQueryWrapper);
-        return ResponseResult.okResult(departmentList);
+        List<DepartmentVo> departmentVos = BeanCopyUtils.copyBeanList(departmentList,DepartmentVo.class);
+        return ResponseResult.okResult(departmentVos);
     }
 }

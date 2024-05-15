@@ -43,7 +43,7 @@
         SELECT vr.`user_id` AS userId ,u.name AS userName,d.`name`AS departmentName,SUM(vr.`volunteer_time`) AS userVolunteerTimes,COUNT(vr.`status`) AS userParticipateInActivityNum
         FROM t_volunteer_record vr RIGHT JOIN t_user u ON u.id = vr.`user_id` LEFT JOIN t_department d ON d.id = u.`department_id`
         WHERE vr.`status` = '1'
-        <if test="departmentId!=null">
+        <if test="departmentId!=null and departmentId!=0">
             AND d.`id` = #{departmentId}
         </if>
         AND d.`del_flag` = 0
@@ -51,7 +51,7 @@
         ORDER BY
             <choose>
                 <when test="sortType==1">
-                    userParticipateInActivityNum  DESC
+                    userParticipateInActivityNum  DESC,userName ASC
                 </when>
                 <otherwise>
                     userVolunteerTimes DESC,userName ASC

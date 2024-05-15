@@ -81,8 +81,8 @@ spring:
   # mail
   mail:
     host: smtp.qq.com
-    username: 1500206893@qq.com
-    password: jqcmcxjdfbmijfhc
+    username: 2920744703@qq.com
+    password: lgbaotlwnnrkdfeh
     #服务协议
     protocol: smtp
     # 编码集

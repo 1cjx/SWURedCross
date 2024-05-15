@@ -103,11 +103,20 @@
         <resources>
             <resource>
                 <directory>src/main/resources</directory>
-                <!--开启过滤，用指定的参数替换directory下的文件中的参数-->
-                <excludes>
-                    <exclude>template/*</exclude>
-                </excludes>
+                <includes>
+                    <include>*.yml</include>
+                </includes>
                 <filtering>true</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources/template</directory>
+                <filtering>false</filtering> <!-- 不需要过滤模板目录 -->
+                <targetPath>${project.build.directory}/classes/template</targetPath> <!-- 指定输出目录 -->
+            </resource>
+            <resource>
+                <directory>src/main/resources/mapper</directory>
+                <filtering>false</filtering> <!-- 不需要过滤模板目录 -->
+                <targetPath>${project.build.directory}/classes/mapper</targetPath> <!-- 指定输出目录 -->
             </resource>
         </resources>
         <plugins>

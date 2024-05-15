@@ -3,12 +3,20 @@
   <component name="Encoding" native2AsciiForPropertiesFiles="true" defaultCharsetForPropertiesFiles="UTF-8">
     <file url="file://$PROJECT_DIR$/admin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/admin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/src/main/resources/mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/admin/src/main/resources/template" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/framework/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/framework/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/framework/src/main/resources/mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/framework/src/main/resources/template" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources/template" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/weixin/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/weixin/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weixin/src/main/resources/mapper" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/weixin/src/main/resources/template" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

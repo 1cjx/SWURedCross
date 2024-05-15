@@ -4,12 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="修改了部分小bug,添加了yml版本管理">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/___.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/___.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/___1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/___1.xml" afterDir="false" />
+    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="修改了部分小bug,添加了yml版本管理">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityAssignmentVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityAssignmentVo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DepartmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/VolunteerRecordMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/VolunteerRecordMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +38,9 @@
         <option value="Class" />
       </list>
     </option>
+  </component>
+  <component name="Git.Merge.Settings">
+    <option name="BRANCH" value="gitee/master" />
   </component>
   <component name="Git.Rebase.Settings">
     <option name="NEW_BASE" value="master" />
@@ -57,6 +68,17 @@
         <option name="userSettingsFile" value="D:\Maven\setting.xml" />
       </MavenGeneralSettings>
     </option>
+    <option name="enabledProfiles">
+      <list>
+        <option value="test" />
+      </list>
+    </option>
+    <option name="disabledProfiles">
+      <list>
+        <option value="prod" />
+        <option value="dev" />
+      </list>
+    </option>
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -83,7 +105,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/项目/RedCross/weixin/src/main/resources&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/项目/Examination_System-master&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -93,7 +115,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;File.Encoding&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a3896cfa970c5ad8b3818d9e3284c6e4&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -132,11 +154,7 @@
       <recent name="com.jx.domain.dto" />
     </key>
   </component>
-  <component name="RunManager" selected="JAR 应用程序.weixin-1.0-SNAPSHOT.jar">
-    <configuration name="weixin-1.0-SNAPSHOT.jar" type="JarApplication" temporary="true">
-      <option name="JAR_PATH" value="$PROJECT_DIR$/weixin/target/weixin-1.0-SNAPSHOT.jar" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Spring Boot.AdminApplication">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -166,16 +184,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JAR 应用程序.weixin-1.0-SNAPSHOT.jar" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
-      <changelist id="d0f92e13-7531-4f0c-ba7d-0270795d8242" name="更改" comment="" />
+      <changelist id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="修改了部分小bug,添加了yml版本管理" />
       <created>1693644757849</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -432,6 +445,9 @@
       <workItem from="1715232855082" duration="61000" />
       <workItem from="1715412538866" duration="15374000" />
       <workItem from="1715476348683" duration="1982000" />
+      <workItem from="1715655389118" duration="654000" />
+      <workItem from="1715658827132" duration="3276000" />
+      <workItem from="1715770384055" duration="4788000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>

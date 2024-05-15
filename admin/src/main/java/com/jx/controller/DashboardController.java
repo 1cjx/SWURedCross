@@ -48,6 +48,7 @@ public class                           DashboardController {
     }
     /**
      * 根据传参对活动积极性进行排序 默认全体部门按志愿时长降序排列
+     * # sortType=1按照参与活动数进行排序，否则按照活动时间排序
      */
     @SystemLog(businessName = "查询活动参与排行榜",type="2")
     @GetMapping("/getRankingByActivity")
