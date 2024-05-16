@@ -17,5 +17,7 @@ public class UpdateActivityAssignmentDto {
     private String  status;
     private Long timeSlotId;
     private Long typeId;
+    private String qrCodeUrl;
+    private String groupAccount;
     private List<UpdatePostAssignmentDto> postList;
 }

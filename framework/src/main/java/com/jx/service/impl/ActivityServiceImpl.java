@@ -239,7 +239,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
             );
         }
         //进行一个过滤处理,筛选掉为空的信息
-        System.out.println(schedule);
         schedule = schedule.stream().map(o->{
             o.setAssignmentVoList(o.getAssignmentVoList().stream().filter(e->!e.getPostNeedBoList().isEmpty()).collect(Collectors.toList()));
             return o;
@@ -599,7 +598,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         redisCache.decrementCount(kcKey,1L);
         //7.2 把秒杀成功用户添加清单里面
         redisCache.addMember(userKey,String.valueOf(userId));
-        System.out.println("秒杀成功了..");
         return true;
     }
 }

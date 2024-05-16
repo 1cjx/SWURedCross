@@ -64,8 +64,6 @@ public class OssUploadService implements UploadService {
                 Response response = uploadManager.put(inputStream,key,upToken,null, null);
                 //解析上传成功的结果
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-                System.out.println(putRet.key);
-                System.out.println(putRet.hash);
                 return "http://redcross.heping.fun/"+key;
             } catch (QiniuException ex) {
                 Response r = ex.response;

@@ -25,7 +25,7 @@ public class ActivityDetailForAdminVo {
     private Long allowedDepartmentId;
     //分类名
     private Long categoryId;
-    //地点列表
+
     //活动开始日期
     private String status;
     private Date beginDate;

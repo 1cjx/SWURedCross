@@ -22,5 +22,7 @@ public class ActivityAssignmentInfoBo {
     private Long typeId;
     private String typeName;
     private String status;
+    private String qrCodeUrl;
+    private String groupAccount;
     private List<PostNeedBo> postList;
 }

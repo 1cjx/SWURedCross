@@ -18,5 +18,7 @@ public class AddActivityDto {
     private String theme;
     private Date beginDate;
     private Date endDate;
+    private String qrCodeUrl;
+    private String groupAccount;
     private List<AddActivityAssignmentDto> activityAssignmentList;
 }

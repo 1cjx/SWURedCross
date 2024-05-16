@@ -90,7 +90,8 @@ public class LogAspect {
         if(!SystemLog.businessName().equals("上传头像")&&
                 !SystemLog.businessName().equals("通过模板excel数据批量新增用户")&&
                 !SystemLog.businessName().contains("导出")&&
-                !SystemLog.businessName().equals("生成活动详情二维码")) {
+                !SystemLog.businessName().equals("生成活动详情二维码")&&
+        !SystemLog.businessName().equals("上传图片")) {
             // 打印请求入参
             logger.append("Request Args   :"+JSON.toJSONString(joinPoint.getArgs())).append("\n");
 //            log.info("Request Args   : {}", JSON.toJSONString(joinPoint.getArgs()));

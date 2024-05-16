@@ -1,10 +1,11 @@
 package com.jx.domain.bo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Data
 @AllArgsConstructor
@@ -17,6 +18,7 @@ public class EmailInfoBo {
     String endTime;
     String postName;
     String locationName;
-    String imgUrl;
+    String qrCodeUrl;
+    String groupAccount;
     String activityTypeName;
 }

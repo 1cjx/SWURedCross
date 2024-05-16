@@ -33,7 +33,7 @@
           AND s.`user_id` = #{userId}  AND aa.`del_flag` = 0
     </select>
     <select id="getEmailInfoByPostAssignmentId" resultType="com.jx.domain.bo.EmailInfoBo">
-        SELECT a.`name` AS activityName,aa.`time` AS activityDate,ts.`begin_time`,ts.`end_time`,p.name AS postName,l.`name` AS locationName,aat.`name` AS activityTypeName
+        SELECT a.`name` AS activity_name,aa.`time` AS activity_date,ts.`begin_time`,ts.`end_time`,p.name AS postName,l.`name` AS location_name,aat.`name` AS activity_type_name,aa.group_account,aa.qr_code_url
         FROM t_post_assignment ps
                  LEFT JOIN t_activity_assignment aa ON ps.`activity_assignment_id` = aa.`id`
                  LEFT JOIN t_activity a ON a.id = aa.`activity_id`

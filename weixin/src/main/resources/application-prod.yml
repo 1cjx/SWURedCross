@@ -36,7 +36,7 @@ spring:
     content-type: text/html
     charset: utf-8
     cache: false
-    template-loader-path: classpath:/templates/freemarker/     # 模板存放处
+    template-loader-path: classpath:/template/freemarker/     # 模板存放处
     check-template-location: true
   servlet:
     multipart:

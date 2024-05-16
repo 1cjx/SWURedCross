@@ -37,6 +37,8 @@ public class ActivityAssignment  {
     private Date time;
     private String status;
     private Long typeId;
+    private String qrCodeUrl;
+    private String groupAccount;
     @TableField(fill = FieldFill.INSERT)
     private Long createBy;
     @TableField(fill = FieldFill.INSERT)

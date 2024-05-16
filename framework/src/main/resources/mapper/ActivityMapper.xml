@@ -64,7 +64,7 @@
         ORDER BY nums DESC
     </select>
     <select id="getActivityAssignmentInfoBo" resultType="com.jx.domain.bo.ActivityAssignmentInfoBo">
-        SELECT aa.id AS id,ts.`begin_time`,ts.`end_time`,ts.`id` AS timeSlotId,l.`name` AS locationName,l.`id` AS locationId,aa.time,aa.`status`,aat.`name` AS typeName ,aat.`id` AS typeId
+        SELECT aa.id AS id,ts.`begin_time`,ts.`end_time`,ts.`id` AS timeSlotId,l.`name` AS locationName,l.`id` AS locationId,aa.time,aa.`status`,aat.`name` AS typeName ,aat.`id` AS typeId,aa.qr_code_url,aa.group_account
         FROM t_activity_assignment aa LEFT JOIN t_location l ON l.id = aa.`location_id` LEFT JOIN t_time_slot ts ON ts.id = aa.`time_slot_id` LEFT JOIN t_activity_assignment_type aat ON aat.id = aa.`type_id`
         WHERE aa.id IN(
             SELECT aa.`id`

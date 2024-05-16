@@ -35,10 +35,9 @@ public class FreemarkerUtils{
      */
     public String getTemplate(Map<String,Object> maps){
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_0);
-        cfg.setClassForTemplateLoading(FreemarkerUtils.class,"/templates/freemarker");
+        cfg.setClassForTemplateLoading(FreemarkerUtils.class,"/template/freemarker");
         try {
             Template template = cfg.getTemplate("index.ftl");
-            System.err.println(maps);
             return FreeMarkerTemplateUtils.processTemplateIntoString(template, maps);
         }catch (Exception e){
             e.printStackTrace();
@@ -53,10 +52,6 @@ public class FreemarkerUtils{
         //班次日期+时间+地点+岗位
         EmailInfoBo emailInfoBo = activityAssignmentMapper.getEmailInfoByPostAssignmentId(scheduled.getPostAssignmentId());
         emailInfoBo.setUserName(user.getName());
-        //TODO 工作群二维码
-        //TODO 注意事项word
-
-        System.err.println(emailInfoBo);
         //封装
         dataModels.put("emailInfo",emailInfoBo);
         return dataModels;

@@ -124,7 +124,6 @@ public class HttpClientUtil {
 			long execStart = System.currentTimeMillis();
 			response = httpClient.execute(httpPost);
 			long execEnd = System.currentTimeMillis();
-			System.out.println("=================执行post请求耗时："+(execEnd-execStart)+"ms");
 			long getStart = System.currentTimeMillis();
 			entity = response.getEntity();
 			responseContent = EntityUtils.toString(entity, "UTF-8");

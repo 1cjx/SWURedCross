@@ -69,7 +69,6 @@ public class WeiXinLoginServiceImpl implements WeiXinLoginService {
             user.setIsBind(SystemConstants.USER_IS_BINDING);
             user.setLastlogindate(new Date());
             user.setRegisterdate(new Date());
-            System.out.println("插入成功");
             userService.updateById(user);
             //利用jwt生成token返回到前端
             String token = JwtUtil.createJWT(user.getId().toString());

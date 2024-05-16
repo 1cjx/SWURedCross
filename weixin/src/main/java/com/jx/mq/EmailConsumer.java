@@ -57,6 +57,7 @@ public class EmailConsumer {
         email.setTo(tos);
         //2.获取邮件内容
         Map<String, Object> dataModels = freemarkerUtils.getDataModels(scheduled);
+        System.out.println(dataModels);
         String template = freemarkerUtils.getTemplate(dataModels);
         //3.发送模板邮件
         mailUtils.sendHtmlMail(tos,"西南大学红十字会志愿服务活动报名成功通知",template);
