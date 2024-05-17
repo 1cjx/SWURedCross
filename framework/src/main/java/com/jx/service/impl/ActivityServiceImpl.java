@@ -15,6 +15,8 @@ import com.jx.mapper.*;
 import com.jx.service.*;
 import com.jx.utils.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.script.DefaultRedisScript;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
@@ -70,6 +72,8 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     SignInMapper signInMapper;
     @Autowired
     EmailService emailService;
+    @Autowired
+    RedisTemplate redisTemplate;
 
     /**
      * 获取活动列表
@@ -147,9 +151,9 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         //报名
         if(doSecKill(addScheduledDto.getUserId(),addScheduledDto.getPostAssignmentId())){
             scheduledService.save(scheduled);
+            //报名成功 发送邮件
+            emailService.sendEmail(scheduled);
         }
-        //报名成功 发送邮件
-        emailService.sendEmail(scheduled);
         return ResponseResult.okResult();
     }
 
@@ -566,38 +570,41 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         redisCache.deleteObject(key+":qt");
         redisCache.deleteObject(key+":user");
     }
+
+    static String secKillScript =
+            "local userid=KEYS[1];\r\n" +
+                    "local prodid=KEYS[2];\r\n" +
+                    "local qtkey='sk:'..prodid..\":qt\";\r\n" +
+                    "local usersKey='sk:'..prodid..\":user\"\r\n" +
+                    "local userExists=redis.call(\"sismember\",usersKey,userid);\r\n" +
+                    "if tonumber(userExists)==1 then \r\n" +
+                    "   return 2;\r\n" +
+                    "end\r\n" +
+                    "local num= redis.call(\"get\" ,qtkey);\r\n" +
+                    "if tonumber(num)<=0 then \r\n" +
+                    "   return 0;\r\n" +
+                    "else \r\n" +
+                    "   redis.call(\"decr\",qtkey);\r\n" +
+                    "   redis.call(\"sadd\",usersKey,userid);\r\n" +
+                    "end\r\n" +
+                    "return 1" ;
     public boolean doSecKill(Long userId, Long postAssignmentId)  {
         //非空判断
         if (Objects.isNull(userId) || Objects.isNull(postAssignmentId)) {
             throw new SystemException(AppHttpCodeEnum.PARAM_NOT_NULL);
         }
-
-        //3 拼接key
-        // 3.1 库存key
-        String kcKey = "sk:" + postAssignmentId + ":qt";
-        // 3.2 秒杀成功用户key
-        String userKey = "sk:" + postAssignmentId + ":user";
-
-        //4 获取库存，如果库存null，秒杀还没有开始
-        if (Objects.isNull(redisCache.getCacheObject(kcKey))) {
+        DefaultRedisScript redisScript = new DefaultRedisScript<>();
+        redisScript.setScriptText(secKillScript);
+        redisScript.setResultType(Long.class);
+        String result = redisTemplate.execute(redisScript, Arrays.asList(userId.toString(), postAssignmentId.toString())).toString();
+        if ("0".equals( result )  ) {
+            throw new SystemException(AppHttpCodeEnum.KILL_PASS);
+        }else if("1".equals( result )  )  {
+            return true;
+        }else if("2".equals( result )  )  {
+            throw new SystemException(AppHttpCodeEnum.REQUEST_AGAIN);
+        }else {
             throw new SystemException(AppHttpCodeEnum.KILL_NOT_START);
         }
-        int kc = redisCache.getCacheObject(kcKey) ;
-        // 5 判断用户是否重复秒杀操作
-        if (redisCache.isMember(userKey,String.valueOf(userId))) {
-            throw new SystemException(AppHttpCodeEnum.REQUEST_AGAIN);
-        }
-
-        //6 判断如果商品数量，库存数量小于1，秒杀结束
-        if (kc <= 0) {
-            throw new SystemException(AppHttpCodeEnum.KILL_PASS);
-        }
-
-        //7 秒杀过程
-        //7.1 库存-1
-        redisCache.decrementCount(kcKey,1L);
-        //7.2 把秒杀成功用户添加清单里面
-        redisCache.addMember(userKey,String.valueOf(userId));
-        return true;
     }
 }

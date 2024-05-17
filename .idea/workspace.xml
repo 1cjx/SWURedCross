@@ -4,28 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="修改了发送人邮箱与admin主页的排行榜接口">
+    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="新增了活动班次的工作群二维码">
+      <change afterPath="$PROJECT_DIR$/weixin/src/test/java/SecKillTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UploadController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/aspect/LogAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/aspect/LogAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bo/ActivityAssignmentInfoBo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bo/ActivityAssignmentInfoBo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bo/EmailInfoBo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bo/EmailInfoBo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddActivityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/AddActivityDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/UpdateActivityAssignmentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/UpdateActivityAssignmentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/ActivityAssignment.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/ActivityAssignment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityDetailForAdminVo.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ActivityDetailForAdminVo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/OssUploadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/OssUploadService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/FreemarkerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/FreemarkerUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/HttpClientUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/HttpClientUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityAssignmentMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityAssignmentMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/templates/freemarker/index.ftl" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,40 +84,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelOrder2": "2",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RequestMappingsPanelWidth2": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "deletionFromPopupRequiresConfirmation": "false",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "last_opened_file_path": "D:/CCJX/项目/RedCross/weixin/src/main/resources/template/img",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "模块",
-    "project.structure.proportion": "0.15234375",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "spring.configuration.checksum": "a3896cfa970c5ad8b3818d9e3284c6e4",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelOrder2&quot;: &quot;2&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth2&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/项目/RedCross/weixin/src/main/resources/template/img&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;a3896cfa970c5ad8b3818d9e3284c6e4&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -163,6 +149,15 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.WeiXinApplication">
+    <configuration name="SecKillTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="weixin" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="SecKillTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -192,6 +187,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.SecKillTest" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -459,7 +459,8 @@
       <workItem from="1715783838007" duration="4955000" />
       <workItem from="1715824946589" duration="2789000" />
       <workItem from="1715842147279" duration="2526000" />
-      <workItem from="1715850080034" duration="8899000" />
+      <workItem from="1715850080034" duration="9215000" />
+      <workItem from="1715913056383" duration="14503000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -545,7 +546,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715781778731</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="新增了活动班次的工作群二维码">
+      <created>1715875039451</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1715875039451</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -573,7 +581,8 @@
     <MESSAGE value="修改了部分活动报名时的逻辑判断" />
     <MESSAGE value="修改了部分小bug,添加了yml版本管理" />
     <MESSAGE value="修改了发送人邮箱与admin主页的排行榜接口" />
-    <option name="LAST_COMMIT_MESSAGE" value="修改了发送人邮箱与admin主页的排行榜接口" />
+    <MESSAGE value="新增了活动班次的工作群二维码" />
+    <option name="LAST_COMMIT_MESSAGE" value="新增了活动班次的工作群二维码" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
