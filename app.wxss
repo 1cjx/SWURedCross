@@ -1,15 +1,4 @@
 /**app.wxss**/
-<<<<<<< HEAD
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding: 200rpx 0;
-  box-sizing: border-box;
-} 
-=======
 /* 初始化全局样式 */
 page,text,view,swiper-item,image,navigator {
   padding:0;
@@ -26,4 +15,3 @@ page{
 image{
   width:100%;
 }
->>>>>>> m1

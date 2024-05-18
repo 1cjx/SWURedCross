@@ -1,18 +1,4 @@
 {
-<<<<<<< HEAD
-  "pages":[
-    "pages/index/index"
-  ],
-  "window":{
-    "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "月影重工",
-    "navigationBarTextStyle":"black"
-  },
-  "style": "v2",
-  "sitemapLocation": "sitemap.json"
-}
-=======
     "pages": [
         "pages/home/index",
         "pages/activity/activity_index/activity_index",
@@ -82,4 +68,3 @@
     "sitemapLocation": "sitemap.json",
     "lazyCodeLoading": "requiredComponents"
 }
->>>>>>> m1

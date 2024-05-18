@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-App({
-  onLaunch(){
-
-  },
-  globalData:{
-    
-  }
-})
-=======
 // app.js
 App({
   onLaunch() {
@@ -27,4 +17,3 @@ App({
     userInfo: null
   },
 })
->>>>>>> m1

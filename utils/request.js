@@ -1,8 +1,8 @@
 // 定义请求根路径baseUrl
 // const baseUrl = "http://127.0.0.1:4523/m1/3238345-0-default";
 
-const baseUrl = "http://www.heping.fun:7777";
-// const baseUrl = "http://localhost:7777";
+// const baseUrl = "http://124.70.136.242:7777";
+const baseUrl = "http://localhost:7777";
 //同时并发请求的次数
 let ajaxTimes = 0;
 /**
