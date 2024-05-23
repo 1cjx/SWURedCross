@@ -17,7 +17,10 @@
         "pages/login/index",
         "pages/search/index",
         "pages/bind/index",
-        "pages/register/index"
+        "pages/register/index",
+        "pages/authorize/index",
+        "pages/protocol/index",
+        "pages/privatepolicy/index"
     ],
     "window": {
         "backgroundTextStyle": "dark",

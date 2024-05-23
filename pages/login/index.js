@@ -22,49 +22,10 @@ Page({
     // })
   },
   onlogin(){
-    this.isLogin()
-  },
-async isLogin(){
-      wx.showModal({
-          title: '友情提示',
-          content: '微信授权登陆',
-          complete: async (res) => {
-              if (res.confirm) {
-                  await getWxLogin().then(async (res)=>{
-                      let loginParam={
-                          code:res.code,
-                      }
-                      await this.wxlogin(loginParam);
-                  })
-                  if(this.data.isbinding===0){
-                      console.log("当前微信未绑定")
-                      wx.redirectTo({
-                        url: '/pages/bind/index',
-                      })
-                  }else{
-                      wx.switchTab({
-                        url: '/pages/home/index'
-                      })
-                  } 
-              }
-          }
-        })
-},
-async wxlogin(loginParam){
-    const result = await request({url:"/weixin/login",data:loginParam,method:"post"});
-    console.log(result)
-    if(result.code===200){
-        const token = result.data;
-        wx.setStorageSync('token', token);
-    }
-    //微信用户与角色绑定
-    if(Object.keys(loginParam).length==1&&result.code===200){
-        this.setData({
-            isbinding:1
-        })
-    }
-},
-  
+    wx.navigateTo({
+      url: '/pages/authorize/index',
+    })
+  },  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

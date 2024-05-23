@@ -1,0 +1,236 @@
+.body {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+.tipTitleContain {
+  width: 100%;
+  height: 20vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20rpx;
+  align-items: center;
+  justify-content: center;
+}
+.tipTitleContain .tipTitle {
+  width: 80%;
+}
+.tipTitleContain .tipTitle .tipPic {
+  width: 100%;
+  height: 10vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5vw 0 6vw;
+  margin-bottom: 15rpx;
+}
+.tipTitleContain .tipTitle .tipPic .tipRound {
+  width: 10vw;
+  height: 10vw;
+  font-size: 30rpx;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.tipTitleContain .tipTitle .tipPic .tipRoundIn {
+  background-image: linear-gradient(to right, #ee3e3e, #d86518);
+  color: white;
+}
+.tipTitleContain .tipTitle .tipPic .tipRoundOut {
+  background-color: #cecfce;
+  color: #131212;
+}
+.tipTitleContain .tipTitle .tipPic .dotLine {
+  width: 13vw;
+  border-top: grey dashed 1px;
+}
+.tipTitleContain .tipTitle .tipText {
+  width: 100%;
+  height: 30rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.tipTitleContain .tipTitle .tipText .tipWord {
+  width: 25%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+.confirmContain {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.confirmContain label {
+  color: #73cc98;
+}
+.loginContain {
+  width: 100%;
+  margin-top: 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.loginContain .Login {
+  width: 90%;
+  height: 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20rpx;
+  font-size: 28rpx;
+  color: #7c7979;
+  border-radius: 70rpx;
+  background-color: #f0f0f0;
+}
+.loginContain .accessLogin {
+  color: #f1ecec;
+  background-image: linear-gradient(to right, #ee3e3e, #d86518);
+}
+.loginContain .disableLogin {
+  color: #7c7979;
+  background-color: #f0f0f0;
+}
+.errTip {
+  width: 50%;
+  height: 50rpx;
+  color: red;
+}
+.user_bind {
+  margin: auto;
+  padding: 30rpx;
+  background-color: #f0f0f0;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.user_bind .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 44rpx;
+}
+.user_bind .user_info {
+  height: 8vh;
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  display: flex;
+  align-items: center;
+  width: 85%;
+}
+.user_bind .user_info input {
+  border-bottom: #292929 solid 1px;
+  width: 67%;
+}
+.user_bind .user_info image {
+  width: 5vw;
+  height: 5vw;
+}
+.user_bind #id {
+  margin-top: 4vh;
+}
+.user_bind .tips {
+  margin: auto;
+  height: 45rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10rpx;
+  font-size: 40rpx;
+}
+.user_bind .bind {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 20rpx;
+}
+.user_bind .bind button {
+  margin-bottom: 5rpx;
+}
+.user_bind .bind text {
+  width: 100%;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+}
+.user_register {
+  margin: auto;
+  padding: 30rpx;
+  height: 70vh;
+  background-color: #f0f0f0;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.user_register .title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 44rpx;
+  margin-bottom: 2vh;
+}
+.user_register .user_info {
+  font-size: 33rpx;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  height: 8vh;
+}
+.user_register .user_info text {
+  min-width: 20%;
+}
+.user_register .user_info input {
+  width: 67%;
+  border-bottom: grey solid 1px;
+}
+.user_register .user_info image {
+  width: 5vw;
+  height: 5vw;
+}
+.user_register .sex {
+  font-size: 33rpx;
+  width: 85%;
+  display: flex;
+  align-items: center;
+  height: 8vh;
+}
+.user_register .sex text {
+  min-width: 20%;
+}
+.user_register .sex radio {
+  margin-right: 20rpx;
+}
+.user_register .sex .wx-radio-input {
+  width: 25rpx;
+  height: 25rpx;
+  border-radius: 50%;
+  border: 2rpx solid #0e0d0d;
+  background: transparent;
+}
+.user_register .sex .wx-radio-input.wx-radio-input-checked {
+  width: 25rpx;
+  height: 25rpx;
+  border: 2rpx solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white !important;
+}
+.user_register .sex .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 15rpx;
+  height: 15rpx;
+  color: transparent;
+  background: #4b4b4b;
+  transform: translate(-50%, -50%) scale(1);
+}
+.user_register button {
+  margin-top: 30rpx;
+}

@@ -1,0 +1,241 @@
+.body{
+    min-height: 100vh;
+    background-color: rgb(250, 250, 250);
+}
+.tipTitleContain{
+    width: 100%;
+    height: 20vh;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20rpx;
+    align-items: center;
+    justify-content: center;
+    .tipTitle{
+        width: 80%;
+        .tipPic{
+            width: 100%;
+            height:10vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:0 5vw 0 6vw;
+            margin-bottom: 15rpx;
+            .tipRound{
+                width: 10vw;
+                height: 10vw;
+                font-size: 30rpx;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            .tipRoundIn{
+                background-image: linear-gradient(to right,rgb(238, 62, 62),rgb(216, 101, 24));
+                // background-color: rgb(20, 182, 20);
+                color: white;
+            }
+            .tipRoundOut{
+                background-color: rgb(206, 207, 206);
+                color: rgb(19, 18, 18);
+            }
+            .dotLine{
+                width: 13vw;
+                // height: 0;
+                border-top: grey dashed 1px;
+            }
+        }
+        .tipText{
+            width: 100%;
+            height:30rpx;
+            display: flex;
+            justify-content: space-between;
+            .tipWord{
+                width: 25%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 28rpx;
+            }
+        }
+    }
+}
+.confirmContain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    label{
+        color: #73cc98;
+    }
+}
+.loginContain{
+    width: 100%;
+    margin-top:30rpx;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    .Login{
+        width:90%;
+        height:10vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20rpx;
+        font-size: 28rpx;
+        color: rgb(124, 121, 121);
+        border-radius: 70rpx;
+        background-color: rgb(240, 240, 240);
+    }
+    .accessLogin{
+        color: rgb(241, 236, 236);
+        background-image: linear-gradient(to right,rgb(238, 62, 62),rgb(216, 101, 24));
+        // background-color: #32b65e;
+    }
+    .disableLogin{
+        color: rgb(124, 121, 121);
+        background-color: rgb(240, 240, 240);
+    }
+}
+.errTip{
+    width: 50%;
+    height:50rpx;
+    color: red;
+}
+.user_bind{
+    margin: auto;
+    padding: 30rpx;
+    background-color: rgb(240, 240, 240);
+    width:80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .title{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width:100%;
+        font-size: 44rpx;
+    }
+    .user_info{
+        height: 8vh;
+        margin-top: 20rpx;
+        font-size: 36rpx;
+        display: flex;
+        align-items: center;
+        width:85%;
+        input{
+            border-bottom: rgb(41, 41, 41) solid 1px;
+            width: 67%;
+        }
+        image{
+            width:5vw;
+            height:5vw;
+        }
+    }
+    #id{
+        margin-top: 4vh;
+    }
+    .tips{
+        margin: auto;
+        height:45rpx;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding-bottom: 10rpx;
+        font-size: 40rpx;
+    }
+    .bind{
+        width:100%;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20rpx;
+        button{
+            margin-bottom: 5rpx;
+        }
+        text{
+            width: 100%;
+            font-size: 32rpx;
+            display: flex;
+            justify-content: center;
+        }
+    }
+}
+.user_register{
+    margin: auto;
+    padding: 30rpx;
+    height:70vh;
+    background-color: rgb(240, 240, 240);
+    width:80%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    .title{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        font-size: 44rpx;
+        margin-bottom: 2vh;
+    }
+    .user_info{
+        font-size: 33rpx;
+        width:85%;
+        display: flex;
+        align-items: center;
+        height:8vh;
+        text{
+            min-width:20%;
+        }
+        input{
+            width:67%;
+            border-bottom: grey solid 1px;
+        }
+        image{
+            width: 5vw;
+            height: 5vw;
+        }
+    }
+    .sex{
+        //border: greenyellow solid 1px;
+        font-size: 33rpx;
+        width:85%;
+        display: flex;
+        align-items: center;
+        height: 8vh;
+        text{
+            min-width:20%;
+        }
+        radio{
+            margin-right: 20rpx;
+        }
+        .wx-radio-input {
+            width: 25rpx;
+            height: 25rpx;
+            border-radius: 50%;
+            border: 2rpx solid rgb(14, 13, 13);
+            background: transparent;
+        }
+        .wx-radio-input.wx-radio-input-checked {
+            width: 25rpx;
+            height: 25rpx;
+            border: 2rpx solid rgb(0, 0, 0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white !important;
+          }
+        
+          .wx-radio-input.wx-radio-input-checked::before {
+            border-radius: 50%;
+            width: 15rpx;
+            height: 15rpx;
+            color: transparent;
+            background: rgb(75, 75, 75);
+            transform: translate(-50%, -50%) scale(1);
+          }
+    }
+    button{
+        margin-top: 30rpx;
+    }
+}

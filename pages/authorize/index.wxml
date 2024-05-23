@@ -1,0 +1,130 @@
+<!--pages/authorize/index.wxml-->
+<view class="body">
+    <view class="tipTitleContain">
+        <view class="tipTitle">
+            <view class="tipPic">
+            <view class="tipRound {{tipNum==1?'tipRoundIn':'tipRoundOut'}}" bindtap="backAuth">
+                1
+            </view>
+            <view class="dotLine"></view>
+            <view class="tipRound {{tipNum==2?'tipRoundIn':'tipRoundOut'}}" bindtap="backBind">
+                2
+            </view>
+            <view class="dotLine"></view>
+            <view class="tipRound {{tipNum==3?'tipRoundIn':'tipRoundOut'}}">
+                3
+            </view>
+        </view>
+        <view class="tipText">
+            <view class="tipWord">
+                微信授权
+            </view>
+            <view class="tipWord">
+                志愿者绑定
+            </view>
+            <view class="tipWord">
+                志愿者注册
+            </view>
+        </view>
+        </view>
+    </view>
+    <view class="confirmContain" wx:if="{{tipNum==1}}">
+        <checkbox-group bindchange="checkboxChange">
+            <checkbox/>
+            我已阅读并同意
+            <label bindtap="toProtocol">
+                《用户协议》
+            </label>
+            <label bindtap="toPrivate">
+                《隐私政策》
+            </label>
+        </checkbox-group>
+    </view>
+    <view class="loginContain" wx:if="{{tipNum==1}}">
+        <view class="Login {{loginDisabled?'disableLogin':'accessLogin'}}" bindtap="login">授权登录</view>
+        <view class="Login" bindtap="notLogin" bindtap="canLogin">取消登录</view>
+    </view>
+
+    <!---->
+    
+    <view class="user_bind" wx:if="{{tipNum==2}}">
+        <view class="title">
+            志愿者绑定
+        </view>
+        <view class="user_info" id="id">
+            <text>学号：</text>
+            <input type="text" model:value="{{userId}}" placeholder="" bindinput="getId"></input>
+            <image hidden="{{!isUserIdFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="0"></image>
+        </view>
+        <view class="errTip">
+            {{err_Id}}
+        </view>
+        <view class="user_info" id="name">
+            <text>姓名：</text>
+            <input type="text" model:value="{{userName}}" placeholder="" bindinput="getUserName"></input>
+            <image hidden="{{!isUserNameFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="1"></image>
+        </view>
+        <view class="errTip">
+            {{err_Name}}
+        </view>
+        <view class="bind">
+            <button bindtap="onBind">绑定</button>
+        </view>
+    </view>
+
+    <!---->
+
+    <view class="user_register" wx:if="{{tipNum==3}}">
+        <view class="title">
+            志愿者注册
+        </view>
+        <view class="user_info">
+            <text>学号:</text>
+            <input type="text" model:value="{{userId}}" placeholder="" bindinput="getId" class="userId" ></input>
+            <image hidden="{{!isUserIdFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="0"></image>
+        </view>
+        <view class="errTip">
+            {{err_Id}}
+        </view>
+        <view class="user_info">
+            <text>姓名:</text>
+            <input type="text" model:value="{{userName}}" placeholder="" bindinput="getUserName" class="userName" ></input>
+            <image hidden="{{!isUserNameFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="1"></image>
+        </view>
+        <view class="errTip">
+            {{err_Name}}
+        </view>
+        <view class="sex">
+            <text>性别:</text>
+            <radio-group bindchange="handleChange">
+                <radio value="male" checked="{{sex=='1'}}">男</radio>
+                <radio value="female" checked="{{sex=='2'}}">女</radio>
+            </radio-group>
+        </view>
+        <view class="user_info">
+            <text>电话:</text>
+            <input type="text" model:value="{{phone}}" placeholder="" bindinput="getPhone" class="phone" ></input>
+            <image hidden="{{!isPhoneFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="2"></image>
+        </view>
+        <view class="errTip">
+            {{err_Phone}}
+        </view>
+        <view class="user_info">
+            <text>QQ:</text>
+            <input type="text" model:value="{{qq}}" placeholder="" bindinput="getQ" class="qq" ></input>
+            <image hidden="{{!isQFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="3"></image>
+        </view>
+        <view class="errTip">
+            {{err_Q}}
+        </view>
+        <view class="user_info">
+            <text>邮箱:</text>
+            <input type="text" model:value="{{email}}" placeholder="" bindinput="getEmail" class="email" ></input>
+            <image hidden="{{!isEmailFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="4"></image>
+        </view>
+        <view class="errTip">
+            {{err_Email}}
+        </view>
+        <button bindtap="onIdent">注册认证</button>
+    </view>
+</view>
