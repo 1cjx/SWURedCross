@@ -4,14 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="新增了活动班次的工作群二维码">
-      <change afterPath="$PROJECT_DIR$/weixin/src/test/java/SecKillTest.java" afterDir="false" />
+    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/___.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/___1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]1/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/exception/GlobalExceptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,11 +67,6 @@
     </option>
     <option name="enabledProfiles">
       <list>
-        <option value="test" />
-      </list>
-    </option>
-    <option name="disabledProfiles">
-      <list>
         <option value="prod" />
       </list>
     </option>
@@ -98,7 +96,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/项目/RedCross/weixin/src/main/resources/template/img&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/学习/大三下/实习/ChinaSoft/3.前端源码、后端源码、硬件源码、可运行文件/后端/backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -108,7 +106,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15234375&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;Docker&quot;,
     &quot;spring.configuration.checksum&quot;: &quot;a3896cfa970c5ad8b3818d9e3284c6e4&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
@@ -149,15 +147,6 @@
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.WeiXinApplication">
-    <configuration name="SecKillTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="weixin" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="SecKillTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -187,11 +176,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="JUnit.SecKillTest" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -460,7 +444,26 @@
       <workItem from="1715824946589" duration="2789000" />
       <workItem from="1715842147279" duration="2526000" />
       <workItem from="1715850080034" duration="9215000" />
-      <workItem from="1715913056383" duration="14503000" />
+      <workItem from="1715913056383" duration="14769000" />
+      <workItem from="1715994900453" duration="7412000" />
+      <workItem from="1716044292396" duration="1234000" />
+      <workItem from="1716088813986" duration="2557000" />
+      <workItem from="1716203521629" duration="2730000" />
+      <workItem from="1716282749408" duration="628000" />
+      <workItem from="1716379730527" duration="2000" />
+      <workItem from="1716429945284" duration="2902000" />
+      <workItem from="1716434632597" duration="966000" />
+      <workItem from="1716443818951" duration="5293000" />
+      <workItem from="1716451642385" duration="2000" />
+      <workItem from="1716898817221" duration="2000" />
+      <workItem from="1717035523360" duration="764000" />
+      <workItem from="1719452976451" duration="626000" />
+      <workItem from="1720003137321" duration="2659000" />
+      <workItem from="1720012316561" duration="1159000" />
+      <workItem from="1720057983331" duration="1514000" />
+      <workItem from="1720168345119" duration="1378000" />
+      <workItem from="1720195218405" duration="442000" />
+      <workItem from="1720273746995" duration="1348000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -553,7 +556,14 @@
       <option name="project" value="LOCAL" />
       <updated>1715875039451</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题">
+      <created>1715929362313</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1715929362313</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -582,7 +592,8 @@
     <MESSAGE value="修改了部分小bug,添加了yml版本管理" />
     <MESSAGE value="修改了发送人邮箱与admin主页的排行榜接口" />
     <MESSAGE value="新增了活动班次的工作群二维码" />
-    <option name="LAST_COMMIT_MESSAGE" value="新增了活动班次的工作群二维码" />
+    <MESSAGE value="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题" />
+    <option name="LAST_COMMIT_MESSAGE" value="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

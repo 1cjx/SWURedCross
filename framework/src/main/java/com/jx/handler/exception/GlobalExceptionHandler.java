@@ -4,6 +4,7 @@ import com.jx.domain.ResponseResult;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -19,7 +20,10 @@ public class GlobalExceptionHandler {
 
 
     @ExceptionHandler(Exception.class)
-    public ResponseResult exceptionHandler(Exception e){
+    public ResponseResult exceptionHandler(Exception e) throws Exception {
+        if(e instanceof AccessDeniedException){
+            throw e;
+        }
         //从异常对象中获取提示信息封装返回
         log.error("Error Reason   : {}",e);
         return ResponseResult.errorResult(AppHttpCodeEnum.SYSTEM_ERROR.getCode(),e.getMessage());
