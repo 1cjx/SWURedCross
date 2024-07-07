@@ -156,7 +156,6 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         }
         return ResponseResult.okResult();
     }
-
     @Override
     @Transactional
     public ResponseResult cancelSchedule(AddScheduledDto addScheduledDto) {
@@ -171,17 +170,18 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         else if(num<=0){
             throw new SystemException(AppHttpCodeEnum.THIS_MONTH_CANCEL_NUMBER_RUN_OUT);
         }
-        redisCache.decrementCount("cancelSchedule:"+userId,1L);
         // 库存key
         String kcKey = "sk:" + postAssignmentId + ":qt";
         // 秒杀成功用户key
         String userKey = "sk:" + postAssignmentId + ":user";
+        //取消次数减一
+        redisCache.decrementCount("cancelSchedule:" + userId, 1L);
         // 库存+1
-        redisCache.addCount(kcKey,1L);
+        redisCache.addCount(kcKey, 1L);
         // 用户从清单里面删除
-        redisCache.deleteMember(userKey,String.valueOf(userId));
+        redisCache.deleteMember(userKey, String.valueOf(userId));
         //从数据库中删除信息
-        Scheduled scheduled = BeanCopyUtils.copyBean(addScheduledDto,Scheduled.class);
+        Scheduled scheduled = BeanCopyUtils.copyBean(addScheduledDto, Scheduled.class);
         scheduled.setUserId(userId);
         scheduledMapper.remove(scheduled);
         return ResponseResult.okResult();
@@ -572,20 +572,22 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
     }
 
     static String secKillScript =
-            "local userid=KEYS[1];\r\n" +
-                    "local prodid=KEYS[2];\r\n" +
-                    "local qtkey='sk:'..prodid..\":qt\";\r\n" +
-                    "local usersKey='sk:'..prodid..\":user\"\r\n" +
-                    "local userExists=redis.call(\"sismember\",usersKey,userid);\r\n" +
+            "local tempUserId=KEYS[1];\r\n" +
+            "local userId = '\"' .. tempUserId .. '\"';\r\n" +
+
+                    "local prodId=KEYS[2];\r\n" +
+                    "local qtKey='sk:'..prodId..\":qt\";\r\n" +
+                    "local usersKey='sk:'..prodId..\":user\"\r\n" +
+                    "local userExists=redis.call(\"sismember\",usersKey,userId);\r\n" +
                     "if tonumber(userExists)==1 then \r\n" +
                     "   return 2;\r\n" +
                     "end\r\n" +
-                    "local num= redis.call(\"get\" ,qtkey);\r\n" +
+                    "local num= redis.call(\"get\" ,qtKey);\r\n" +
                     "if tonumber(num)<=0 then \r\n" +
                     "   return 0;\r\n" +
                     "else \r\n" +
-                    "   redis.call(\"decr\",qtkey);\r\n" +
-                    "   redis.call(\"sadd\",usersKey,userid);\r\n" +
+                    "   redis.call(\"decr\",qtKey);\r\n" +
+                    "   redis.call(\"sadd\",usersKey,userId);\r\n" +
                     "end\r\n" +
                     "return 1" ;
     public boolean doSecKill(Long userId, Long postAssignmentId)  {
