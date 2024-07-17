@@ -1,8 +1,7 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
-import com.jx.domain.dto.AddLocationDto;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddPostDto;
 import com.jx.service.PostService;
 import io.swagger.annotations.Api;

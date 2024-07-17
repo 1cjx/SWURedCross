@@ -2,7 +2,7 @@ package com.jx.mq;
 
 import com.alibaba.fastjson.JSONObject;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.entity.Email;
+import com.jx.domain.bean.Email;
 import com.jx.domain.entity.Scheduled;
 import com.jx.domain.entity.User;
 import com.jx.service.ScheduledService;

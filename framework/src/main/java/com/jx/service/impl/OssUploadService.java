@@ -1,7 +1,7 @@
 package com.jx.service.impl;
 
 import com.google.gson.Gson;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import com.jx.service.UploadService;

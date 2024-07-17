@@ -1,6 +1,7 @@
-package com.jx.domain.entity;
+package com.jx.domain.bean;
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.jx.domain.entity.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

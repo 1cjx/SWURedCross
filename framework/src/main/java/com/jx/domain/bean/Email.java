@@ -1,4 +1,4 @@
-package com.jx.domain.entity;
+package com.jx.domain.bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

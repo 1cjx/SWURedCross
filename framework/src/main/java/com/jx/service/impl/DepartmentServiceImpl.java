@@ -4,13 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddDepartmentDto;
-import com.jx.domain.dto.AddUserDto;
 import com.jx.domain.dto.ListDepartmentDto;
 import com.jx.domain.entity.Department;
-import com.jx.domain.entity.Location;
-import com.jx.domain.entity.Post;
 import com.jx.domain.entity.User;
 import com.jx.domain.vo.DepartmentVo;
 import com.jx.domain.vo.PageVo;
@@ -20,7 +17,6 @@ import com.jx.mapper.DepartmentMapper;
 import com.jx.service.DepartmentService;
 import com.jx.service.UserService;
 import com.jx.utils.BeanCopyUtils;
-import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,7 +24,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * (Department)表服务实现类

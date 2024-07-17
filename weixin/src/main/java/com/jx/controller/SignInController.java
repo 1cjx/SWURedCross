@@ -1,11 +1,10 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddSignInDto;
 import com.jx.service.SignInService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -1,14 +1,13 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddActivityDto;
 import com.jx.domain.dto.ChangeActivityStatusDto;
 import com.jx.domain.dto.ListActivityDto;
 import com.jx.domain.dto.UpdateActivityDto;
 import com.jx.service.ActivityService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +23,12 @@ public class ActivityController {
     @PreAuthorize("@ps.hasPermission('content:activity:query')")
     public ResponseResult listActivity(Long pageSize, Long pageNum, ListActivityDto listActivityDto){
         return activityService.listActivity(pageSize,pageNum,listActivityDto);
+    }
+    @GetMapping("/getChatActivityList")
+    @SystemLog(businessName = "查询chat可供选择的活动",type="2")
+    @PreAuthorize("@ps.hasPermission('content:chat:queryActvity')")
+    public ResponseResult getChatActivityList(Long pageNum, Long pageSize, ListActivityDto listActivityDto){
+        return activityService.getChatActivityList(pageNum,pageSize,listActivityDto);
     }
     @GetMapping("/{id}")
     @SystemLog(businessName = "查询选中活动详情信息",type="2")

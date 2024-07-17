@@ -1,18 +1,15 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
-import com.jx.domain.dto.AddPostDto;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddTimeSlotDto;
 import com.jx.domain.dto.ListTimeSlotDto;
 import com.jx.service.TimeSlotService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.xml.ws.Response;
 import java.util.List;
 
 @RestController

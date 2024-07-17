@@ -7,6 +7,11 @@ public enum AppHttpCodeEnum {
     NEED_LOGIN(401,"需要登录后操作"),
     NO_OPERATOR_AUTH(403,"无权限操作"),
     SYSTEM_ERROR(500,"出现错误"),
+    LLM_REQUEST_ERROR(500,"请求异常，请联系管理员"),
+    CHAT_ROLE_NOT_EXIST(500,"当前聊天角色不存在"),
+    SESSION_NOT_FOUND(500,"当前会话不存在"),
+    SESSION_USER_ERROR(503, "当前会话不属于该用户"),
+
     USER_NOT_EXIT(501,"用户不存在"),
     REQUIRE_USERNAME(503, "必需填写用户名"),
     REQUIRE_PASSWORD(504,"必须填写密码"),

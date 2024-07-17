@@ -23,13 +23,14 @@
           </if>
         ORDER BY a.id DESC
     </select>
-    <select id="getActivityList" resultType="com.jx.domain.entity.Activity">
-        SELECT DISTINCT a.id,a.name,a.theme,a.category_id,a.status,a.allowed_department_id,DATE(a.begin_date) AS begin_date,
-                        DATE(a.end_date) AS end_date,a.create_by,a.create_time,a.update_by,a.update_time
-        FROM t_activity a LEFT JOIN t_activity_assignment aa ON a.`id` = aa.`activity_id`
+    <select id="getActivityList" resultType="com.jx.domain.vo.ListActivityVo">
+        SELECT DISTINCT a.id,a.name,a.theme,a.category_id,c.name AS category,a.status,DATE(a.begin_date) AS beginDate,
+                        DATE(a.end_date) AS endDate
+        FROM t_activity a LEFT JOIN t_activity_assignment aa ON a.`id` = aa.`activity_id` LEFT JOIN t_category c ON a.`category_id` = c.`id`
         WHERE
+            a.`del_flag` = 0
         <if test=' status != null '>
-              a.`status` = #{status}
+            AND  a.`status` = #{status}
         </if>
         <if test=' locationId != null '>
             AND    aa.`location_id` = #{locationId}
@@ -40,15 +41,16 @@
         <if test=' activityName != null '>
             AND  a.`name`  LIKE concat('%',#{activityName},'%')
         </if>
-        <choose>
-            <when test="departmentId!= 9">
-                AND a.`allowed_department_id` in (#{departmentId},0,-1)
-            </when>
-            <otherwise>
-                AND a.`allowed_department_id` = -1
-            </otherwise>
-        </choose>
-        AND a.`del_flag` = 0
+        <if test='departmentId !=null'>
+            <choose>
+                <when test="departmentId!= 9">
+                    AND a.`allowed_department_id` in (#{departmentId},0,-1)
+                </when>
+                <otherwise>
+                    AND a.`allowed_department_id` = -1
+                </otherwise>
+            </choose>
+        </if>
         ORDER BY  DATE(a.`begin_date`) DESC
     </select>
     <select id="getActivityDetails" resultType="com.jx.domain.vo.ActivityDetailVo">

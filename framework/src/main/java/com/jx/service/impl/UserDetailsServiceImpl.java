@@ -2,12 +2,10 @@ package com.jx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.entity.LoginUser;
-import com.jx.domain.entity.Menu;
+import com.jx.domain.bean.LoginUser;
 import com.jx.domain.entity.User;
 import com.jx.mapper.MenuMapper;
 import com.jx.mapper.UserMapper;
-import com.jx.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -17,7 +15,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {

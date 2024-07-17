@@ -2,7 +2,7 @@ package com.jx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.entity.Activity;
 import com.jx.domain.entity.User;
 import com.jx.domain.vo.ActivityCategoryHoldVo;
@@ -12,7 +12,6 @@ import com.jx.mapper.VolunteerRecordMapper;
 import com.jx.service.ActivityService;
 import com.jx.service.DashboardService;
 import com.jx.service.UserService;
-import com.jx.service.VolunteerRecordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

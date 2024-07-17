@@ -100,3 +100,13 @@ oss:
   accessKey: 0mxfXLyroCwjPhwjYqouj_RBehtJIUAwSHNrecd-
   secretKey: 08ksXFk_piGxHjiS3oql8Q06bDSo6Fq-gc8ZOC_y
   bucket: jiax-redcross
+xunfei:
+  client:
+    appid: cff732ef
+    apiSecret: NjFlNzliYTAwZDZlOTg0ODZmZDQ2MjRj
+    apiKey: cefc79f8b45bb3558ece8c430ef9f338
+    hostUrl: https://spark-api.xf-yun.com/v3.5/chat
+    maxResponseTime: 100
+webSocket:
+  netty:
+    port: 17070

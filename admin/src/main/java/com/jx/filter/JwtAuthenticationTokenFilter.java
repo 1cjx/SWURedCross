@@ -1,8 +1,8 @@
 package com.jx.filter;
 
 import com.alibaba.fastjson.JSON;
-import com.jx.domain.ResponseResult;
-import com.jx.domain.entity.LoginUser;
+import com.jx.domain.bean.ResponseResult;
+import com.jx.domain.bean.LoginUser;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.utils.JwtUtil;
 import com.jx.utils.RedisCache;

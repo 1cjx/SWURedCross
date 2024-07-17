@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.bo.*;
 import com.jx.domain.dto.*;
 import com.jx.domain.entity.*;
@@ -81,13 +81,11 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
      * @return
      */
     @Override
-    public ResponseResult getActivityList(String status,Long locationId,Long categoryId,String activityName,Long pageNum,Long pageSize) {
+    public ResponseResult getActivityList(Long pageNum,Long pageSize,ListActivityDto listActivityDto) {
         //根据status、location、department、category查询活动信息
         //其中department为用户的department 当仅当该部门成员或会长团可以访问该活动
         User user = SecurityUtils.getLoginUser().getUser();
-        List<Activity>activityList = activityMapper.getActivityList(status,locationId,user.getDepartmentId(),categoryId,activityName);
-        //封装
-        List<ListActivityVo>activityVos = BeanCopyUtils.copyBeanList(activityList, ListActivityVo.class);
+        List<ListActivityVo>activityVos = activityMapper.getActivityList(listActivityDto.getStatus(),listActivityDto.getLocationId(),user.getDepartmentId(),listActivityDto.getCategoryId(),listActivityDto.getName());
         //查询活动开展的地点
         activityVos.stream().forEach(
                 o->
@@ -186,6 +184,21 @@ public class ActivityServiceImpl extends ServiceImpl<ActivityMapper, Activity> i
         scheduledMapper.remove(scheduled);
         return ResponseResult.okResult();
     }
+
+    @Override
+    public ResponseResult getChatActivityList(Long pageNum, Long pageSize, ListActivityDto listActivityDto) {
+        List<ListActivityVo>activityVos = activityMapper.getActivityList(listActivityDto.getStatus(),listActivityDto.getLocationId(),null,listActivityDto.getCategoryId(),listActivityDto.getName());
+        //查询活动开展的地点
+        activityVos.stream().forEach(
+                o->
+                        o.setLocations(BeanCopyUtils.copyBeanList(locationMapper.getActivityLocations(o.getId())
+                                , ListLocationVo.class)));
+        //分页
+        Page<ListActivityVo> listActivityVoPage = PageUtils.listToPage(activityVos,pageNum,pageSize);
+        PageVo pageVo = new PageVo(listActivityVoPage.getRecords(),listActivityVoPage.getTotal());
+        return ResponseResult.okResult(pageVo);
+    }
+
 
     @Override
     public ResponseResult getActivityDetail(Long activityId) {

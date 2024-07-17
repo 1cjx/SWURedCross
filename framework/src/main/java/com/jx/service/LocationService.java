@@ -1,7 +1,7 @@
 package com.jx.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddLocationDto;
 import com.jx.domain.dto.ListLocationDto;
 import com.jx.domain.entity.Location;

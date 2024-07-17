@@ -1,14 +1,12 @@
 package com.jx.service.impl;
 
 import com.alibaba.excel.util.StringUtils;
-import com.aliyun.oss.ServiceException;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import com.jx.service.TokenService;
 import com.jx.utils.RedisCache;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;

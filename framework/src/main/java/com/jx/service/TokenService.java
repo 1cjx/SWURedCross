@@ -1,7 +1,6 @@
 package com.jx.service;
 
-import com.jx.domain.ResponseResult;
-import org.springframework.stereotype.Service;
+import com.jx.domain.bean.ResponseResult;
 
 import javax.servlet.http.HttpServletRequest;
 

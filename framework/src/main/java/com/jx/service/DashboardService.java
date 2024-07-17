@@ -1,6 +1,6 @@
 package com.jx.service;
 
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 
 public interface DashboardService {
     ResponseResult getVolunteerNums();

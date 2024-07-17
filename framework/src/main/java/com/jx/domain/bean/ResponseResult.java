@@ -1,4 +1,4 @@
-package com.jx.domain;
+package com.jx.domain.bean;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.jx.enums.AppHttpCodeEnum;

@@ -4,12 +4,10 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddTimeSlotDto;
 import com.jx.domain.dto.ListTimeSlotDto;
 import com.jx.domain.entity.ActivityAssignment;
-import com.jx.domain.entity.Location;
-import com.jx.domain.entity.Scheduled;
 import com.jx.domain.entity.TimeSlot;
 import com.jx.domain.vo.PageVo;
 import com.jx.domain.vo.TimeSlotVo;
@@ -20,15 +18,12 @@ import com.jx.service.ActivityAssignmentService;
 import com.jx.service.TimeSlotService;
 import com.jx.utils.BeanCopyUtils;
 import com.jx.utils.TimeUtils;
-import lombok.AllArgsConstructor;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * (TimeSlot)表服务实现类

@@ -1,7 +1,7 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.ListMenuDto;
 import com.jx.domain.entity.Menu;
 import com.jx.domain.vo.MenuTreeVo;
@@ -9,7 +9,6 @@ import com.jx.domain.vo.MenuVo;
 import com.jx.service.MenuService;
 import com.jx.utils.BeanCopyUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;

@@ -1,7 +1,7 @@
 package com.jx.service.impl;
 
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.entity.Scheduled;
 import com.jx.service.EmailService;
 import lombok.extern.slf4j.Slf4j;

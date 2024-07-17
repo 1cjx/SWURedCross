@@ -3,7 +3,7 @@ package com.jx.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.ListMenuDto;
 import com.jx.domain.dto.RoleMenuTreeDto;
 import com.jx.domain.entity.Menu;

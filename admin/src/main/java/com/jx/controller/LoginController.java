@@ -1,26 +1,22 @@
 package com.jx.controller;
 
 import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
+import com.jx.domain.bean.LoginUser;
 import com.jx.domain.dto.LoginUserDto;
 import com.jx.domain.entity.*;
 import com.jx.domain.vo.AdminUserInfoVo;
 import com.jx.domain.vo.MenuVo;
 import com.jx.domain.vo.RoutersVo;
 import com.jx.domain.vo.UserInfoVo;
-import com.jx.enums.AppHttpCodeEnum;
-import com.jx.exception.SystemException;
 import com.jx.service.*;
 import com.jx.utils.BeanCopyUtils;
 import com.jx.utils.SecurityUtils;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Objects;
 
 
 @RestController

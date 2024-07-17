@@ -3,10 +3,7 @@ package com.jx.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.jx.domain.bo.ActivityAssignmentInfoBo;
 import com.jx.domain.entity.Activity;
-import com.jx.domain.vo.ActivityCategoryHoldVo;
-import com.jx.domain.vo.ActivityDetailVo;
-import com.jx.domain.vo.ActivityVo;
-import com.jx.domain.vo.ListLocationVo;
+import com.jx.domain.vo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -42,10 +39,10 @@ public interface ActivityMapper extends BaseMapper<Activity> {
      * @param categoryId
      * @return
      */
-    List<Activity> getActivityList(@Param("status") String status, @Param("locationId") Long locationId,
-                                   @Param("departmentId")Long departmentId,
-                                   @Param("categoryId") Long categoryId,
-                                   @Param("activityName")String activityName);
+    List<ListActivityVo> getActivityList(@Param("status") String status, @Param("locationId") Long locationId,
+                                         @Param("departmentId")Long departmentId,
+                                         @Param("categoryId") Long categoryId,
+                                         @Param("activityName")String activityName);
     /**
      * 根据活动id获取活动详情信息
      * @param activityId

@@ -113,4 +113,13 @@ weixin:
   jscode2sessionUrl: https://api.weixin.qq.com/sns/jscode2session
   appid: wxdaf3d64b1d8991c3
   secret: a59bdd79273e47dc92ffeecdf1039710
-
+xunfei:
+  client:
+    appid: cff732ef
+    apiSecret: NjFlNzliYTAwZDZlOTg0ODZmZDQ2MjRj
+    apiKey: cefc79f8b45bb3558ece8c430ef9f338
+    hostUrl: https://spark-api.xf-yun.com/v2.1/chat
+    maxResponseTime: 30
+webSocket:
+  netty:
+    port: 17777

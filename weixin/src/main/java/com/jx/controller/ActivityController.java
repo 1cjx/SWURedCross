@@ -1,16 +1,12 @@
 package com.jx.controller;
 
-import com.jx.anatation.ApiIdempotent;
 import com.jx.anatation.SystemLog;
-import com.jx.constants.SystemConstants;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.AddScheduledDto;
-import com.jx.domain.entity.Scheduled;
+import com.jx.domain.dto.ListActivityDto;
 import com.jx.service.ActivityService;
 import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,18 +22,15 @@ public class ActivityController {
      * 默认查询所有招募中的活动按时间排序
      * 可以选择活动类型、地点进行筛选
      * DepartmentId表示仅该部门人员可以访问
-     * @param status
-     * @param locationId
-     * @param categoryId
+     * @param pageNum
+     * @param pageSize
+     * @param listActivityDto
      * @return
      */
     @SystemLog(businessName = "分页查询活动列表",type="1")
     @GetMapping("/getActivityList")
-    public ResponseResult getActivityList(@Param("status") String status, @Param("locationId") Long locationId,
-                                          @Param("categoryId") Long categoryId,
-                                          @Param("pageNum") Long pageNum,
-                                          @Param("pageSize") Long pageSize){
-        return activityService.getActivityList(status,locationId,categoryId,null,pageNum,pageSize);
+    public ResponseResult getActivityList(Long pageNum, Long pageSize, ListActivityDto listActivityDto){
+        return activityService.getActivityList(pageNum,pageSize,listActivityDto);
     }
 
     /**
@@ -70,15 +63,13 @@ public class ActivityController {
 
     /**
      * 根据名称模糊搜索活动，前端传入查询的名称
-     * @param activityName
+     * @param listActivityDto
      * @return
      */
     @SystemLog(businessName = "根据活动名模糊查询活动",type="1")
     @GetMapping("/selectActivity")
-    public ResponseResult selectActivity( @Param("pageNum") Long pageNum,
-                                          @Param("pageSize") Long pageSize,
-                                          @Param("activityName") String activityName){
-        return activityService.getActivityList(SystemConstants.STATUS_NORMAL,null,null,activityName,pageNum,pageSize);
+    public ResponseResult selectActivity( Long pageNum,Long pageSize, ListActivityDto listActivityDto){
+        return activityService.getActivityList(pageNum,pageSize,listActivityDto);
     }
 
     /**

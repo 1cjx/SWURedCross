@@ -4,17 +4,138 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/___.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/___1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]/shelved.patch" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[更改]1/shelved.patch" beforeDir="false" />
+    <list default="true" id="09a5f399-a781-496a-8833-41496690a71c" name="更改" comment="修改了部分小bug">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_45_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__io_netty_netty_all_4_1_65_Final.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ChatController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ChatSessionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/config/XFConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/Choices.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/Header.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/JsonParse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/NettyGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/Payload.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/RoleContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/WebSocketGroup.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/ChatRandomQuestion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/ChatRoleContent.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/ChatSession.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/vo/ChatSessionVo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/netty/AuthHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/netty/NettyServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/netty/WebSocketHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/XFWebClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/XFWebSocketListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ChatRandomQuestionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ChatRoleContentMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ChatSessionMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/AiChatService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ChatRandomQuestionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ChatRoleContentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ChatSessionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/AiChatServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ChatRandomQuestionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ChatRoleContentServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ChatSessionServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ChatRandomQuestionMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/dataSources/6ef17d0d-8e41-466a-b77f-fb784f60963f.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/6ef17d0d-8e41-466a-b77f-fb784f60963f.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/easyCodeTableSetting.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/admin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/admin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/TestDemo.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ActivityAssignmentTypeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ActivityAssignmentTypeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/ActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/CategoryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/CategoryController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/CollegeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/CollegeController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DashboardController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DepartmentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/DepartmentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/LocationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/LocationController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/PostController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/PostController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/RoleController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/SelectOptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/SelectOptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/SignInUserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/SignInUserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/TimeSlotController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/TimeSlotController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/java/com/jx/filter/JwtAuthenticationTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/java/com/jx/filter/JwtAuthenticationTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/admin/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/admin/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/framework.iml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/framework.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/ResponseResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/ResponseResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListActivityDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/dto/ListActivityDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/Email.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/Email.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/LoginUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/LoginUser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/entity/UserImportFail.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/domain/bean/UserImportFail.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/enums/AppHttpCodeEnum.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/exception/GlobalExceptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/security/AccessDeniedHandlerImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/security/AccessDeniedHandlerImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/security/AuthenticationEntryPointImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/handler/security/AuthenticationEntryPointImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/listener/MyListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ActivityMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/mapper/ActivityMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityAssignmentTypeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityAssignmentTypeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/ActivityService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/AdminLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/AdminLoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/CategoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/CategoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/CollegeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/CollegeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/DashboardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/DashboardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/DepartmentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/DepartmentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/EmailService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/EmailService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/LocationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/LocationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/PostService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/PostService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/RoleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/RoleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInUserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/SignInUserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TimeSlotService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TimeSlotService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TitleService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TitleService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TokenService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/TokenService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/UploadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/UploadService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/WeiXinLoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/WeiXinLoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityAssignmentTypeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityAssignmentTypeServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/ActivityServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/AdminLoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/AdminLoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/CategoryServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/CategoryServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/CollegeServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/CollegeServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DashboardServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DashboardServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DepartmentServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/DepartmentServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/EmailServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/EmailServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/LocationServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/LocationServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/MenuServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/MenuServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/OssUploadService.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/OssUploadService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/PostServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/PostServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/RoleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/SignInUserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TimeSlotServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TimeSlotServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TitleServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TitleServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TokenServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/TokenServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserDetailsServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/service/impl/WeiXinLoginServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/MailUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/MailUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/SecurityUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/java/com/jx/utils/SecurityUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/framework/src/main/resources/mapper/ActivityMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/ActivityController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/ActivityController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/LoginController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SelectOptionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SelectOptionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/SignInController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/TokenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/TokenController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/UploadController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/UploadController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/controller/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/filter/JwtAuthenticationTokenFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/filter/JwtAuthenticationTokenFilter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/java/com/jx/mq/EmailConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-dev.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-prod.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/src/main/resources/application-test.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/weixin/weixin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/weixin/weixin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,8 +151,10 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Mybatis Mapper" />
         <option value="Interface" />
+        <option value="Mybatis Mapper" />
+        <option value="AnnotationType" />
+        <option value="JavaFXApplication" />
         <option value="Class" />
       </list>
     </option>
@@ -96,7 +219,7 @@
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;deletionFromPopupRequiresConfirmation&quot;: &quot;false&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/学习/大三下/实习/ChinaSoft/3.前端源码、后端源码、硬件源码、可运行文件/后端/backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/CCJX/项目/RedCross/framework/src/main/java/com/jx/domain/bean&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -127,26 +250,29 @@
       <recent name="com.jx.domain.entity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\CCJX\项目\RedCross\framework\src\main\java\com\jx\domain\bean" />
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources\template\img" />
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources" />
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources\templates\freemarker\img" />
       <recent name="D:\CCJX\项目\RedCross\framework\src\main\java\com\jx" />
-      <recent name="D:\CCJX\项目\RedCross\admin\src\main\resources\template" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources\template" />
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources\templates" />
       <recent name="D:\CCJX\项目\RedCross\weixin\src\main\resources\templates\freemarker\img" />
     </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="com.jx.listener" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="com.jx.anatation" />
-      <recent name="com.jx.controller" />
       <recent name="com.jx.service.impl" />
-      <recent name="com.jx.utils" />
-      <recent name="com.jx.domain.dto" />
+      <recent name="com.jx.service" />
+      <recent name="com.jx.handler.netty" />
+      <recent name="com.jx.listener" />
+      <recent name="com.jx.domain.bean" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.WeiXinApplication">
+  <component name="RunManager" selected="Spring Boot.AdminApplication">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="RedCross" />
       <method v="2">
@@ -464,6 +590,19 @@
       <workItem from="1720168345119" duration="1378000" />
       <workItem from="1720195218405" duration="442000" />
       <workItem from="1720273746995" duration="1348000" />
+      <workItem from="1720337235620" duration="2579000" />
+      <workItem from="1720361575569" duration="2444000" />
+      <workItem from="1720588139829" duration="146000" />
+      <workItem from="1720597489352" duration="286000" />
+      <workItem from="1720885031583" duration="2133000" />
+      <workItem from="1720921924699" duration="14969000" />
+      <workItem from="1720955498401" duration="2505000" />
+      <workItem from="1720961943340" duration="7000" />
+      <workItem from="1720962221945" duration="5634000" />
+      <workItem from="1721007584126" duration="21431000" />
+      <workItem from="1721044797893" duration="4821000" />
+      <workItem from="1721094235522" duration="13241000" />
+      <workItem from="1721187346066" duration="4556000" />
     </task>
     <task id="LOCAL-00001" summary="加入ReadMe文件">
       <created>1705235696169</created>
@@ -563,7 +702,21 @@
       <option name="project" value="LOCAL" />
       <updated>1715929362313</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="修改了部分小bug">
+      <created>1720337317434</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1720337317434</updated>
+    </task>
+    <task id="LOCAL-00016" summary="修改了部分小bug">
+      <created>1720337366741</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1720337366741</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -593,7 +746,8 @@
     <MESSAGE value="修改了发送人邮箱与admin主页的排行榜接口" />
     <MESSAGE value="新增了活动班次的工作群二维码" />
     <MESSAGE value="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题" />
-    <option name="LAST_COMMIT_MESSAGE" value="解决了活动报名在高并发下的超卖和库存遗留问题，解决rabbitmq消费消息的幂等性问题" />
+    <MESSAGE value="修改了部分小bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改了部分小bug" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

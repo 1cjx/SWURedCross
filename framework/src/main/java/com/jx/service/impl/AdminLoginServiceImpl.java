@@ -1,10 +1,8 @@
 package com.jx.service.impl;
 
-import com.jx.anatation.SystemLog;
-import com.jx.domain.ResponseResult;
+import com.jx.domain.bean.ResponseResult;
 import com.jx.domain.dto.LoginUserDto;
-import com.jx.domain.entity.LoginUser;
-import com.jx.domain.entity.User;
+import com.jx.domain.bean.LoginUser;
 import com.jx.enums.AppHttpCodeEnum;
 import com.jx.exception.SystemException;
 import com.jx.service.AdminLoginService;

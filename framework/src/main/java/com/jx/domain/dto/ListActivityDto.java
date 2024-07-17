@@ -17,5 +17,7 @@ public class ListActivityDto {
     private Long categoryId;
     @ApiModelProperty(value="活动状态",name="status",example="1")
     private String status;
+    @ApiModelProperty(value="活动地点Id",name="locationId",example="1")
+    private Long locationId;
 
 }

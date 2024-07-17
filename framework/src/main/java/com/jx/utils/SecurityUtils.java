@@ -1,8 +1,7 @@
 package com.jx.utils;
 
 
-import com.jx.constants.SystemConstants;
-import com.jx.domain.entity.LoginUser;
+import com.jx.domain.bean.LoginUser;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
