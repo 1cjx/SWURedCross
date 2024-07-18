@@ -1,0 +1,61 @@
+<!--pages/sign/sign_release/sign_release.wxml-->
+<!-- 查询用户发起的签到 -->
+<!-- 对已有签到进行展示 -->
+<scroll-view class="container" scroll-y>
+  <view class="detail_container" wx:for="{{SignList}}" wx:key="*this">
+    <view class="sign_detail">
+      <!--签到名-->
+      <view class="upbody">
+        {{item.activityName}}
+      </view>
+
+      <!--签到体下半-->
+      <view class="downbody">
+        <!--签到地点及日期-->
+        <view class="left">
+          <view class="date">
+            {{item.date}}
+          </view>
+          <view class="loc">
+            {{item.location}}
+          </view>
+        </view>
+
+        <!--班次时间-->
+        <view class="right">
+          {{item.timeSlotBegin}}-{{item.timeSlotEnd}}
+        </view>
+
+        <!-- 生成签到二维码 -->
+        <view class="show" bindtap="showSignDetail" data-id="{{item.activityAssignmentId}}" data-index="{{index}}">
+          选择签到类型
+        </view>
+      </view>
+    </view>
+    <view class="typebody" wx:if="{{isShowSignDetail[index][0]}}">
+      <view class="showcode_container" wx:for="{{isShowSignDetail[index][1]}}">
+              <!--签到类型-->
+              <view class="type" style="background-color: red;" wx:if="{{item.type==1}}">签到</view>
+        <view class="type" style="background-color: blue;" wx:if="{{item.type==2}}">考勤</view>
+        <view class="type" style="background-color: green;" wx:if="{{item.type==3}}">签退</view>
+        <!--签到截至时间-->
+        <view class="codedate">
+          截至时间：{{item.expireTime}}
+        </view>
+        <view wx:if="{{item.status==0}}"class="expire">签到已过期</view>
+        <navigator class="code" url="/pages/sign/sign_showcode/sign_showcode?id={{item.id}}" wx:else>
+          生成签到二维码
+        </navigator>
+      </view>
+    </view>
+  </view>
+
+</scroll-view>
+<!--创建新签到开始-->
+<!-- <view class="creat_sign">
+    <navigator url="/pages/sign/sign_setsign/sign_setsign" open-type="navigate">
+        <image src="/icons/add.png"></image>
+        <view>创建新签到</view>
+    </navigator>
+</view> -->
+<!--创建新签到结束-->

@@ -1,0 +1,19 @@
+<!--custom-tab-bar/index.wxml-->
+<view class="tab-bar" wx:if="{{show}}">
+  <view wx:for="{{list}}" wx:key="index" class="tab-bar-item {{item.bulge?'bulge':''}}" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <view  wx:if="item.bulge" class="tab-bar-bulge"></view>
+    <image class="image" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></image>
+    <view  class="tab-bar-view" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</view>
+  </view>
+</view>
+
+<!-- 
+  使用带有 cover 的标签 开启页面的下拉刷新时在安卓手机可以固定 tabbar 
+-->
+<!-- <cover-view class="tab-bar">
+  <cover-view wx:for="{{list}}" wx:key="index" class="tab-bar-item {{item.bulge?'bulge':''}}" data-path="{{item.pagePath}}" data-index="{{index}}" bindtap="switchTab">
+    <cover-view  wx:if="item.bulge" class="tab-bar-bulge"></cover-view>
+    <cover-image class="image" src="{{selected === index ? item.selectedIconPath : item.iconPath}}"></cover-image>
+    <cover-view  class="tab-bar-view" style="color: {{selected === index ? selectedColor : color}}">{{item.text}}</cover-view>
+  </cover-view>
+</cover-view> -->

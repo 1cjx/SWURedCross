@@ -1,0 +1,29 @@
+.body {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.body image {
+  margin-top: 13vh;
+  width: 400rpx;
+  height: 400rpx;
+}
+.body .title {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  font-size: 40rpx;
+  margin-top: 60rpx;
+}
+.body .login {
+  width: 300rpx;
+  height: 120rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 60rpx;
+  font-size: 38rpx;
+  color: white;
+  border-radius: 70rpx;
+  background-image: linear-gradient(to right, #ee3e3e, #d86518);
+}

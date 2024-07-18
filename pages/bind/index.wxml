@@ -1,0 +1,27 @@
+<!--pages/identify/index.wxml-->
+<view class="user_bind">
+    <view class="title">
+        账号绑定
+    </view>
+    <view class="user_info" id="id">
+        <text>学号：</text>
+        <input type="text" model:value="{{userId}}" placeholder="" bindinput="getId"></input>
+        <image hidden="{{!isUserIdFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="0"></image>
+    </view>
+    <view class="user_info" id="name">
+        <text>姓名：</text>
+        <input type="text" model:value="{{userName}}" placeholder="" bindinput="getUserName"></input>
+        <image hidden="{{!isUserNameFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="1"></image>
+    </view>
+    <view class="bind">
+        <button bindtap="onBind">绑定</button>
+        <text>已是志愿者</text>
+    </view>
+    <view class="tips">
+        or
+    </view>
+    <view class="bind">
+        <button bindtap="onIdent">注册</button>
+        <text>还不是志愿者</text>
+    </view>
+</view>

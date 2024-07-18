@@ -1,0 +1,59 @@
+<!--pages/my/my_activity/my_activity.wxml-->
+<view class="desc_tabs">
+  <view class="title_item {{activeIndex==1?'active':''}}" bindtap="handleItemTap" data-index="1">我参与的活动</view>
+  <view class="title_item {{activeIndex==0?'active':''}}" bindtap="handleItemTap" data-index="0">我管理的活动</view>
+</view>
+
+<view class="contain">
+  <view class="Null" wx:if="{{userActivityList[0] == null && activeIndex==1}}">
+    您尚未参与过活动
+  </view>
+  <view class="Null" wx:if="{{userActivityList[0] == null && activeIndex==0}}">
+    您尚未管理活动
+  </view>
+  <activitylist list="{{userActivityList}}" flag="{{false}}" isLeader="{{isLeader}}"></activitylist>
+  
+
+  <view class="activity_mana" wx:for="{{activity_manager}}" wx:if="{{activity_manager[0] != null &&activeIndex==0}}">
+    <view class="unit1">
+      <view class="msg">
+        <view class="msg_chidren"><span style="font-weight: bold;">活动名：</span>{{item.activityInfo.activityName}}</view>
+        <view class="msg_chidren"><span style="font-weight: bold;">活动类型：</span>{{item.activityInfo.type}}</view>
+        <view class="msg_chidren"><span style="font-weight: bold;">活动地点：</span>{{item.activityInfo.location}}</view>
+        <view class="msg_chidren"><span style="font-weight: bold;">活动时间：</span>{{item.activityInfo.date}} {{item.activityInfo.timeSlotBegin}}-{{item.activityInfo.timeSlotEnd}}</view>
+      </view>
+      <view class="makeSignIn" bindtap="toMakeSignIn" data-assignmentId="{{item.activityInfo.activityAssignmentId}}">发起签到</view>
+    </view>
+    <view class="containVolunteer">
+      <view class="showVolunteerPost" bindtap="showVolunteerPost" data-index="{{index}}">
+        <!-- <image class="{{isshowVolunteerPost&&showPostIndex==index?'arrow_down':'arrow_left '}}" src="/icons/arrow.png"></image> -->
+        志愿者岗位详情
+        <image class="{{isshowVolunteer[index][0]?'arrow_down':'arrow_right '}}" src="/icons/arrow.png"></image>
+      </view>
+      <view class="VolunteerPosts" wx:if="{{isshowVolunteer[index][0]}}">
+        <view class="VolunteerPost" wx:for="{{item.volunteersInfo}}" wx:for-index="childindex">
+          <view class="Post"><span style="font-weight: bold;">岗位名称：</span>{{item.postName}}</view>
+          <view class="Post"><span style="font-weight: bold;">是否报班：</span>{{item.choose?'是':'否'}}</view>
+          <view class="Post"><span style="font-weight: bold;">人员需求：</span>{{item.reqPeople}}</view>
+          <view class="showVolunteerInfo" bindtap="showVolunteerInfo" data-index="{{index}}"  wx:if="{{item.volunteerInfoBoList.length>0}}"
+          data-childindex="{{childindex}}"> 
+            已报名人员列表
+            <image class="{{isshowVolunteer[index][1][childindex]?'arrow_down':'arrow_right '}}" src="/icons/arrow.png"></image>
+          </view>
+          <view class="VolunteerInfos" wx:if="{{isshowVolunteer[index][1][childindex]}}">
+            <view class="VolunteerInfo" wx:for="{{item.volunteerInfoBoList}}">
+              <view class="VolunteerContact_left">
+                {{item.name}}
+              </view>
+              <view class="VolunteerContact_right">
+                <view class="Contact">电话：{{item.phoneNumber}}</view>
+                <view class="Contact">QQ：{{item.qq}}</view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view style="width: 100%;height: calc(100rpx + env(safe-area-inset-bottom) / 2);"></view>
+</view>

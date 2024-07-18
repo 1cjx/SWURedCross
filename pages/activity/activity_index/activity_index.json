@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "searchbar":"/components/searchbar/searchbar",
+    "activitylist":"/components/activitylist/activitylist"
+  },
+  "navigationBarTitleText":"志愿服务",
+  "enablePullDownRefresh": true
+}

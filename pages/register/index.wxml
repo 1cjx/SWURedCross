@@ -1,0 +1,39 @@
+<view class="user_register">
+    <view class="title">
+        账号注册
+    </view>
+    <view class="user_info">
+        <text>学号:</text>
+        <input type="text" model:value="{{userId}}" placeholder="" bindinput="getId" class="userId" ></input>
+        <image hidden="{{!isUserIdFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="0"></image>
+    </view>
+    <view class="user_info">
+        <text>姓名:</text>
+        <input type="text" model:value="{{userName}}" placeholder="" bindinput="getUserName" class="userName" ></input>
+        <image hidden="{{!isUserNameFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="6"></image>
+    </view>
+    <view class="sex">
+        <text>性别:</text>
+        <radio-group bindchange="handleChange">
+            <radio value="male" checked="{{sex=='1'}}">男</radio>
+            <radio value="female" checked="{{sex=='2'}}">女</radio>
+        </radio-group>
+    </view>
+    <view class="user_info">
+        <text>电话:</text>
+        <input type="text" model:value="{{phone}}" placeholder="" bindinput="getPhone" class="phone" ></input>
+        <image hidden="{{!isPhoneFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="3"></image>
+    </view>
+    <view class="user_info">
+        <text>QQ:</text>
+        <input type="text" model:value="{{qq}}" placeholder="" bindinput="getQ" class="qq" ></input>
+        <image hidden="{{!isQFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="4"></image>
+    </view>
+    <view class="user_info">
+        <text>邮箱:</text>
+        <input type="text" model:value="{{email}}" placeholder="" bindinput="getEmail" class="email" ></input>
+        <image hidden="{{!isEmailFocus}}" class="img" src="/icons/cancel.png" mode="aspectFit" bindtap="handleItemTap" data-index="5"></image>
+    </view>
+    <button bindtap="onIdent">注册认证</button>
+</view>
+

@@ -1,0 +1,131 @@
+/* pages/my/my_index/my_index.wxss */
+.body {
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  border: #f6f6f6 solid 0.00005px;
+}
+.title {
+  height: 15vh;
+  width: 100%;
+  padding: 0 10rpx 0 10rpx;
+  background-color: #ffffff;
+}
+.title navigator {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.title navigator .title_pic {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.title navigator .title_pic image {
+  height: 120rpx;
+  width: 120rpx;
+  border-radius: 50%;
+}
+.title navigator .title_intro {
+  height: 60%;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.title navigator .title_intro .title_intro_name {
+  width: 90%;
+  font-size: 38rpx;
+  font-weight: bold;
+}
+.title navigator .title_intro .title_intro_position {
+  width: 90%;
+  color: grey;
+}
+.title navigator .title_intro .title_intro_position .right {
+  margin-left: 30rpx;
+}
+.title navigator .title_icon {
+  width: 20%;
+}
+.information {
+  height: 20vh;
+  display: flex;
+}
+.information navigator {
+  width: 100%;
+  display: flex;
+  font-weight: bold;
+}
+.information navigator .infor_left {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.information navigator .infor_right {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.information navigator .contain {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.information navigator .contain .contain_title {
+  display: flex;
+  align-items: center;
+}
+.information navigator .contain .contain_title image {
+  width: 30rpx;
+  height: 30rpx;
+}
+.information navigator .contain .contain_title text {
+  display: flex;
+}
+.information navigator .contain .data {
+  margin-top: 20rpx;
+  height: 100rpx;
+  border-radius: 1.2ch;
+  font-weight: normal;
+  font-size: 30rpx;
+  width: 50%;
+  background-color: #ffffff;
+  border: solid lightgray 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.transport {
+  background-color: #ffffff;
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  padding: 15rpx;
+}
+.transport text {
+  font-size: 30rpx;
+  width: 97%;
+}
+.transport image {
+  width: 35rpx;
+  height: 35rpx;
+  margin-left: 10rpx;
+  margin-right: 20rpx;
+}
+.transport .arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 5px 0 5px 8.7px;
+  border-color: transparent transparent transparent grey;
+}

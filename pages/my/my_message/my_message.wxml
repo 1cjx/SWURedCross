@@ -1,0 +1,37 @@
+<!--pages/my/my_message/my_message.wxml-->
+<view class="body">
+    <view class="rewrite" id="profile">
+        <view class="">头像:</view>
+        <button open-type="chooseAvatar" bind:chooseavatar="getUserAvatar"><image src="{{avatar==0?userInfo.avatar:avatar}}"></image></button>
+        
+    </view>
+    <view class="rewrite">
+        <view>学号:</view>
+        <input disabled="true" type="number" value="{{userInfo.id}}" />
+    </view>
+    <view class="rewrite">
+        <view>姓名:</view>
+        <input disabled="true" value="{{userInfo.name}}" bindinput="Inputname" />
+    </view>
+    <view class="rewrite">
+        <view>性别:</view>
+        <radio-group bindchange="handleChange">
+            <radio value="male" checked="{{userInfo.sex=='1'}}">男</radio>
+            <radio value="female" checked="{{userInfo.sex=='2'}}">女</radio>
+        </radio-group>
+    </view>
+    <view class="rewrite">
+        <view>电话:</view>
+        <input type="number" value="{{userInfo.phoneNumber}}" bindinput="Inputphone" />
+    </view>
+    <view class="rewrite">
+        <view>QQ:</view>
+        <input type="number" value="{{userInfo.qq}}" bindinput="Inputqq" />
+    </view>
+    <view class="rewrite">
+        <view>Email:</view>
+        <input type="text" value="{{userInfo.email}}" bindinput="Inputemail" />
+    </view>
+
+    <view class="save" bindtap="Save">点击保存</view>
+</view>

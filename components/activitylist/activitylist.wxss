@@ -1,0 +1,50 @@
+.activity {
+  background-color: #ffffff;
+  margin: 13rpx 20rpx 10rpx 20rpx;
+  border-radius: 1.2ch;
+  height: auto;
+  padding: 20rpx;
+  border: 1px solid lightgrey;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+}
+.activity navigator {
+  height: 100%;
+}
+.activity navigator .acti_title view {
+  padding: 1%;
+}
+.activity navigator .acti_title .acti_name {
+  width: 90%;
+  font-size: large;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.activity navigator .acti_title .acti_theme {
+  width: fit-content;
+  max-width: 90%;
+  padding-right: 30rpx;
+  background: linear-gradient(to right, #ff9999, white);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-radius: 1ch;
+  font-size: large;
+}
+.activity navigator .acti_date view {
+  padding: 1%;
+  font-size: medium;
+}
+.activity navigator .loc_list {
+  flex-direction: row;
+  display: flex;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.activity navigator .loc_list .acti_loc {
+  padding: 1%;
+  font-size: medium;
+  word-break: keep-all;
+  white-space: nowrap;
+}

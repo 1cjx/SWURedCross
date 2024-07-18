@@ -1,0 +1,9 @@
+<!--pages/my/my_about/my_about.wxml-->
+<view class="contain">
+    <image src="/icons/symbol.jpeg"></image>
+    <view class="intro">
+        <text>
+            {{introdata}}
+        </text>
+    </view>
+</view>

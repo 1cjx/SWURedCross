@@ -1,0 +1,278 @@
+.body {
+  background-color: #f6f6f6;
+  border: 1px solid #f6f6f6;
+  height: 100vh;
+}
+
+.activity_detail {
+  margin: 20rpx;
+  padding: 20rpx;
+  border-radius: 1.2ch;
+  background-color: rgb(255, 255, 255);
+  height: auto;
+  border: 1px solid lightgrey;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+
+  .detail {
+    margin-bottom: 15rpx;
+    font-size: medium;
+    display: flex;
+    font-weight: bold;
+
+    .detail_right {
+      width: 70%;
+      display: flex;
+      font-weight: normal;
+      flex-wrap: wrap;
+    }
+  }
+}
+.activity_part {
+  border: lightgray solid 1px;
+  margin: 10rpx 20rpx 20rpx 20rpx;
+  padding: 20rpx;
+  border: 1px solid lightgrey;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 1.2ch;
+  background-color: white;
+
+  view {
+    margin-top: 15rpx;
+    margin-bottom: 15rpx;
+    font-size: 30rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .no_manager{
+    font-weight: bold;
+    text-align: center;
+  }
+  .contact {
+    display: flex;
+    align-items: flex-start;
+
+    .left {
+      width: 25%;
+      display: flex;
+      align-items: flex-start;
+      margin-top: 0rpx;
+      margin-bottom: 0rpx;
+
+      view {
+        margin-top: 0rpx;
+        margin-bottom: 0rpx;
+      }
+    }
+
+    .right {
+      width: 60%;
+      margin-top: 0rpx;
+      margin-bottom: 0rpx;
+      display: flex;
+      flex-wrap: wrap;
+
+      .phone {
+        margin-top: 0rpx;
+        margin-bottom: 0rpx;
+        width: 100%;
+      }
+
+      .qq {
+        margin-top: 0rpx;
+        margin-bottom: 0rpx;
+        width: 100%;
+      }
+    }
+  }
+}
+
+.activity_mana {
+  border: lightgray solid 1px;
+  margin: 10rpx 20rpx 20rpx 20rpx;
+  padding: 20rpx;
+  border: 1px solid lightgrey;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.2);
+  border-radius: 1.2ch;
+  background-color: white;
+
+  .unit1 {
+    display: flex;
+    justify-content: flex-start;
+    .msg {
+      width:80%;
+      margin: 10rpx 0rpx;
+      font-size: 30rpx;
+      .tag_content{
+        position: relative;
+        display: flex;
+        left:-32rpx;
+        .tag_tail{
+          width: 0;
+          height: 0;
+          border-left: 30rpx solid red;
+          border-top: 30rpx solid transparent;
+          border-bottom: 30rpx solid transparent;
+        }
+        .tag{
+          background-color: red;
+          padding:10rpx 10rpx 10rpx 10rpx;
+          width:fit-content;
+          color: yellow;
+          font-weight: bold;        
+          border-top-left-radius: 0.5ch;
+          border-bottom-left-radius: 0.5ch;
+        }
+      }
+      .msg_chidren{
+        margin-bottom: 12rpx;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+
+    .makeSignIn {
+      width:20%;
+      background-color: red;
+      border: 1px  lightgrey solid;
+      border-radius: 1.3ch;
+      color:yellow;
+      height:10%;
+      margin-top:20%;
+      font-size:25rpx;
+      padding-top:5rpx;
+      padding-bottom: 5rpx;
+      text-align: center;
+    }
+  }
+
+  .containVolunteer {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    margin: 20rpx 0rpx;
+    font-size: 30rpx;
+
+    .showVolunteerPost {
+      padding-left: 5%;
+      width: 100%;
+      height: 80rpx;
+      border: lightgray solid 1px;
+      border-radius: 0.7ch;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 28rpx;
+      font-weight: bold;
+      color:white;
+      background-color: lightcoral;
+
+      .arrow_down {
+        width: 40rpx;
+        height: 40rpx;
+        margin: 0 10rpx;
+      }
+
+      .arrow_left {
+        width: 30rpx;
+        height: 30rpx;
+        transform: rotateZ(270deg);
+      }
+
+      .arrow_right {
+        width: 40rpx;
+        height: 40rpx;
+        transform: rotateZ(90deg);
+      }
+    }
+
+    .VolunteerPosts {
+      width: 95%;
+      border: rgb(196, 197, 197) solid 1px;
+
+      .VolunteerPost {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        border-bottom: lightgrey solid 1px;
+        padding: 15rpx 20rpx;
+
+        .Post {
+          display: flex;
+          align-items: center;
+          //border: aqua solid 1px;
+          height: 55rpx;
+          font-size: 28rpx;
+          width: 100%;
+        }
+
+        .showVolunteerInfo {
+          //border: aqua solid 1px;
+          height: 80rpx;
+          font-size: 28rpx;
+          background-color: #2775b6;
+          border-radius: 0.7ch;
+          padding-left: 30rpx;
+          font-weight: bold;
+          color: white;
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+
+          .arrow_right {
+            width: 35rpx;
+            height: 35rpx;
+            transform: rotateZ(90deg);
+          }
+
+          .arrow_down {
+            width: 35rpx;
+            height: 35rpx;
+            margin: 0 10rpx;
+          }
+        }
+
+        .VolunteerInfos {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          justify-content: center;
+          margin-top: 10rpx;
+          .VolunteerInfo {
+            width: 95%;
+            height:100rpx;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            border:1px solid lightgrey;
+            border-radius: 0.8ch;
+
+            .VolunteerContact_left {
+              width: 30%;
+              text-align: center;
+              font-size: 28rpx;
+              padding: 10rpx;
+            }
+
+            .VolunteerContact_right {
+              width: 70%;
+              font-size: 28rpx;
+              padding: 10rpx;
+            }
+          }
+        }
+      }
+
+      .VolunteerPost:last-child {
+        border-bottom: 0;
+      }
+    }
+  }
+}
+

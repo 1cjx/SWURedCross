@@ -1,0 +1,93 @@
+/* pages/sign/sign_setsign/sign_setsign.wxss */
+.container {
+  width: 100vm;
+  height: 100vh;
+  padding: 6vh 70rpx 0 70rpx;
+}
+.container .selections {
+  height: 150rpx;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6vh;
+}
+.container .selections .left {
+  width: 40%;
+  font-size: 35rpx;
+}
+.container .selections .right {
+  height: 70rpx;
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.container .selections .right .activity_title {
+  border: grey solid 1px;
+  width: 60%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10rpx;
+  font-size: 31rpx;
+}
+.container .selections .right .activity_title text {
+  white-space: nowrap;
+  overflow: scroll;
+  width: 80%;
+}
+.container .selections .right .activity_title .arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8.7px 5px 0 5px;
+  border-color: var(--themeColor) transparent transparent transparent;
+}
+.container .selections .right .activity_title picker {
+  width: 100%;
+  height: 100%;
+  font-size: 31rpx;
+  display: flex;
+  align-items: center;
+}
+.container .selections .right .activity_title picker view {
+  width: 100%;
+  height: 100%;
+}
+.container .selections .right .activity_selectbox {
+  border: grey solid 1px;
+  border-top: 0rpx;
+  width: 60%;
+  max-height: 210rpx;
+  display: flex;
+  justify-content: center;
+}
+.container .selections .right .activity_selectbox .activity_select {
+  display: flex;
+  align-items: center;
+  height: 70rpx;
+  padding-left: 10rpx;
+  font-size: 31rpx;
+  border-bottom: black solid 0.5px;
+  background-color: #f7f7f7;
+  white-space: nowrap;
+  overflow: scroll;
+}
+.container .selections .right .activity_selectbox .activity_select:last-child {
+  border-bottom: 0rpx;
+}
+.container .selections .right .activity_selectbox .AT_active {
+  background-image: linear-gradient(to right, orange, red);
+}
+.container .output {
+  border: grey solid 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 300rpx;
+  height: 100rpx;
+  margin: auto;
+  margin-top: 80rpx;
+  font-size: 35rpx;
+}

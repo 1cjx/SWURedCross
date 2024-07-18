@@ -1,0 +1,24 @@
+<!--pages/search/index.wxml-->
+<wxs src="/module/replace.wxs" module="tools" />
+<view class="searchBar">
+    <view class="search">
+        <input bindinput="onInput" placeholder="输入活动名" value="{{inputValue}}" />
+        <image class="cancelButton" bindtap="onTapCancel" wx:if="{{isSearchOn}}" src="/icons/cancel.png"></image>
+        <image class="cancelButton" bindtap="onResultCancel" wx:if="{{isSearchOver}}" src="/icons/cancel.png"></image>
+        <button class="searchButton" bindtap="onTapSearch" data-string="" size="mini">搜索</button>
+    </view>
+</view>
+<view class="body">
+    <view class="activityList" wx:if="{{actilist.length!=0&&isSearchOn}}">
+        <view class="List_guide" bindtap="ListSearch" wx:for="{{actilist}}" data-value="{{item.name}}">
+            {{item.name}}
+            <!-- <text class=" {{tools.fn(inputValue, item.name).indexOf?'highlight':''}}">{{item}}</text> -->
+        </view>
+    </view>
+    <view class="activityList" wx:if="{{actilist.length!=0&&isSearchOver}}">
+        <activitylist list="{{actilist}}"></activitylist>
+    </view>
+    <view class="Err_Nodata" wx:if="{{actilist.length==0&&isSearchOver}}">
+        未找到相关内容
+    </view>
+</view>

@@ -1,0 +1,64 @@
+.user_bind {
+  margin: auto;
+  margin-top: 10vh;
+  height: 70vh;
+  padding: 30rpx;
+  background-color: #e7e5e5;
+  width: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.user_bind .title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 44rpx;
+  font-style: initial;
+}
+.user_bind .user_info {
+  height: 8vh;
+  margin-top: 20rpx;
+  font-size: 36rpx;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+.user_bind .user_info input {
+  border-bottom: #292929 solid 1px;
+}
+.user_bind .user_info image {
+  width: 50rpx;
+  height: 50rpx;
+}
+.user_bind #id {
+  margin-top: 4vh;
+}
+.user_bind #name {
+  margin-bottom: 2vh;
+}
+.user_bind .tips {
+  margin: auto;
+  height: 45rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10rpx;
+  font-size: 40rpx;
+}
+.user_bind .bind {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.user_bind .bind button {
+  margin-bottom: 5rpx;
+}
+.user_bind .bind text {
+  width: 100%;
+  font-size: 32rpx;
+  display: flex;
+  justify-content: center;
+}

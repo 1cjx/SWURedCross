@@ -1,0 +1,17 @@
+/**app.wxss**/
+/* 初始化全局样式 */
+page,text,view,swiper-item,image,navigator {
+  padding:0;
+  margin:0;
+  box-sizing:border-box;
+}
+/* 全局变量定义 设置主题颜色，字体大小等 */
+page{
+  /* 主题颜色 */
+  --themeColor:#de1c31;
+  /* 字体大小 rpx自适应大小 */
+  font-size:28rpx;
+}
+image{
+  width:100%;
+}

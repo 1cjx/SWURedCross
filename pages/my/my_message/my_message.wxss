@@ -1,0 +1,114 @@
+/* pages/my/my_message/my_message.wxss */
+.body {
+  min-height: 100vh;
+  background-color: #f6f6f6;
+  border: #f6f6f6 solid 0.00005px;
+  padding-top: 30rpx;
+}
+.body .rewrite {
+  height: 8vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 30rpx;
+  background-color: #ffffff;
+  margin-bottom: 30rpx;
+  font-size: 35rpx;
+}
+.body .rewrite view {
+  width: 18%;
+}
+.body .rewrite input {
+  text-align: right;
+}
+.body .save {
+  width: 240rpx;
+  height: 100rpx;
+  border: #656868 solid 1px;
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  font-size: 32rpx;
+}
+.body radio {
+  margin-right: 20rpx ;
+}
+.body .wx-radio-input {
+  width: 25rpx;
+  height: 25rpx;
+  border-radius: 50%;
+  border: 2rpx solid #000000;
+  background: transparent;
+}
+.body .wx-radio-input.wx-radio-input-checked {
+  width: 25rpx;
+  height: 25rpx;
+  border: 2rpx solid #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white !important;
+}
+.body .wx-radio-input.wx-radio-input-checked::before {
+  border-radius: 50%;
+  width: 15rpx;
+  height: 15rpx;
+  color: transparent;
+  background: #4b4b4b;
+  transform: translate(-50%, -50%) scale(1);
+}
+#profile {
+  height: auto;
+  padding: 10rpx 30rpx;
+}
+#profile button {
+  margin-right: 0rpx;
+  padding: 0 0;
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+#profile button image {
+  width: 130rpx;
+  height: 130rpx;
+  border-radius: 50%;
+}
+.zan-dialog__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 110;
+  background: rgba(0, 0, 0, 0.3);
+  height: 100vh;
+  width: 100%;
+  /* //设置阴影半透明背景如： background: rgba(0, 0, 0, 0.4); */
+  display: none;
+}
+.zan-dialog__container {
+  position: fixed;
+  bottom: 0rpx;
+  width: 100%;
+  /* //弹窗布局宽 */
+  height: 35%;
+  /* //弹窗布局高，与下面弹出距离transform有关 */
+  border-radius: 20rpx 20rpx 0 0  ;
+  background: #f8f8f8;
+  transform: translateY(300%);
+  /* //弹框弹出距离，与弹框布局高度有关，如300%表示弹起距离为3倍弹窗高度 */
+  transition: all 0.4s ease;
+  z-index: 112;
+  text-align: center;
+  line-height: 60rpx;
+  padding-top: 25rpx;
+  /* //弹框的悬浮阴影效果，如不需要可注释该行 */
+}
+.zan-dialog--show .zan-dialog__container {
+  transform: translateY(0);
+}
+.zan-dialog--show .zan-dialog--show .zan-dialog__mask {
+  display: block;
+}

@@ -1,0 +1,21 @@
+<view class="index">
+月影
+<!-- <view class="activity">{{activity.categoryName}}</view> -->
+
+  <view class="activityList">
+    <view class="act_list_title">活动列表</view>
+    <view class="activitydetail"
+      wx:for="{{activityList}}"
+      wx:for-item="acti"
+      wx:key="name">
+      <navigator>
+        <!-- <view class="activity_theme">{{acti.theme}}</view> -->
+        <view class="activity_name">活动：{{acti.name}}</view>
+        <view class="activity_begin">开始时间：{{acti.beginDate}}</view>
+        <view class="activity_end">结束时间：{{acti.endDate}}</view>
+        <view class="activity_loc">活动地点：{{acti.locations}}</view>
+      </navigator>
+    </view>
+  </view>
+
+</view>

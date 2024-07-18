@@ -1,0 +1,40 @@
+<!-- 搜索栏开始 -->
+<view class="searchbar">
+    <searchbar></searchbar>
+</view>
+<!-- 搜索栏结束 -->
+
+<view class="body">
+    <!-- 轮播图开始 -->
+    <view class="index_swiper">
+        <swiper indicator-dots autoplay circular>
+        <swiper-item 
+            wx:for="{{swiperList}}" 
+            wx:for-item="swiper"
+            wx:key="id">
+            <navigator url="/pages/product_detail/index?id={{swiper.id}}">
+                <image mode="widthFix" src="{{baseUrl +'/images/swiper/'+swiper.swiperpic}}"></image>
+            </navigator>
+        </swiper-item>
+        </swiper>
+    </view>
+    <!-- 轮播图结束 -->
+    <!-- 活动展示开始 -->
+    <view class="show_activity">
+        <view class="title"> 
+            <view class="Hotpoint">
+                <text>热门活动</text>
+            </view>
+        </view>
+        <activitylist list="{{activity_list}}"></activitylist>
+    </view>
+    <!-- 活动展示结束 -->
+    <!-- 活动跳转开始 -->
+    <view class="transport_activity">
+        <navigator url="/pages/activity/activity_index/activity_index" open-type="switchTab">
+            <text>查看更多活动</text>
+        </navigator>
+    </view>
+    <!-- 活动跳转结束 -->
+    <view style="width: 100%;height: calc(140rpx + env(safe-area-inset-bottom) / 2);"></view>
+</view>  

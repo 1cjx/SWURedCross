@@ -1,0 +1,73 @@
+{
+    "pages": [
+        "pages/home/index",
+        "pages/activity/activity_index/activity_index",
+        "pages/activity/activity_details/activity_details",
+        "pages/my_activity/my_activity_index/my_activity_index",
+        "pages/my_activity/my_activity_detail/my_activity_detail",
+        "pages/sign/sign_index/sign_index",
+        "pages/sign/sign_set/sign_set",
+        "pages/sign/sign_setsign/sign_setsign",
+        "pages/sign/sign_activity_assignment/sign_activity_assignment",
+        "pages/sign/sign_showcode/sign_showcode",
+        "pages/my/my_index/my_index",
+        "pages/my/my_message/my_message",
+        "pages/my/my_about/my_about",
+        "pages/my/my_totalactivity/my_totalactivity",
+        "pages/login/index",
+        "pages/search/index",
+        "pages/bind/index",
+        "pages/register/index",
+        "pages/authorize/index",
+        "pages/protocol/index",
+        "pages/privatepolicy/index"
+    ],
+    "window": {
+        "backgroundTextStyle": "dark",
+        "navigationBarBackgroundColor": "#de1c31",
+        "navigationBarTitleText": "小红",
+        "navigationBarTextStyle": "white"
+    },
+    "tabBar": {
+        "custom": true,
+        "color": "#515151",
+        "selectedColor": "#DAA520",
+        "borderStyle": "white",
+        "backgroundColor": "#000000",
+        "list": [
+            {
+                "pagePath": "pages/home/index",
+                "text": "首页",
+                "iconPath": "icons/home.png",
+                "selectedIconPath": "icons/_home.png"
+            },
+            {
+                "pagePath": "pages/activity/activity_index/activity_index",
+                "text": "志愿服务",
+                "iconPath": "icons/activity.png",
+                "selectedIconPath": "icons/_activity.png"
+            },
+            {
+                "pagePath": "pages/sign/sign_index/sign_index",
+                "text": "打卡",
+                "iconPath": "icons/sign.png",
+                "selectedIconPath": "icons/_sign.png"
+            },
+            {
+                "pagePath": "pages/my_activity/my_activity_index/my_activity_index",
+                "text": "活动",
+                "iconPath": "icons/sign.png",
+                "selectedIconPath": "icons/_sign.png"
+            },
+            {
+                "pagePath": "pages/my/my_index/my_index",
+                "text": "我的",
+                "iconPath": "icons/my.png",
+                "selectedIconPath": "icons/_my.png"
+            }
+        ]
+    },
+    "style": "v2",
+    "sitemapLocation": "sitemap.json",
+    "lazyCodeLoading": "requiredComponents"
+}

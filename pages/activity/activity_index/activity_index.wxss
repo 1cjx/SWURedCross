@@ -1,0 +1,75 @@
+.searchbar {
+  width: 100%;
+  position: fixed;
+  z-index: 1;
+}
+.body {
+  background-color: #f6f6f6;
+  height: 100vh;
+  padding-top: 90rpx;
+}
+.body .goods-type {
+  height: 74rpx;
+  background-color: white;
+  display: flex;
+  border-bottom: solid 1px lightgrey;
+}
+.body .goods-type .reset {
+  right: 0;
+  height: 74rpx;
+  width: 74rpx;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.body .goods-type .reset image {
+  width: 60%;
+  height: 60%;
+}
+.body .goods-type .select-content {
+  width: 50%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.body .goods-type .select-content .select-border {
+  order: 0;
+  width: 45%;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  padding: 0 10rpx;
+}
+.body .goods-type .select-content .select-border text {
+  white-space: nowrap;
+  overflow: scroll;
+  width: 80%;
+}
+.body .goods-type .select-content .select-border .arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8.7px 5px 0 5px;
+  border-color: var(--themeColor) transparent transparent transparent;
+}
+.body .goods-type .select-content .select-box {
+  background-color: #fff;
+  width: 60%;
+  border: 1rpx solid var(--themeColor);
+  border-top: none;
+}
+.body .goods-type .select-content .select-box .select-item {
+  padding: 5rpx 10rpx;
+  height: 60rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: solid 1px var(--themeColor);
+  white-space: nowrap;
+  overflow: scroll;
+}
+.body .goods-type .select-content .select-box .select-item:last-child {
+  border: none;
+}

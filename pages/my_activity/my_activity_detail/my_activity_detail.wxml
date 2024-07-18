@@ -1,0 +1,103 @@
+<view class="body">
+  <view wx:if="{{activityInfo!==''}}">
+    <view class="activity_detail">
+      <view class="detail">
+        <view class="detail_left">
+          活动名称：
+        </view>
+        <view class="detail_right">
+          {{activityInfo.name}}
+        </view>
+      </view>
+      <view class="detail">
+        <view class="detail_left">
+          活动主题：
+        </view>
+        <view class="detail_right">
+          {{activityInfo.theme}}
+        </view>
+      </view>
+      <view class="detail">
+        <view class="detail_left">
+          活动时间：
+        </view>
+        <view class="detail_right">
+          {{activityInfo.beginDate}} 至 {{activityInfo.endDate}}
+        </view>
+      </view>
+    </view>
+  </view>
+  <view>
+    <view wx:if="{{isLeader}}">
+      <view class="activity_mana" wx:for="{{userActivityDetail}}" wx:key="">
+        <view class="unit1">
+          <view class="msg">
+            <view class="tag_content">
+              <view class="tag">{{item.activityAssignmentInfo.type}}</view>
+              <view class="tag_tail"></view>
+            </view>
+            <view class="msg_chidren">时间：{{item.activityAssignmentInfo.date}} {{item.activityAssignmentInfo.timeSlotBegin}}-{{item.activityAssignmentInfo.timeSlotEnd}}</view>
+            <view class="msg_chidren">地点：{{item.activityAssignmentInfo.location}}</view>
+          </view>
+          <view class="makeSignIn" bindtap="toMakeSignIn" data-assignmentId="{{item.activityAssignmentInfo.activityAssignmentId}}">发起签到</view>
+        </view>
+        <view class="containVolunteer">
+          <view class="showVolunteerPost" bindtap="showVolunteerPost" data-index="{{index}}">
+            志愿者岗位详情
+            <image class="{{isshowVolunteer[index][0]?'arrow_down':'arrow_right '}}" src="/icons/arrow.png"></image>
+          </view>
+          <view class="VolunteerPosts" wx:if="{{isshowVolunteer[index][0]}}">
+            <view class="VolunteerPost" wx:for="{{item.volunteersInfo}}" wx:for-index="childindex">
+              <view class="Post"><span style="font-weight: bold;">岗位名称：</span>{{item.postName}}</view>
+              <view class="Post"><span style="font-weight: bold;">是否报班：</span>{{item.choose?'是':'否'}}</view>
+              <view class="Post"><span style="font-weight: bold;">人员需求：</span>{{item.reqPeople}}</view>
+              <view class="showVolunteerInfo" bindtap="showVolunteerInfo" data-index="{{index}}" wx:if="{{item.volunteerInfoBoList.length>0}}" data-childindex="{{childindex}}">
+                已报名人员列表
+                <image class="{{isshowVolunteer[index][1][childindex]?'arrow_down':'arrow_right '}}" src="/icons/arrow.png"></image>
+              </view>
+              <view class="VolunteerInfos" wx:if="{{isshowVolunteer[index][1][childindex]}}">
+                <view class="VolunteerInfo" wx:for="{{item.volunteerInfoBoList}}">
+                  <view class="VolunteerContact_left">
+                    {{item.name}}
+                  </view>
+                  <view class="VolunteerContact_right">
+                    <view class="Contact">电话：{{item.phoneNumber}}</view>
+                    <view class="Contact">QQ：{{item.qq}}</view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="activity_part" wx:for="{{userActivityDetail}}">
+        <view><span style="font-weight: bold;">活动类型：</span>{{item.activityAssignmentInfo.type}}</view>
+        <view><span style="font-weight: bold;">活动地点：</span>{{item.activityAssignmentInfo.location}}</view>
+        <view><span style="font-weight: bold;">活动时间：</span>{{item.date}} {{item.activityAssignmentInfo.timeSlotBegin}}-{{item.activityAssignmentInfo.timeSlotEnd}}</view>
+        <view><span style="font-weight: bold;">我的岗位：</span>{{item.myPost}}</view>
+        <view><span style="font-weight: bold;">报名时间：</span>{{item.createTime}}</view>
+        <view wx:if="{{item.myPost != '负责人'}}">
+          <view wx:if="{{item.leaderInfo!=null}}">
+            <view><span style="font-weight: bold;">负责人：</span>{{item.leaderInfo.name}}</view>
+            <view class="contact">
+              <view class="left">
+                <view><span style="font-weight: bold;">联系方式：</span></view>
+              </view>
+              <view class="right">
+                <view class="phone">
+                  电话：{{item.leaderInfo.phoneNumber}}
+                </view>
+                <view class="qq">
+                  QQ：{{item.leaderInfo.qq}}
+                </view>
+              </view>
+            </view>
+          </view>
+          <view class="no_manager" wx:else>暂无负责人信息</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
