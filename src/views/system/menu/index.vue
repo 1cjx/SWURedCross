@@ -121,7 +121,7 @@
               >
                 <el-option v-for="(item, index) in icons" :key="index" :value="item">
                   <svg-icon :icon-class="item" />
-                  <span>{{ item }}</span>
+                  <span>{{" "+ item }}</span>
                 </el-option>
 
               </el-select>
@@ -360,15 +360,24 @@ export default {
     submitForm: function() {
       this.$refs['form'].validate(valid => {
         if (valid) {
+					const loading = this.$loading({
+						lock: true,
+						text: "提交中...请稍后...",
+						spinner: "el-icon-loading",
+						target:'.el-dialog',
+						background: "rgba(0, 0, 0, 0.7)"
+					});
           if (this.form.id !== undefined) {
             updateMenu(this.form).then(response => {
               this.$modal.msgSuccess('修改成功')
+							loading.close();
               this.open = false
               this.getList()
             })
           } else {
             addMenu(this.form).then(response => {
               this.$modal.msgSuccess('新增成功')
+							loading.close();
               this.open = false
               this.getList()
             })

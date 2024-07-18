@@ -1,11 +1,10 @@
 <template>
   <div class="app-container">
     <el-form ref="queryForm" :model="queryParams" :inline="true">
-      <el-form-item label="部门" prop="departmentId">
+      <el-form-item label="部门" prop="departmentId" label-width="68px">
         <el-select
           v-model="queryParams.departmentId"
           placeholder="请选择"
-          @click.native="listAllDepartment()"
           size="small"
           clearable
         >
@@ -17,11 +16,10 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="职称" prop="titleId">
+      <el-form-item label="职称" prop="titleId" label-width="68px">
         <el-select
           v-model="queryParams.titleId"
           placeholder="请选择"
-          @click.native="listAllTitle()"
           size="small"
           clearable
         >
@@ -33,13 +31,13 @@
           />
         </el-select>
       </el-form-item>
-      <el-form-item label="状态" prop="status">
+      <el-form-item label="状态" prop="status" label-width="68px">
         <el-select
           v-model="queryParams.status"
           placeholder="角色状态"
           clearable
           size="small"
-          style="width: 240px"
+          style="width: 120px"
         >
           <el-option :key="1" label="正常" :value="1" />
           <el-option :key="0" label="停用" :value="0" />
@@ -333,6 +331,8 @@ export default {
     };
   },
   created() {
+		this.listAllTitle();
+		this.listAllDepartment();
     this.getList();
   },
   methods: {
@@ -380,9 +380,9 @@ export default {
     },
     // 角色状态修改
     handleStatusChange(row) {
-      const text = row.status === "0" ? "启用" : "停用";
+      const text = row.status === "1" ? "启用" : "停用";
       this.$modal
-        .confirm('确认要"' + text + '""' + row.roleName + '"角色吗？')
+        .confirm('确认要"' + text + row.departmentName+ row.titleName + '"角色吗？')
         .then(function () {
           return changeRoleStatus(row.id, row.status);
         })
@@ -403,7 +403,6 @@ export default {
       if (this.$refs.menu !== undefined) {
         this.$refs.menu.setCheckedKeys([]);
       }
-
       // eslint-disable-next-line no-sequences
       (this.menuNodeAll = false),
         (this.menuExpand = false),
@@ -430,7 +429,8 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.roleNames = selection.map((item) => item.roleName);
+			console.log(selection)
+      this.roleNames = selection.map((item) => item.departmentName+ item.titleName);
       this.ids = selection.map((item) => item.id);
       this.single = selection.length !== 1;
       this.multiple = !selection.length;
@@ -451,16 +451,12 @@ export default {
     handleAdd() {
       this.reset();
       this.getMenuTreeselect();
-      this.listAllDepartment();
-      this.listAllTitle();
       this.open = true;
       this.title = "添加角色";
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      this.listAllTitle();
-      this.listAllDepartment();
       const id = row.id || this.ids;
       const roleMenu = this.getRoleMenuTreeselect(id);
       getRole(id).then((response) => {
@@ -483,10 +479,18 @@ export default {
     submitForm: function () {
       this.$refs["form"].validate((valid) => {
         if (valid) {
+					const loading = this.$loading({
+						lock: true,
+						text: "提交中...请稍后...",
+						spinner: "el-icon-loading",
+						target:'.el-dialog',
+						background: "rgba(0, 0, 0, 0.7)"
+					});
           if (this.form.id !== undefined) {
             this.form.menuIds = this.getMenuAllCheckedKeys();
             updateRole(this.form).then((response) => {
               this.$modal.msgSuccess("修改成功");
+							loading.close();
               this.open = false;
               this.getList();
             });
@@ -494,6 +498,7 @@ export default {
             this.form.menuIds = this.getMenuAllCheckedKeys();
             addRole(this.form).then((response) => {
               this.$modal.msgSuccess("新增成功");
+							loading.close();
               this.open = false;
               this.getList();
             });
@@ -504,8 +509,13 @@ export default {
 
     /** 删除按钮操作 */
     handleDelete(row) {
-      let roleNames = row.roleName || this.roleNames;
+      let roleNames = (row.departmentName? (row.departmentName+ row.titleName):undefined) || this.roleNames;
+			console.log(row)
+			console.log(row!==undefined)
+			console.log(this.roleNames)
+			console.log(roleNames)
       const ids = row.id || this.ids;
+			console.log(ids.length)
       roleNames =
         ids.length > 2
           ? roleNames[0] + "," + roleNames[1] + "等..."

@@ -1,6 +1,6 @@
 <template>
   <div class="app-container">
-    <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true" >
+    <el-form ref="queryForm" :model="queryParams" :inline="true" >
       <el-row>
 			<el-form-item label="活动名称" prop="name">
         <el-input
@@ -136,8 +136,6 @@ export default {
       loading: true,
       // 导出遮罩层
       exportLoading: false,
-      // 显示搜索条件
-      showSearch: true,
 			timeOptions:null,
       // 总条数
       total: 0,
@@ -156,10 +154,6 @@ export default {
         categoryId:undefined,
         status: undefined
       },
-			categoryParams:{
-				pageNum: 1,
-				pageSize: 40
-			},
 			categoryOptions:[],
     }
   },
@@ -244,7 +238,7 @@ export default {
 		},
     /** 删除按钮操作 */
     handleDelete(row) {
-      this.$modal.confirm('是否确认删除活动"' + row.name+'"?<span style="color: red;">(一旦删除会印象已报名志愿者相关数据，请谨慎删除！)</span>').then(function() {
+      this.$modal.confirm('是否确认删除活动"' + row.name+'"?<span style="color: red;">(一旦删除会影响已报名志愿者相关数据，请谨慎删除！)</span>').then(function() {
 				return deleteActivity(row.id)
       }).then(() => {
         this.getList()

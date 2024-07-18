@@ -25,14 +25,25 @@
 			<el-row>
 				<el-col :span="24">
 					<el-card shadow= 'hover' class="tableInfo" >
-						<div slot="header">
+						<div style="margin-bottom: 5%;">
 							<span class="important-font">干事信息</span>
-							<el-select v-model="queryParams.departmentId"   placeholder="请选择" 
-							style="width:30%"
-							size="mini"
-							clearable>
+							<el-select v-model="queryParams.sortType"   placeholder="请选择"
+							style="width:28%;margin-left:10%"
+							@change="rankSelectChange"
+							size="mini">
 							  <el-option
-							    v-for="item in slectOptions"
+							    v-for="item in selectTypeOptions"
+							    :key="item.id"
+							    :label="item.name"
+							    :value="item.id"
+							  />
+							</el-select>
+							<el-select v-model="queryParams.departmentId"   placeholder="请选择"
+							style="width:32%;margin-left:5%"
+							@change="rankSelectChange"
+							size="mini">
+							  <el-option
+							    v-for="item in selectDepartmentOptions"
 							    :key="item.id"
 							    :label="item.name"
 							    :value="item.id"
@@ -40,11 +51,11 @@
 							</el-select>
 						</div>
 						<div>
-							<el-table id="oIncomTable" :data="infoList" size="mini" max-height="100%">
+							<el-table id="oIncomTable" :data="infoList" size="mini" max-height="100%"  v-loading="loading">
 												<el-table-column label="姓名" align="center" prop="userName" />
 												<el-table-column label="部门" align="center" prop="departmentName" />
-												<el-table-column label="参加活动次数" align="center" prop="userParticipateInActivityNum" />
-												<el-table-column label="活动总时长" align="center" prop="userVolunteerTimes" />
+												<el-table-column label="活动数" align="center" prop="userParticipateInActivityNum" />
+												<el-table-column label="总时长" align="center" prop="userVolunteerTimes" />
 											</el-table>
 						</div> 
 					</el-card>
@@ -82,7 +93,7 @@
 				<el-col :span="24">
 				<!-- 柱状图 -->
 				<el-card style="height: 300px;width:800px">
-					<div  ref="barEcharts" style="height:300px;width: 800px;">{{initBarEcharts()}}</div>
+					<div  ref="barEcharts" style="height:300px;width: 800px;"></div>
 				</el-card>
 				</el-col>
 			</el-row>
@@ -95,13 +106,14 @@
 import { mapGetters } from 'vuex'
 import * as echarts from 'echarts'
 import {getRankingByActivity,getTotalVolunteerTimes,getVolunteerNums,getActivityNums,getVariousActivitiesNum} from '@/api/dashboard'
+import {listAllDepartment} from '@/api/utils/selectOptions'
 
 export default {
   name: "Index",
   data() {
     return {
-			circleUrl:"https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png",
 			imgurl:'',
+			loading:true,
 			dataarry:[],
 			namearry:[],
 			infoList:null,
@@ -112,8 +124,8 @@ export default {
 				role:''
 			},
 			queryParams:{
-				departmentId:'',
-				sortType:''
+				departmentId:0,
+				sortType:0
 			},
 			imglist:[
 				
@@ -132,9 +144,10 @@ export default {
       tableData: [{
           
       }],
-			slectOptions:[
-				{}
+			selectDepartmentOptions:[
+				{id:0,name:"全体志愿者"}
 			],
+			selectTypeOptions:[{id:0,name:"活动时间"},{id:1,name:"活动数"}],
       countData:
         [
 					{
@@ -161,16 +174,38 @@ export default {
 	created(){
 		this.getinformation()
 	},
+	mounted(){
+		this.initBarEcharts()
+	},
 	methods:{
+		/**
+		 * 当排行榜排序条件修改时触发
+		 */
+		rankSelectChange(){
+			this.loading = true
+			getRankingByActivity(this.queryParams).then(response=>{
+				this.infoList = response;
+				this.loading = false;
+			})
+		},
+		/**
+		 * 初始化获取各组件信息
+		 */
 		getinformation(){
 			this.userInfo.role = this.$store.getters.role
 			this.userInfo.name = this.$store.getters.name
 			this.userInfo.department = this.$store.getters.department
 			this.userInfo.avatar = this.$store.getters.avatar
+			//获取排行榜
 			getRankingByActivity().then(response=>{
 				this.infoList = response
+				this.loading = false
 			}),
-
+			//获取排行榜部门筛选值
+			listAllDepartment().then(response=>{
+				this.selectDepartmentOptions = [...this.selectDepartmentOptions,...response]
+			})
+			//获取柱状图数据
 			getVolunteerNums().then(response=>{
 				this.countData[0].value = response
 			}),
@@ -180,7 +215,6 @@ export default {
 			getTotalVolunteerTimes().then(response=>{
 				this.countData[2].value = response
 			})
-
 		},
     //柱状图
   initBarEcharts () {
@@ -188,7 +222,6 @@ export default {
       let p = new Promise(async(resolve) => {
 				await getVariousActivitiesNum().then(response=>{
 					this.activityInfo = response
-					console.log(this.activityInfo)
 					let i = 0;
 					this.activityInfo.forEach(o=>{
 						this.dataarry[i] =  o.nums;
@@ -343,6 +376,14 @@ export default {
 .el-col {
 	 margin-top: 10px;
  }
+ el-table__row>td {
+   border: none;
+ }
+ 
+ .el-table::before {
+   height: 0px;
+ }
+
 </style>
 <style>
 	

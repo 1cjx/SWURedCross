@@ -61,7 +61,12 @@ Vue.use(ElementUI)
 Vue.use(plugins)
 Vue.use(mavonEditor)
 Vue.config.productionTip = false
-
+import  debounceDirective from '@/directive/utils/debounceDirective.js'
+// 防抖
+Vue.directive('debounce', debounceDirective)
+import overflowTooltip from '@/directive/utils/overflow-tooltip.js'
+// 超出文本显示
+Vue.use(overflowTooltip)
 new Vue({
   el: '#app',
   router,

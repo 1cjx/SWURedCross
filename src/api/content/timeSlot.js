@@ -35,8 +35,6 @@ export function updateTime(data) {
 
 // 删除分类
 export function delTime(timeSlotIds) {
-  console.log(timeSlotIds)
-  const data = typeof(timeSlotIds)==='string'?[timeSlotIds]:[...timeSlotIds];
   return request({
     url: '/system/timeSlot',
     method: 'delete',

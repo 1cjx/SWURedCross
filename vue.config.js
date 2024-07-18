@@ -1,12 +1,15 @@
 'use strict'
 const path = require('path')
-
+const webpack = require('webpack');
 function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
 const name = process.env.VUE_APP_TITLE || '西南大学红十字会志愿服务管理平台' // 网页标题
-
+const baseUrl = 'localhost'
+const httpPort = 7070
+const webSocketPort = 17070
+const webSocketPath ='/webSocket'
 // const port = process.env.port || process.env.npm_config_port || 81 // 端口
 
 // vue.config.js 配置说明
@@ -30,7 +33,9 @@ module.exports = {
     proxy: {
       // detail: https://cli.vuejs.org/config/#devserver-proxy
       [process.env.VUE_APP_BASE_API]: {
-        target: `http://172.17.0.5:7070`,
+        // target: `http://192.168.139.4:7070`,
+				target: `http://${baseUrl}:${httpPort}`,
+				// target: `http://www.heping.fun:7070`,
         changeOrigin: true,
         pathRewrite: {
           ['^' + process.env.VUE_APP_BASE_API]: ''
@@ -45,7 +50,15 @@ module.exports = {
       alias: {
         '@': resolve('src')
       }
-    }
+    },
+		    plugins: [
+		      new webpack.DefinePlugin({
+		        'process.env': {
+		          VUE_APP_WEBSOCKET_URL: JSON.stringify('ws://'+`${baseUrl}:${webSocketPort}${webSocketPath}`),
+		        }
+		      })
+		    ]
+
   },
   chainWebpack(config) {
     config.plugins.delete('preload') // TODO: need test

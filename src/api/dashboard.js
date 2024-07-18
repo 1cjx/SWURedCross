@@ -22,16 +22,17 @@ export function getActivityNums() {
   })
 }
 // 根据传参对活动积极性进行排序
-export function getRankingByActivity() {
+export function getRankingByActivity(query) {
   return request({
     url: '/system/dashboard/getRankingByActivity',
     method: 'get',
+		params:query
   })
 }
 
 // 获取各类活动参与次数
 export function getVariousActivitiesNum() {
-  return request({
+  return request({ 
     url: '/system/dashboard/getVariousActivitiesNum',
     method: 'get',
   })

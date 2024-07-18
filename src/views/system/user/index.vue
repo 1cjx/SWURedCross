@@ -5,13 +5,13 @@
         <el-form v-show="showSearch" ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
           <div>
             <el-form-item label="部门" prop="college">
-              <el-select v-model="queryParams.departmentId" placeholder="请选择" @click.native="listAllDepartment()"
+              <el-select v-model="queryParams.departmentId" placeholder="请选择"
                 size="small" clearable>
                 <el-option v-for="item in departmentOptions" :key="item.id" :label="item.name" :value="item.id" />
               </el-select>
             </el-form-item>
             <el-form-item label="职称" prop="title">
-                <el-select v-model="queryParams.titleId" placeholder="请选择" @click.native="listAllTitle()" size="small"
+                <el-select v-model="queryParams.titleId" placeholder="请选择" size="small"
                   clearable>
                   <el-option v-for="item in titleOptions" :key="item.id" :label="item.name" :value="item.id"
                     :disabled="item.status == 0" />
@@ -43,7 +43,7 @@
                   @keyup.enter.native="handleQuery" />
               </el-form-item>
               <el-form-item label="学院" prop="college">
-              <el-select v-model="queryParams.collegeId" placeholder="请选择" @click.native="listAllCollege()" size="small"
+              <el-select v-model="queryParams.collegeId" placeholder="请选择"  size="small"
                 clearable>
                 <el-option v-for="item in collegeOptions" :key="item.id" :label="item.name" :value="item.id" />
               </el-select>
@@ -134,7 +134,7 @@
 
 
     <!-- 修改 -->
-    <el-dialog title="修改用户" :visible.sync="open" width="600px" append-to-body>
+    <el-dialog title="修改用户" :visible.sync="open" width="600px" >
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
         <el-row>
           <el-col :span="12">
@@ -307,7 +307,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         userName: undefined,
-        phonenumber: undefined,
+        phoneNumber: undefined,
         status: undefined,
       },
       showMoreQuery: false,
@@ -356,7 +356,7 @@ export default {
             trigger: ["blur", "change"],
           },
         ],
-        phonenumber: [
+        phoneNumber: [
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: "请输入正确的手机号码",
@@ -388,6 +388,9 @@ export default {
   },
   watch: {},
   created() {
+		this.listAllCollege();
+		this.listAllTitle();
+		this.listAllDepartment();
     this.getList();
   },
   methods: {
@@ -420,9 +423,6 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      this.listAllCollege();
-      this.listAllTitle();
-      this.listAllDepartment();
       const id = row.id || this.ids; /*学号*/
       getUser(id).then((response) => {
         this.form = response;
@@ -567,20 +567,25 @@ export default {
       this.$message.error("只能上传一个文件");
     },
     fileRemove(file, fileList) {
-      this.form.thumbnail = "";
       this.fileList.pop();
     },
     /** 提交按钮 */
     submitForm: function () {
       this.$refs["form"].validate((valid) => {
         if (valid) {
-          if (this.form.id !== undefined) {
+					const loading = this.$loading({
+						lock: true,
+						text: "提交中...请稍后...",
+						spinner: "el-icon-loading",
+						target:'.el-dialog',
+						background: "rgba(0, 0, 0, 0.7)"
+					});
             updateUser(this.form).then((response) => {
               this.$modal.msgSuccess("修改成功");
+							loading.close();
               this.open = false;
               this.getList();
             });
-          }
         }
       });
     },

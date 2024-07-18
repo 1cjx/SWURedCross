@@ -5,11 +5,11 @@
     <div id="app" class="container">
       <img src="@/assets/images/login-background.jpg" />
       <div class="panel">
-        <div class="content login">
+        <div class="content login" >
           <div class="switch">
-            <span>登陆</span>
+            <span>登录</span>
           </div>
-          <el-form class="form" id="fromLogin" ref="loginForm" :model="loginForm" :rules="loginRules" auto-complete="on" label-position="left">
+          <el-form class="form" id="fromLogin" ref="loginForm" :model="loginForm" :rules="loginRules" auto-complete="on" label-position="left" @keyup.enter.native="handleLogin">
               <div class="input">
                 <input
                   :class="{ hasValue: loginForm.username !==''}"
@@ -20,7 +20,7 @@
                 /><label for="username">用户名</label>
               </div>
               <div class="input">
-                <input
+                <input 
                   :class="{ hasValue: loginForm.password !==''}"
                   v-model="loginForm.password"
                   type="password"
@@ -29,9 +29,8 @@
                 /><label for="password">密码</label>
               </div>
 
-            <span>忘记?</span>
 
-            <el-button :loading="loading" type="primary" @click.native.prevent="handleLogin">登录</el-button>
+            <el-button :loading="loading" type="primary" @click.native.prevent="handleLogin" >登录</el-button>
           </el-form>
         </div>
       </div>
@@ -123,8 +122,8 @@ export default {
   justify-content: center;
   align-items: center;
   font-family: miaowu;
-  background: linear-gradient(45deg, rgb(181, 154, 254), rgb(245, 189, 253))
-    fixed;
+  /* background: linear-gradient(45deg, rgb(181, 154, 254), rgb(245, 189, 253)) */
+    /* fixed; */
 }
 
 * {
@@ -140,10 +139,12 @@ export default {
   margin-top:70px;
   border-radius: 0.5%;
   width: 70rem;
+	box-shadow: 15px 15px 15px 15px  lightgrey;
+	/* border: 1px solid yellow; */
 }
 
 .switch span {
-  color: rgb(181, 154, 254);
+  color:#7c1823;
   font-size: 1.4rem;
   cursor: pointer;
 }
@@ -178,7 +179,7 @@ export default {
   outline: none;
   width: 100%;
   border: none;
-  border-bottom: 0.1rem solid rgb(181, 154, 254);
+  border-bottom: 0.1rem solid #7c1823;
   position: relative;
   line-height: 35px;
   background: transparent;
@@ -190,7 +191,7 @@ export default {
   left: 0;
   top: 20%;
   font-size: 1.2rem;
-  color: rgb(129, 101, 207);
+  color: #7c1823;
   transition: 0.3s;
 }
 
@@ -203,7 +204,7 @@ input:focus ~ label {
 
 .form span {
   display: block;
-  color: rgb(110, 89, 167);
+  color: #7c1823;
   font-size: 0.8rem;
   cursor: pointer;
 }
@@ -215,8 +216,11 @@ input:focus ~ label {
   width: 100%;
   height: 3rem;
   border-radius: 3rem;
-  background: linear-gradient(90deg, rgb(181, 154, 254), rgb(245, 189, 253));
-  box-shadow: 0 0 8px rgb(181, 154, 254);
+  /* background: linear-gradient(90deg, rgb(181, 154, 254), rgb(245, 189, 253));
+	*/
+ font-size:16px;
+	background-color: #7c1823;
+  /* box-shadow: 0 0 8px #7c1823; */
   cursor: pointer;
   color: white;
   font-family: miaowu;

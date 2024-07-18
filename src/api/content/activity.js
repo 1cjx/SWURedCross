@@ -60,3 +60,10 @@ export function changeActivityStatus(activityId, status) {
     data: data
   })
 }
+export function getChatActivityList(query) {
+  return request({
+    url: '/system/activity/getChatActivityList',
+    method: 'get',
+    params: query
+  })
+}
