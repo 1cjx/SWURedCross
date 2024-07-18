@@ -1,14 +1,9 @@
 package com.jx.config;
 
-import com.alibaba.fastjson.JSON;
-import com.jx.domain.bean.ResponseResult;
-import com.jx.enums.AppHttpCodeEnum;
 import com.jx.filter.JwtAuthenticationTokenFilter;
-import com.jx.utils.WebUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
