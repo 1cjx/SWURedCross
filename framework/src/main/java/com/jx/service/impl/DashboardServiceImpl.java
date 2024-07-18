@@ -50,7 +50,6 @@ public class DashboardServiceImpl implements DashboardService {
     @Override
     public ResponseResult getActivityNums() {
         LambdaQueryWrapper<Activity> activityLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        activityLambdaQueryWrapper.eq(Activity::getStatus, SystemConstants.STATUS_NORMAL);
         int count = activityService.count(activityLambdaQueryWrapper);
         return ResponseResult.okResult(count);
     }
