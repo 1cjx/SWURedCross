@@ -1,43 +1,57 @@
-<<<<<<< HEAD
-a
-=======
-# theRedCross-weixin
-
-#### 介绍
-{**以下是 Gitee 平台说明，您可以替换此简介**
-Gitee 是 OSCHINA 推出的基于 Git 的代码托管平台（同时支持 SVN）。专为开发者提供稳定、高效、安全的云端软件开发协作平台
-无论是个人、团队、或是企业，都能够用 Gitee 实现代码托管、项目管理、协作开发。企业项目请看 [https://gitee.com/enterprises](https://gitee.com/enterprises)}
-
-#### 软件架构
-软件架构说明
 
 
-#### 安装教程
+# “西小红”西南大学红十字会志愿服务管理系统—前端微信小程序
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+⭐基于SpringBoot与Vue的志愿服务管理系统系统，用于简化志愿服务流程，提高志愿服务效率。
 
-#### 使用说明
+**接口文档**：https://apifox.com/apidoc/shared-51abf509-a67a-4bff-9b64-21ae1adc42bd
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+**后端技术栈**：
 
-#### 参与贡献
+- 😄SpringBoot + MyBatis-Plus
+- 🔒SpringSecurity + JWT+Redis：鉴权
+- ❤Redis：用户信息缓存、志愿活动招募数据缓存
+- ✉️JavaMail+FreeMarker：邮件模板的填充和发送功能
+- :file_folder:七牛云OSS：图片存储 
+- 🧚‍♂️okHttp + Netty建立前端、后端、大模型的websocket连接，调用星火大模型API实现流式问答。
+- 🛒Rediss事务、Lua脚本实现限量志愿者招募人数秒杀
+- ⛷️RabbitMQ消息重试机制与乐观锁保证活动邮件正确发送 
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+**前端技术栈**：
 
+​	后台：Vue2+ vue-template-admin + Element-UI
 
-#### 特技
+​	微信小程序：原生开发
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
->>>>>>> temp/master
+**部署**：Docker + Nginx
+
+**TODO**：
+
+- [ ] 更完善的权限控制
+- [ ] 拆为微服务
+
+本系统还有很多不完善的地方，如果您有宝贵的建议、不满 or 疑问，欢迎提issue！作者将尽快回复。
+
+如果你对这个项目感兴趣，想要一起让它变得更好，欢迎联系我一起contribute！mail：qwretrh@qq.com
+
+## 效果预览
+
+![image](https://gitee.com/world_heping/RedCross/blob/front-admin/src/assets/readme/1721279956558.png)
+
+![image](https://gitee.com/world_heping/RedCross/blob/front-admin/src/assets/readme/1721279704101.png)
+
+![image](https://gitee.com/world_heping/RedCross/blob/front-admin/src/assets/readme/1721279851836.png)
+
+![image](https://gitee.com/world_heping/RedCross/blob/front-admin/src/assets/readme/1721279902568.png)
+
+## 前端微信小程序项目运行
+
+**后端项目在master分支下，前端后台项目在frontend-admin分支下，前端微信小程序在front-weixin分支下。**
+
+下载项目
+
+直接使用微信小程序开发者工具打开
+
+## 部署
+
+部署见后端README.md文件
