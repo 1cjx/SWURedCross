@@ -2,3 +2,4 @@
 /admin/target/
 /framework/target/
 /weixin/target/
+/framework/src/main/resources/.env

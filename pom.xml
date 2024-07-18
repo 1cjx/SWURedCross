@@ -105,6 +105,7 @@
                 <directory>src/main/resources</directory>
                 <includes>
                     <include>*.yml</include>
+                    <include>.env</include>
                 </includes>
                 <filtering>true</filtering>
             </resource>
@@ -115,7 +116,7 @@
             </resource>
             <resource>
                 <directory>src/main/resources/mapper</directory>
-                <filtering>false</filtering> <!-- 不需要过滤模板目录 -->
+                <filtering>false</filtering> <!-- 不需要过滤mapper目录 -->
                 <targetPath>${project.build.directory}/classes/mapper</targetPath> <!-- 指定输出目录 -->
             </resource>
         </resources>
