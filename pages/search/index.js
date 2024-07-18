@@ -107,7 +107,8 @@ Page({
             const result =await request({
                 url: "/activity/selectActivity",
                 data: {
-                    activityName: input,
+                    name: input,
+                    status:"1",
                     pageSize:10,
                     pageNum:1
                 },

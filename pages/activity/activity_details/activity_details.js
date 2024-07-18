@@ -33,7 +33,6 @@ Page({
    */
   onReady() {
     this.getActivityDetails()
-
   },
 
   /**
@@ -103,7 +102,6 @@ Page({
         showpost: new Array(length).fill(0).map(() => new Array(2).fill(0)),
         ActivityLocations: result.data.locations
       })
-      console.log(this.data.ActivityLocations)
     }
   },
   cancelBaoming(e) {
@@ -162,7 +160,6 @@ Page({
     }
   },
   onBaoming: function (e) {
-    console.log(e)
     let activityAssignmentId = e.target.dataset.activityassignmentid;
     let postAssignmentId = e.target.dataset.postassignmentid;
     this.addSchedule(activityAssignmentId, postAssignmentId);

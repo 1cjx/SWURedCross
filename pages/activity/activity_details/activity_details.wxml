@@ -41,7 +41,7 @@
     <!-- 排班表开始 -->
     <view class="schedule" wx:if="{{ActivityDetail.scheduled.length!==0}}">
       <view class="title">活动排班：</view>
-      <view class="menu_contain" wx:for="{{ActivityDetail.scheduled}}" wx:for-item="schedule" wx:key="*this">
+      <view class="menu_contain" wx:for="{{ActivityDetail.scheduled}}" wx:for-item="schedule" wx:key="id">
 
         <!-- 菜单第一级开始 -->
         <view class="menu_grade1">
@@ -63,7 +63,9 @@
         <view class="menu_grade2" wx:if="{{showpost[index][0]}}">
           <!-- 左侧时间表开始 -->
           <scroll-view scroll-y class="left">
-            <view class="time {{showpost[index][1]==childindex?'active':''}}" data-parent="{{index}}" wx:for="{{schedule.assignmentVoList}}" wx:for-index="childindex" data-index="{{childindex}}" data-list="{{item.postNeedBoList}}" bindtap="Timeselect">
+            <view class="time {{showpost[index][1]==childindex?'active':''}}" data-parent="{{index}}" wx:for="{{schedule.assignmentVoList}}" 
+            wx:key="id"
+            wx:for-index="childindex" data-index="{{childindex}}" data-list="{{item.postNeedBoList}}" bindtap="Timeselect">
               {{item.timeSlotBo.beginTime}}-{{item.timeSlotBo.endTime}}
             </view>
           </scroll-view>
@@ -71,7 +73,7 @@
 
           <!-- 右侧职位表开始 -->
           <scroll-view scroll-y class="right">
-            <view class="contain" wx:for="{{schedule.assignmentVoList[showpost[index][1]].postNeedBoList}}" wx:for-index="postIndex">
+            <view class="contain" wx:for="{{schedule.assignmentVoList[showpost[index][1]].postNeedBoList}}" wx:key="index" wx:for-index="postIndex">
               <view class="post">
                 职位:{{item.postName}} 需求：{{item.reqPeople}}
               </view>
